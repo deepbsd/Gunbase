@@ -1,6 +1,6 @@
-# Skeleton
+# Gunbase
 
-Simple boilerplate Express and Gulp.
+Gun database app
 
 ## Features
 
