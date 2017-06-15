@@ -36,7 +36,7 @@ router.get('/:id', (req, res) => {
 // Posting a new gun to the database
 router.post('/', jsonParser, (req, res) => {
 
-  const requiredFields = ['manufacturer', 'model', 'chambering', 'type', 'serial_number', 'serial_number', 'value', 'sold', 'buyer'];
+  const requiredFields = ['manufacturer', 'model', 'chambering', 'type', 'image', 'serial_number', 'serial_number', 'value', 'sold', 'buyer'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -52,6 +52,7 @@ router.post('/', jsonParser, (req, res) => {
       model: req.body.model,
       chambering: req.body.chambering,
       type: req.body.type,
+      image: req.body.image,
       serial_number: req.body.serial_number,
       value: req.body.value,
       sold: req.body.sold,
@@ -87,7 +88,7 @@ router.put('/:id', jsonParser, (req, res) => {
   }
 
   const updated = {};
-  const updateableFields = ['manufacturer', 'model', 'chambering', 'type', 'serial_number', 'serial_number', 'value', 'sold', 'buyer'];
+  const updateableFields = ['manufacturer', 'model', 'chambering', 'image', 'type', 'serial_number', 'serial_number', 'value', 'sold', 'buyer'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];

@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 // this module
 const should = chai.should();
 
-const {BlogPost} = require('../models');
+const {firearm} = require('../src/js/models');
 const {app, runServer, closeServer} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
 
@@ -18,30 +18,33 @@ chai.use(chaiHttp);
 // we use the Faker library to automatically
 // generate placeholder values for author, title, content
 // and then we insert that data into mongo
-function seedBlogPostData() {
-  console.info('seeding blog post data');
+function seedGunData() {
+  console.info('seeding firearm data');
   const seedData = [];
 
   for (let i=1; i<=10; i++) {
-    seedData.push(generateBlogData());
+    seedData.push(generateGunData());
   }
   // this will return a promise
-  return BlogPost.insertMany(seedData);
+  return firearm.insertMany(seedData);
 }
 
 
 // generate an object represnting a restaurant.
 // can be used to generate seed data for db
 // or request.body data
-function generateBlogData() { 
+function generateGunData() {
   return {
-    author: {
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName()
-    },
-    title: faker.lorem.words(),
-    content: faker.lorem.sentences(),
-    created: faker.date.past()
+    manufacturer: faker.company.companyName(),
+    model: faker.lorem.words(),
+    chambering: faker.lorem.words(),
+    type: faker.lorem.words(),
+    serial_number: faker.lorem.words(),
+    image: faker.internet.url(),
+    value: faker.random.number(500),
+    sold: faker.random.boolean(),
+    buyer: faker.name.lastName()
+
   }
 }
 
@@ -54,7 +57,7 @@ function tearDownDb() {
     return mongoose.connection.dropDatabase();
 }
 
-describe('BlogPosts API resource', function() {
+describe('Firearm API resource', function() {
 
   // we need each of these hook functions to return a promise
   // otherwise we'd need to call a `done` callback. `runServer`,
@@ -65,7 +68,7 @@ describe('BlogPosts API resource', function() {
   });
 
   beforeEach(function() {
-    return seedBlogPostData();
+    return seedGunData();
   });
 
   afterEach(function() {
@@ -81,25 +84,25 @@ describe('BlogPosts API resource', function() {
   // on proving something small
   describe('GET endpoint', function() {
 
-    it('should return all existing blogposts', function() {
+    it('should return all existing guns', function() {
       // strategy:
-      //    1. get back all posts returned by by GET request to `/posts`
+      //    1. get back all guns returned by by GET request to `/guns`
       //    2. prove res has right status, data type
-      //    3. prove the number of blog posts we got back is equal to number
+      //    3. prove the number of guns we got back is equal to number
       //       in db.
       //
       // need to have access to mutate and access `res` across
       // `.then()` calls below, so declare it here so can modify in place
       let res;
       return chai.request(app)
-        .get('/posts')
+        .get('/guns')
         .then(function(_res) {
           // so subsequent .then blocks can access resp obj.
           res = _res;
           res.should.have.status(200);
           // otherwise our db seeding didn't work
           res.body.should.have.length.of.at.least(1);
-          return BlogPost.count();
+          return firearm.count();
         })
         .then(function(count) {
           res.body.should.have.length.of(count);
@@ -107,31 +110,38 @@ describe('BlogPosts API resource', function() {
     });
 
 
-    it('should return blogposts with right fields', function() {
+    it('should return firearms with right fields', function() {
       // Strategy: Get back all restaurants, and ensure they have expected keys
 
-      let resBlogPost;
+      let resFirearm;
       return chai.request(app)
-        .get('/posts')
+        .get('/guns')
         .then(function(res) {
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.a('array');
           res.body.should.have.length.of.at.least(1);
 
-          res.body.forEach(function(post) {
-            post.should.be.a('object');
-            post.should.include.keys(
-              'id', 'title', 'content', 'author', 'created');
-          });
-          resBlogPost = res.body[0];
-          return BlogPost.findById(resBlogPost.id);
-        })
-        .then(function(post) {
+          res.body.forEach(function(gun) {
+            gun.should.be.a('object');
+            gun.should.include.keys(
 
-          resBlogPost.title.should.equal(post.title);
-          resBlogPost.content.should.equal(post.content);
-          resBlogPost.author.should.equal(post.authorName);
+              'manufacturer', 'model', 'id', 'chambering', 'type', 'serial_number', 'image', 'value', 'sold', 'buyer');
+          });
+          resFirearm = res.body[0];
+          return firearm.findById(resFirearm.id);
+        })
+        .then(function(gun) {
+
+          resFirearm.manufacturer.should.equal(gun.manufacturer);
+          resFirearm.model.should.equal(gun.model);
+          resFirearm.chambering.should.equal(gun.chambering);
+          resFirearm.type.should.equal(gun.type);
+          resFirearm.serial_number.should.equal(gun.serial_number);
+          resFirearm.image.should.equal(gun.image);
+          resFirearm.value.should.equal(gun.value);
+          resFirearm.sold.should.equal(gun.sold);
+          resFirearm.buyer.should.equal(gun.buyer);
 
         });
     });
@@ -139,35 +149,44 @@ describe('BlogPosts API resource', function() {
 
   describe('POST endpoint', function() {
     // strategy: make a POST request with data,
-    // then prove that the blogpost we get back has
+    // then prove that the gun we get back has
     // right keys, and that `id` is there (which means
     // the data was inserted into db)
-    it('should add a new blogpost', function() {
+    it('should add a new firearm', function() {
 
-      const newBlogpost = generateBlogData();
+      const newFirearm = generateGunData();
 
       return chai.request(app)
-        .post('/posts')
-        .send(newBlogpost)
+        .post('/guns')
+        .send(newFirearm)
         .then(function(res) {
+
+          //console.log('HEY! ',res);
+
           res.should.have.status(201);
           res.should.be.json;
           res.body.should.be.a('object');
           res.body.should.include.keys(
-            'id', 'title', 'content', 'author', 'created');
-          res.body.author.should.equal(`${newBlogpost.author.firstName} ${newBlogpost.author.lastName}`);
+            'manufacturer', 'id', 'model', 'chambering', 'type', 'serial_number', 'image', 'value', 'sold', 'buyer');
+          res.body.manufacturer.should.equal(newFirearm.manufacturer);
           // cause Mongo should have created id on insertion
           res.body.id.should.not.be.null;
-          res.body.title.should.equal(newBlogpost.title);
-          res.body.content.should.equal(newBlogpost.content);
+          res.body.model.should.equal(newFirearm.model);
+          res.body.chambering.should.equal(newFirearm.chambering);
+          res.body.type.should.equal(newFirearm.type);
+          res.body.serial_number.should.equal(newFirearm.serial_number);
+          res.body.image.should.equal(newFirearm.image);
+          res.body.value.should.equal(newFirearm.value);
+          res.body.sold.should.equal(newFirearm.sold);
+          res.body.buyer.should.equal(newFirearm.buyer);
 
-          return BlogPost.findById(res.body.id);
+          return firearm.findById(res.body.id);
         })
-        .then(function(post) {
+        .then(function(gun) {
 
-          post.authorName.should.equal(`${newBlogpost.author.firstName} ${newBlogpost.author.lastName}`);
-          post.title.should.equal(newBlogpost.title);
-          post.content.should.equal(newBlogpost.content);
+          gun.model.should.equal(newFirearm.model);
+          gun.serial_number.should.equal(newFirearm.serial_number);
+          gun.value.should.equal(newFirearm.value);
         });
     });
   });
@@ -175,27 +194,27 @@ describe('BlogPosts API resource', function() {
   describe('PUT endpoint', function() {
 
     // strategy:
-    //  1. Get an existing post from db
-    //  2. Make a PUT request to update that post
-    //  3. Prove post returned by request contains data we sent
-    //  4. Prove post in db is correctly updated
+    //  1. Get an existing gun from db
+    //  2. Make a PUT request to update that record
+    //  3. Prove gun returned by request contains data we sent
+    //  4. Prove gun in db is correctly updated
     it('should update fields you send over', function() {
       const updateData = {
-        title: 'fofofofofofofof',
-        content: 'foo bar baz bee bop aree bop ruhbarb pie'
+        manufacturer: 'fofofofofofofof',
+        model: 'foo bar baz bee bop aree bop ruhbarb pie'
       };
 
 
-      return BlogPost
+      return firearm
         .findOne()
         .exec()
-        .then(function(post) {
-          updateData.id = post.id;
+        .then(function(gun) {
+          updateData.id = gun.id;
 
           // make request then inspect it to make sure it reflects
           // data we sent
           return chai.request(app)
-            .put(`/posts/${post.id}`)
+            .put(`/guns/${gun.id}`)
             .send(updateData);
 
         })
@@ -203,42 +222,42 @@ describe('BlogPosts API resource', function() {
           // server.js file specifies status 201 on success...
           res.should.have.status(201);
 
-          return BlogPost.findById(updateData.id).exec();
+          return firearm.findById(updateData.id).exec();
         })
-        .then(function(post) {
-          post.title.should.equal(updateData.title);
-          post.content.should.equal(updateData.content);
+        .then(function(gun) {
+          gun.manufacturer.should.equal(updateData.manufacturer);
+          gun.model.should.equal(updateData.model);
         });
       });
   });
 
   describe('DELETE endpoint', function() {
     // strategy:
-    //  1. get a post
-    //  2. make a DELETE request for that post's id
+    //  1. get a gun
+    //  2. make a DELETE request for that gun's id
     //  3. assert that response has right status code
-    //  4. prove that post with the id doesn't exist in db anymore
-    it('delete a blogpost by id', function() {
+    //  4. prove that gun with the id doesn't exist in db anymore
+    it('delete a firearm by id', function() {
 
-      let post;
+      let gun;
 
-      return BlogPost
+      return firearm
         .findOne()
         .exec()
-        .then(function(_post) {
-          post = _post;
-          return chai.request(app).delete(`/posts/${post.id}`);
+        .then(function(_gun) {
+          gun = _gun;
+          return chai.request(app).delete(`/guns/${gun.id}`);
         })
         .then(function(res) {
           res.should.have.status(204);
-          return BlogPost.findById(post.id).exec();
+          return firearm.findById(gun.id).exec();
         })
-        .then(function(post) {
+        .then(function(gun) {
           // when a variable's value is null, chaining `should`
-          // doesn't work. so `_post.should.be.null` would raise
+          // doesn't work. so `_gun.should.be.null` would raise
           // an error. `should.be.null(_post)` is how we can
           // make assertions about a null value.
-          should.not.exist(post);
+          should.not.exist(gun);
         });
     });
   });
