@@ -1,2 +1,10 @@
-{"manufacturer": "Ruger", "model": "Security Six", "chambering": ".38spl", "type": "pistol", "serial_number": "123abc", "value": "500.00", "sold": false, "buyer": "n/a"}
-{"manufacturer": "Ruger", "model": "LCR", "chambering": ".380acp", "type": "pistol", "serial_number": "345def", "value": "200.00", "sold": false, "buyer": "n/a"}
+{"manufacturer": "Ruger", "model": "Security Six", "chambering": ".38spl", "type": "revolver", "serial_number": "123abc", "value": "500.00", "sold": false, "buyer": "n/a"}
+{"manufacturer": "Ruger", "model": "LCR", "chambering": ".380acp", "type": "revolver", "serial_number": "345def", "value": "200.00", "sold": false, "buyer": "n/a"}
+{"manufacturer": "Ruger", "model": "SR556", "chambering": "556mm", "type": "rifle", "serial_number": "678ghi", "value": "1200.00", "sold": false, "buyer": "n/a"}
+{"manufacturer": "Ruger", "model": "LCP", "chambering": ".380acp", "type": "pistol", "serial_number": "910abc", "value": "100.00", "sold": false, "buyer": "n/a"}
+{"manufacturer": "Ruger", "model": "Vaquero", "chambering": ".357mag", "type": "revolver", "serial_number": "3abc457", "value": "500.00", "sold": false, "buyer": "n/a"}
+{"manufacturer": "Ruger", "model": "Vaquero", "chambering": ".357mag", "type": "revolver", "serial_number": "3abc458", "value": "500.00", "sold": false, "buyer": "n/a"}
+{"manufacturer": "Wilson Combat", "model": "X-Tac 5in", "chambering": ".45acp", "type": "pistol", "serial_number": "wc345def", "value": "2000.00", "sold": false, "buyer": "n/a"}
+{"manufacturer": "Wilson Combat", "model": "X-Tac 4in", "chambering": ".45acp", "type": "pistol", "serial_number": "wc445def", "value": "2000.00", "sold": false, "buyer": "n/a"}
+{"manufacturer": "Wilson Combat", "model": "Elite 5in", "chambering": ".45acp", "type": "pistol", "serial_number": "wc545def", "value": "2500.00", "sold": false, "buyer": "n/a"}
+{"manufacturer": "Wilson Combat", "model": "Elite 5in", "chambering": "9x19mm", "type": "pistol", "serial_number": "wc945def", "value": "2600.00", "sold": false, "buyer": "n/a"}

@@ -233,7 +233,7 @@ describe('Firearm API resource', function() {
 
   describe('DELETE endpoint', function() {
     // strategy:
-    //  1. get a gun
+    //  1. get a gun record
     //  2. make a DELETE request for that gun's id
     //  3. assert that response has right status code
     //  4. prove that gun with the id doesn't exist in db anymore
