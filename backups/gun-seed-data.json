@@ -1,5 +1,5 @@
 {"manufacturer": "Ruger", "model": "Security Six", "chambering": ".38spl", "type": "revolver", "serial_number": "123abc", "value": "500.00", "sold": false, "buyer": "n/a"}
-{"manufacturer": "Ruger", "model": "LCR", "chambering": ".380acp", "type": "revolver", "serial_number": "345def", "value": "200.00", "sold": false, "buyer": "n/a"}
+{"manufacturer": "Ruger", "model": "LCR", "chambering": ".38 spl", "type": "revolver", "serial_number": "345def", "value": "200.00", "sold": false, "buyer": "n/a"}
 {"manufacturer": "Ruger", "model": "SR556", "chambering": "556mm", "type": "rifle", "serial_number": "678ghi", "value": "1200.00", "sold": false, "buyer": "n/a"}
 {"manufacturer": "Ruger", "model": "LCP", "chambering": ".380acp", "type": "pistol", "serial_number": "910abc", "value": "100.00", "sold": false, "buyer": "n/a"}
 {"manufacturer": "Ruger", "model": "Vaquero", "chambering": ".357mag", "type": "revolver", "serial_number": "3abc457", "value": "500.00", "sold": false, "buyer": "n/a"}

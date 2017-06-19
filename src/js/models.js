@@ -12,7 +12,9 @@ const FirearmSchema = mongoose.Schema({
     buyer: String
 })
 
-
+FirearmSchema.virtual('fullName').get(function() {
+  return `${this.manufacturer} ${this.model} ${this.chambering}`.trim()
+});
 
 
 FirearmSchema.methods.apiRepr = function() {
@@ -26,7 +28,8 @@ FirearmSchema.methods.apiRepr = function() {
     image: this.image,
     value: this.value,
     sold: this.sold,
-    buyer: this.buyer
+    buyer: this.buyer,
+    fullName: this.fullName,
   };
 }
 
