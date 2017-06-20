@@ -6,9 +6,11 @@ const state = {
 }
 
 var template = '';
-//const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'mongodb://deepbsd:2D33p4m3!@ds133162.mlab.com:33162/firearms';
+
+const rootURL = 'http://localhost:8080/guns';
+
+//const rootURL = 'mongodb://deepbsd:2D33p4m3!@ds133162.mlab.com:33162/firearms';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -20,7 +22,7 @@ function getAllGuns() {
       url: rootURL,
       type: "GET",
       headers: {
-        "accept": "application/json;odata=verbose",
+        "accept": "application/jsonp;odata=verbose",
       },
       success: function(gundata) {
         var num=0;
