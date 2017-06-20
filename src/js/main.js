@@ -8,7 +8,7 @@ const state = {
 var template = '';
 //const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'mongodb://deepbsd:2D33p4m3!@ds133162.mlab.com:33162/firearms';
+const rootURL = 'https://deepbsd:2D33p4m3!@ds133162.mlab.com:33162/firearms';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
