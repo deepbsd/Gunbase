@@ -8,9 +8,9 @@ const state = {
 //var template = '';
 
 
-const rootURL = 'http://localhost:8080/guns';
+//const rootURL = 'http://localhost:8080/guns';
 
-//const rootURL = 'https://firearmbase.herokuapp.com/guns';
+const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
