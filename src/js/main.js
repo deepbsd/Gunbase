@@ -70,6 +70,13 @@ function outputGunsReport() {
   // });
 }
 
+//#########################################################
+//#################  DATABASE METHODS      ################
+//#########################################################
+
+function createGun(data){
+
+}
 
 
 
@@ -95,7 +102,8 @@ function showMenu(){
 
   $("#create_gun").click(function(){
     //console.log('Create_gun clicked')
-    var template = `<div><form action=${rootURL} method="POST">`;
+    // var template = `<div><form enctype="application/json" action=${rootURL} method="POST">`;
+    var template = `<div><form enctype="application/json"  action=${rootURL} method="POST">`;
     template += '<input type="text" placeholder="manufacturer" name="manufacturer">';
     template += '<input type="text" placeholder="model" name="model">';
     template += '<input type="text" placeholder="chambering" name="chambering">';
@@ -108,6 +116,11 @@ function showMenu(){
     template += '</form></div>';
 
     $("#output").html(template);
+
+    $("#create_gun_submit").click(function(){
+      var newGunData =       // capture the data from the form and pass to create()
+      createGun(newGunData);
+    })
 
   })
 

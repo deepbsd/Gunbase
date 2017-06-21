@@ -4,6 +4,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
+router.use(jsonParser);
 
 const {firearm} = require('./models');
 
@@ -41,6 +42,7 @@ router.post('/', jsonParser, (req, res) => {
     const field = requiredFields[i];
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`
+      //const message = typeof req.body + ': ' + JSON.stringify(req.body);
       console.error(message);
       return res.status(400).send(message);
     }
