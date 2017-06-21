@@ -8,9 +8,9 @@ const state = {
 //var template = '';
 
 
-//const rootURL = 'http://localhost:8080/guns';
+const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'https://firearmbase.herokuapp.com/guns';
+//const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -62,7 +62,7 @@ function outputGunsReport() {
     })
     template += '<button id="home_page">Home</button>';
     template += '</div>';
-    console.log('outputGunsReport template: ', template);
+    console.log('state.guns object ', state.guns);
     $("#output").html(template);
     $("#home_page").click(function(){
       showMenu();
@@ -94,7 +94,21 @@ function showMenu(){
   })
 
   $("#create_gun").click(function(){
-    console.log('Create_gun clicked')
+    //console.log('Create_gun clicked')
+    var template = `<div><form action=${rootURL} method="POST">`;
+    template += '<input type="text" placeholder="manufacturer" name="manufacturer">';
+    template += '<input type="text" placeholder="model" name="model">';
+    template += '<input type="text" placeholder="chambering" name="chambering">';
+    template += '<input type="text" placeholder="type" name="type">';
+    template += '<input type="text" placeholder="serial_number" name="serial_number">';
+    template += '<input type="text" placeholder="value" name="value">';
+    template += '<input type="text" placeholder="sold" name="sold">';
+    template += '<input type="text" placeholder="buyer" name="buyer">';
+    template += '<button type="submit" id="create_gun_submit">Submit</submit> ';
+    template += '</form></div>';
+
+    $("#output").html(template);
+
   })
 
   $("#read_gun").click(function(){
