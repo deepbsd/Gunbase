@@ -5,12 +5,12 @@ const state = {
   guns: []
 }
 
-var template = '';
+//var template = '';
 
 
-//const rootURL = 'http://localhost:8080/guns';
+const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'https://firearmbase.herokuapp.com/guns';
+//const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -43,18 +43,6 @@ function getAllGuns() {
   return state;
 }
 
-function outputGunsReport() {
-  // return new Promise( (res, rej) => {
-    template = '<div>'
-    state.guns.forEach( gun => {
-      console.log('THREE: ', typeof gun)
-      template += '<p>'+gun.fullName+'</p>'
-    })
-    template += '</div>'
-    console.log('2nd promise--template: ', template);
-    $("#output").html(template);
-  // });
-}
 
 // getAllGuns()
 // .then(function () {
@@ -81,15 +69,20 @@ getAllGuns()
 //#################  DOM MODIFICATION METHODS  ############
 //#########################################################
 
-// function outputGuns(template){
-//   $("#output").html(template);
-// }
 
-//var content = outputGuns();
-//console.log('Content: ', template)
 
-// $("#output").html(template);
-
+function outputGunsReport() {
+  // return new Promise( (res, rej) => {
+    var template = '<div>'
+    state.guns.forEach( gun => {
+      console.log('ONE: ', typeof gun)
+      template += '<p>'+gun.fullName+'</p>'
+    })
+    template += '</div>'
+    console.log('outputGunsReport template: ', template);
+    $("#output").html(template);
+  // });
+}
 
 
 
@@ -97,3 +90,8 @@ getAllGuns()
 //#########################################################
 //#################  PROGRAM CONTROL FLOW  ################
 //#########################################################
+
+//This function shows the opening menu
+function showMenu(){
+  var template = ''
+}
