@@ -8,9 +8,9 @@ const state = {
 //var template = '';
 
 
-const rootURL = 'http://localhost:8080/guns';
+//const rootURL = 'http://localhost:8080/guns';
 
-//const rootURL = 'https://firearmbase.herokuapp.com/guns';
+const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -74,9 +74,30 @@ function outputGunsReport() {
 //#################  DATABASE METHODS      ################
 //#########################################################
 
-function createGun(data){
+function gunDbTalk(gunData){
+  //return new Promise(function(res,rej){
+  var body = "{'manufacturer': 'remington'}";
+    $.ajax({
+      url: rootURL,
+      type: "POST",
+      headers: {
+        "accept": "application/jsonp;odata=verbose",
+      },
+      data: body,
+      success: function(gundata) {
 
+        //console.log('StateObject: ',state.guns);
+        console.log('Object: ',gundata);
+        // res();
+      },
+      error: function(error){
+        console.log('error: ',error);
+      }
+    })
+  //})
 }
+
+
 
 
 
@@ -102,24 +123,36 @@ function showMenu(){
 
   $("#create_gun").click(function(){
     //console.log('Create_gun clicked')
-    // var template = `<div><form enctype="application/json" action=${rootURL} method="POST">`;
-    var template = `<div><form enctype="application/json"  action=${rootURL} method="POST">`;
-    template += '<input type="text" placeholder="manufacturer" name="manufacturer">';
-    template += '<input type="text" placeholder="model" name="model">';
-    template += '<input type="text" placeholder="chambering" name="chambering">';
-    template += '<input type="text" placeholder="type" name="type">';
-    template += '<input type="text" placeholder="serial_number" name="serial_number">';
-    template += '<input type="text" placeholder="value" name="value">';
-    template += '<input type="text" placeholder="sold" name="sold">';
-    template += '<input type="text" placeholder="buyer" name="buyer">';
+
+    var template = `<div><form>`;
+    template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
+    template += '<input id="model"  type="text" placeholder="model" name="model">';
+    template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
+    template += '<input id="type" type="text" placeholder="type" name="type">';
+    template += '<input  id="serial_number" type="text" placeholder="serial_number" name="serial_number">';
+    template += '<input id="value" type="text" placeholder="value" name="value">';
+    template += '<input id="sold" type="text" placeholder="sold" name="sold">';
+    template += '<input id="buyer" type="text" placeholder="buyer" name="buyer">';
     template += '<button type="submit" id="create_gun_submit">Submit</submit> ';
     template += '</form></div>';
 
     $("#output").html(template);
 
-    $("#create_gun_submit").click(function(){
-      var newGunData =       // capture the data from the form and pass to create()
-      createGun(newGunData);
+    $("#create_gun_submit").click(function(e){
+      e.preventDefault();
+      gunObj = {
+        manufacturer: $("#manufacturer").val(),
+        model: $("#model").val(),
+        chambering: $("#chambering").val(),
+        type: $("#type").val(),
+        serial_number: $("#serial_number").val(),
+        value: $("#value").val(),
+        sold: $("#sold").val(),
+        buyer: $("#buyer").val()
+      }
+      var newGunData =   $("#manufacturer").val();
+      console.log(gunObj);
+      gunDbTalk(gunObj);
     })
 
   })
