@@ -8,9 +8,9 @@ const state = {
 //var template = '';
 
 
-//const rootURL = 'http://localhost:8080/guns';
+const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'https://firearmbase.herokuapp.com/guns';
+//const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -75,26 +75,27 @@ function outputGunsReport() {
 //#########################################################
 
 function gunDbTalk(gunData){
-  //return new Promise(function(res,rej){
-  var body = "{'manufacturer': 'remington'}";
+  console.log('gunTalk ', gunData);
     $.ajax({
       url: rootURL,
       type: "POST",
       headers: {
-        "accept": "application/jsonp;odata=verbose",
+        "accept": "application/json;odata=verbose",
       },
-      data: body,
+      data: JSON.stringify(gunData),
+      contentType: "application/json; charset=utf-8",
+      dataType: 'json',
       success: function(gundata) {
 
         //console.log('StateObject: ',state.guns);
-        console.log('Object: ',gundata);
+        console.log('HEY!  Object: ',gundata);
         // res();
       },
       error: function(error){
         console.log('error: ',error);
       }
     })
-  //})
+  showMenu();
 }
 
 
@@ -130,6 +131,7 @@ function showMenu(){
     template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
     template += '<input id="type" type="text" placeholder="type" name="type">';
     template += '<input  id="serial_number" type="text" placeholder="serial_number" name="serial_number">';
+    template += '<input id="image" type="text" placeholder="image" name="image">'
     template += '<input id="value" type="text" placeholder="value" name="value">';
     template += '<input id="sold" type="text" placeholder="sold" name="sold">';
     template += '<input id="buyer" type="text" placeholder="buyer" name="buyer">';
@@ -146,12 +148,13 @@ function showMenu(){
         chambering: $("#chambering").val(),
         type: $("#type").val(),
         serial_number: $("#serial_number").val(),
+        image: $("#image").val(),
         value: $("#value").val(),
         sold: $("#sold").val(),
         buyer: $("#buyer").val()
       }
       var newGunData =   $("#manufacturer").val();
-      console.log(gunObj);
+      console.log("From showmenu() ",gunObj);
       gunDbTalk(gunObj);
     })
 
