@@ -8,9 +8,9 @@ const state = {
 //var template = '';
 
 
-const rootURL = 'http://localhost:8080/guns';
+//const rootURL = 'http://localhost:8080/guns';
 
-//const rootURL = 'https://firearmbase.herokuapp.com/guns';
+const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -95,6 +95,7 @@ function gunDbTalk(gunData){
         console.log('error: ',error);
       }
     })
+  getAllGuns();
   showMenu();
 }
 
@@ -118,10 +119,12 @@ function showMenu(){
 
   $("#output").html(template);
 
+  // List all guns
   $("#list_all").click(function(){
     outputGunsReport();
   })
 
+  // Add a gun to database
   $("#create_gun").click(function(){
     //console.log('Create_gun clicked')
 
@@ -157,9 +160,9 @@ function showMenu(){
       console.log("From showmenu() ",gunObj);
       gunDbTalk(gunObj);
     })
+  })  //end of #create_gun listener
 
-  })
-
+  // Search for a gun in the state.guns object
   $("#read_gun").click(function(){
     console.log('Find gun clicked')
   })
@@ -172,4 +175,4 @@ function showMenu(){
     console.log('Delete gun clicked')
   })
 
-}
+}  // end of showMenu()
