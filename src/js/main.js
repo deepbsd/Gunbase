@@ -8,9 +8,9 @@ const state = {
 //var template = '';
 
 
-//const rootURL = 'http://localhost:8080/guns';
+const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'https://firearmbase.herokuapp.com/guns';
+//const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -31,8 +31,7 @@ function getAllGuns() {
           state.guns[num] = gun;
           num++;
         });
-        //console.log('StateObject: ',state.guns);
-        console.log('first promise hit');
+        console.log('StateObject: ',state.guns);
         res();
       },
       error: function(error){
@@ -74,11 +73,13 @@ function outputGunsReport() {
 //#################  DATABASE METHODS      ################
 //#########################################################
 
-function gunDbTalk(gunData){
+function gunDbTalk(gunData, http_method){
   console.log('gunTalk ', gunData);
+  if (gunData.id) myURL = rootURL + "/" + gunData.id;
+  else myURL = rootURL;
     $.ajax({
-      url: rootURL,
-      type: "POST",
+      url: myURL,
+      type: http_method,
       headers: {
         "accept": "application/json;odata=verbose",
       },
@@ -156,20 +157,76 @@ function showMenu(){
         sold: $("#sold").val(),
         buyer: $("#buyer").val()
       }
-      var newGunData =   $("#manufacturer").val();
+
       console.log("From showmenu() ",gunObj);
-      gunDbTalk(gunObj);
+      gunDbTalk(gunObj, "POST");
     })
   })  //end of #create_gun listener
 
-  // Search for a gun in the state.guns object
+  //Search for a gun in the state.guns object
   $("#read_gun").click(function(){
     console.log('Find gun clicked')
-  })
+    var template = `<div><form>`;
+    template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
+    template += '<input id="model"  type="text" placeholder="model" name="model">';
+    template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
+    template += '<input id="type" type="text" placeholder="type" name="type">';
+    template += '<input  id="serial_number" type="text" placeholder="serial_number" name="serial_number">';
+    template += '<input id="image" type="text" placeholder="image" name="image">'
+    template += '<input id="value" type="text" placeholder="value" name="value">';
+    template += '<input id="sold" type="text" placeholder="sold" name="sold">';
+    template += '<input id="buyer" type="text" placeholder="buyer" name="buyer">';
+    template += '<button type="submit" id="search_gun_submit">Submit</submit> ';
+    template += '</form></div>';
+
+    $("#output").html(template);
+
+    $("#search_gun_submit").click(function(e){
+      e.preventDefault();
+      gunObj = {
+        manufacturer: $("#manufacturer").val(),
+        model: $("#model").val(),
+        chambering: $("#chambering").val(),
+        type: $("#type").val(),
+        serial_number: $("#serial_number").val(),
+        image: $("#image").val(),
+        value: $("#value").val(),
+        sold: $("#sold").val(),
+        buyer: $("#buyer").val()
+      }
+
+      console.log("From findGun ",gunObj);
+
+      var searchObj = {};
+      var searchList = [];
+      for (key in gunObj) {
+        if (key) { searchObj[key] = gunObj[key]; }
+        state.guns.forEach(function(gun) {
+          if (gun[key] === searchObj[key]) {
+            searchList.push(gun.id);
+            console.log('Gun ID: ',gun.id,'fullName: ',gun.fullName);
+          }
+        })
+      }
+
+      console.log(searchList);
+    })
+
+  })  //end of searchgun menu pick
+
+  $("#read_gun").click(function() {
+    //var gunid = state.guns[0].id;
+    //obj = { id: gunid };
+    //gunDbTalk(obj, "GET");
+    //console.log("I read this gun: ",value);
+  });
+
 
   $("#update_gun").click(function(){
     console.log('Update gun clicked')
   })
+
+
 
   $("#delete_gun").click(function(){
     console.log('Delete gun clicked')
