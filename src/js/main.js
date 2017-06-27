@@ -197,19 +197,34 @@ function showMenu(){
 
       console.log("From findGun ",gunObj);
 
-      var searchObj = {};
+      var searchKeys = {};
       var searchList = [];
-      for (key in gunObj) {
-        if (key) { searchObj[key] = gunObj[key]; }
-        state.guns.forEach(function(gun) {
-          if (gun[key] === searchObj[key]) {
-            searchList.push(gun.id);
-            console.log('Gun ID: ',gun.id,'fullName: ',gun.fullName);
-          }
-        })
+      for (var [key, value] of Object.entries(gunObj)) {
+        if (value) { searchKeys[key] = value; }
       }
+      var length = Object.keys(searchKeys).length;
 
-      console.log(searchList);
+      // state.guns.forEach(function(gun) {
+      //   for (var [key, val] of Object.entries(searchKeys)){
+      //     if (searchKeys[key] === gun[key]) {
+      //       searchList.push(gun);
+      //       //console.log('Gun ID: ',gun.id,'fullName: ',gun.fullName);
+      //     }
+      //   }
+      // })
+
+
+
+      for (var n=0; n < state.guns.length; n++) {
+        if ((state.guns[n][Object.keys(searchKeys)[0]] === searchKeys[Object.keys(searchKeys)[0]]) &&
+        (state.guns[n][Object.keys(searchKeys)[1]] === searchKeys[Object.keys(searchKeys)[1]]) &&
+        (state.guns[n][Object.keys(searchKeys)[2]] === searchKeys[Object.keys(searchKeys)[2]])) {
+
+          searchList.push(state.guns[n]);
+        }
+      }
+      console.log('searchKeys: ', searchKeys);
+      console.log('### SearchList: ',searchList);
     })
 
   })  //end of searchgun menu pick
