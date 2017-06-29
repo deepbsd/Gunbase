@@ -100,8 +100,15 @@ function gunDbTalk(gunData, http_method){
   showMenu();
 }
 
+//Update db for a single gun
+function updateGun(gunId){
 
+}
 
+//Delete a single gun from db
+function deleteGun(gunId){
+
+}
 
 
 //#########################################################
@@ -127,7 +134,6 @@ function showMenu(){
 
   // Add a gun to database
   $("#create_gun").click(function(){
-    //console.log('Create_gun clicked')
 
     var template = `<div><form>`;
     template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
@@ -181,6 +187,7 @@ function showMenu(){
 
     $("#output").html(template);
 
+    // Collect info from the search fields
     $("#search_gun_submit").click(function(e){
       e.preventDefault();
       gunObj = {
@@ -195,46 +202,51 @@ function showMenu(){
         buyer: $("#buyer").val()
       }
 
-      console.log("From findGun ",gunObj);
-
+      //searchKeys are the fields the user is looking for
       var searchKeys = {};
-      var searchList = [];
+      //searchList is a big list to be whittled down...
+      var searchList = state.guns;
       for (var [key, value] of Object.entries(gunObj)) {
         if (value) { searchKeys[key] = value; }
       }
-      var length = Object.keys(searchKeys).length;
 
-      // state.guns.forEach(function(gun) {
-      //   for (var [key, val] of Object.entries(searchKeys)){
-      //     if (searchKeys[key] === gun[key]) {
-      //       searchList.push(gun);
-      //       //console.log('Gun ID: ',gun.id,'fullName: ',gun.fullName);
-      //     }
-      //   }
-      // })
+      // newArray will contain only matching guns to be returned to user
+      let newArray = searchList.filter(function(gun, index, array) {
+        Object.keys(searchKeys).forEach(function(key) {
+          if(searchKeys[key] !== gun[key]) {
+            gun['delete'] = true;
+          }
+        });
+        return !gun.delete;
+      });
 
+      let returnTemplate = '<div>'
+      newArray.forEach(function(gun){
+        returnTemplate += '<p>'+gun.fullName+
+        '<button id="update_gun">update</button><button id="delete_gun">delete</button></p>';
+      })
+      // put the 'home' button on the page
+      returnTemplate += '<button id="home_page">Home</button>';
+      returnTemplate += '</div>'
 
+      $("#output").html(returnTemplate);
+      $("#home_page").click(function(){
+        showMenu();
+      })
 
-      for (var n=0; n < state.guns.length; n++) {
-        if ((state.guns[n][Object.keys(searchKeys)[0]] === searchKeys[Object.keys(searchKeys)[0]]) &&
-        (state.guns[n][Object.keys(searchKeys)[1]] === searchKeys[Object.keys(searchKeys)[1]]) &&
-        (state.guns[n][Object.keys(searchKeys)[2]] === searchKeys[Object.keys(searchKeys)[2]])) {
+      $("#update_gun").click(function(){
+        console.log(this)
+        //updateGun();
+      })
 
-          searchList.push(state.guns[n]);
-        }
-      }
-      console.log('searchKeys: ', searchKeys);
-      console.log('### SearchList: ',searchList);
+      $("#delete_gun").click(function(){
+        //deleteGun();
+      })
+
+      console.log('NewArray returned: ', newArray);
     })
-
   })  //end of searchgun menu pick
 
-  $("#read_gun").click(function() {
-    //var gunid = state.guns[0].id;
-    //obj = { id: gunid };
-    //gunDbTalk(obj, "GET");
-    //console.log("I read this gun: ",value);
-  });
 
 
   $("#update_gun").click(function(){

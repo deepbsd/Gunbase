@@ -1,0 +1,33 @@
+var myFavGun = { title: 'Super WOW Gun', type: 'LASER' }
+var allGuns = [ {...}, {...}, {...}, ...  ] // array w/ many guns of many types
+
+var gunsLikeMyFavGun = allGuns.filter(function (gun) {
+  var thisGunLooksLikeMyGun = true // let's be optimistics 😁
+
+    Object.keys(myFavGun).forEach(function (key) {
+        if (myFavGun[key] !== gun[key]) {
+	      thisGunLooksLikeMyGun = false // 😕
+        }
+    })
+
+    return thisGunLooksLikeMyGun
+})
+
+
+
+basically:
+- I am using the `Array#filter` method to filter guns from the `allGuns` array,
+  using the `myFavGun` object;
+- When filtering, I’m being optimistic: all guns are elegible to no be
+    filtered, unless otherwise;
+- I then used the `Object.keys` to get all keys from the `myFavGun` object
+      (in this case, `title` and `type`);
+- I loop through the keys (yeah, a loop inside another loop) and check if
+	the values for the same key are equal for both `myFavGun` and the
+	current gun of the outer loop;
+- If the values are different, I mark `thisGunLooksLikeMyGun` as
+	  `false`;
+- Finally, I’m returning `thisGunLooksLikeMyGun`.
+
+
+
