@@ -100,10 +100,61 @@ function gunDbTalk(gunData, http_method){
   showMenu();
 }
 
-//Update db for a single gun
-function updateGun(gunId){
+//GET single gun from db
+function getOneGun(gunId){
+  //console.log('UPDATE: You want to update: ',gunId)
+  var myURL = rootURL + '/' + gunId;
+  $.ajax({
+    url: myURL,
+    type: 'GET',
+    headers: {
+      "accept": "application/json;odata=verbose",
+    },
+    data: JSON.stringify(gunId),
+    contentType: "application/json; charset=utf-8",
+    dataType: 'json',
+    success: function(gundata) {
+      console.log('HEY!  Object: ',gundata);
+      var template = '<div id="update_gun_function"><form id="update_gun_form">';
+      template += `<input id="manufacturer" type="text" placeholder="${gundata.manufacturer}" name="manufacturer">`;
+      template += `<input id="model"  type="text" placeholder="${gundata.model}" name="model">`;
+      template += `<input id="chambering"  type="text" placeholder="${gundata.chambering}" name="chambering">`;
+      template += `<input id="type" type="text" placeholder="${gundata.type}" name="type">`;
+      template += `<input  id="serial_number" type="text" placeholder="${gundata.serial_number}" name="serial_number">`;
+      template += `<input id="image" type="text" placeholder="${gundata.image}" name="image">`;
+      template += `<input id="value" type="text" placeholder="${gundata.value}" name="value">`;
+      template += `<input id="sold" type="text" placeholder="${gundata.sold}" name="sold">`;
+      template += `<input id="buyer" type="text" placeholder="${gundata.buyer}" name="buyer">`;
+      template += '<button type="submit" id="update_gun_submit">Submit</submit> ';
+      template += '</form></div>';
+      $("#output").html(template);
+      $("#update_gun_submit").click(function(ev){
+        ev.preventDefault();
+        let fields = ['manufacturer', 'model', 'chambering', 'type', 'serial_number', 'image', 'value', 'sold', 'buyer'];
+
+        let updateData = '{';
+        fields.forEach(function(field){
+          if (`$("#${field}").val()`) {
+            updateData += `"${field}":"$(\"#${field}\").val()"`;
+          }
+        })
+        updateData += '}';
+        console.log(updateData);
+        //updateGun(updateData);
+      })
+
+
+    },
+    error: function(error){
+      console.log('error *getting* the record: ',error);
+    }
+  })
+}
+
+function updateGun(updateData){
 
 }
+
 
 //Delete a single gun from db
 function deleteGun(gunId){
@@ -220,23 +271,29 @@ function showMenu(){
         return !gun.delete;
       });
 
-      let returnTemplate = '<div>'
+
+
+      let returnTemplate = '<div id="edit_guns">';
       newArray.forEach(function(gun){
         returnTemplate += '<p>'+gun.fullName+
-        '<button id="update_gun">update</button><button id="delete_gun">delete</button></p>';
+        `<button class="update_gun" data-gunobj="${gun.id}">update</button><button id="delete_gun">delete</button></p>`;
+
       })
       // put the 'home' button on the page
       returnTemplate += '<button id="home_page">Home</button>';
       returnTemplate += '</div>'
 
       $("#output").html(returnTemplate);
+
       $("#home_page").click(function(){
         showMenu();
       })
 
-      $("#update_gun").click(function(){
-        console.log(this)
-        //updateGun();
+      $("#edit_guns").click('.update_gun', function(ev) {
+        var targetId = $(ev.target).data('gunobj');
+        console.log('ClickHandler!  target id:', targetId);
+
+        getOneGun(targetId);
       })
 
       $("#delete_gun").click(function(){
