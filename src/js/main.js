@@ -132,18 +132,18 @@ function getOneGun(gunId){
         ev.preventDefault();
         let fields = ['manufacturer', 'model', 'chambering', 'type', 'serial_number', 'image', 'value', 'sold', 'buyer'];
 
-        let updateData = '{';
+        let updateData = '{ ';
         fields.forEach(function(field){
-          if (`$("#${field}").val()`) {
-            updateData += `"${field}":"$(\"#${field}\").val()"`;
+          if ($('#'+field).val()) {
+            let thevalue = $('#'+field).val();
+            updateData += `id: "${gunId}",`;
+            updateData += `${field}: "${thevalue}"`;
           }
         })
-        updateData += '}';
+        updateData += ' }';
         console.log(updateData);
-        //updateGun(updateData);
+        updateGun(updateData, gunId);
       })
-
-
     },
     error: function(error){
       console.log('error *getting* the record: ',error);
@@ -151,14 +151,35 @@ function getOneGun(gunId){
   })
 }
 
-function updateGun(updateData){
+// Update a single gun record
+function updateGun(updateData, gunId){
+  var myURL = rootURL + '/' + gunId;
+  $.ajax({
+    url: myURL,
+    type: 'PUT',
+    headers: {
+      "accept": "application/json;odata=verbose",
+    },
+    data: JSON.stringify(updateData),
+    contentType: "application/json; charset=utf-8",
+    dataType: 'json',
+    success: function(gundata) {
 
+      //console.log('StateObject: ',state.guns);
+      console.log('Gun updated!  Object: ',gundata);
+      // res();
+    },
+    error: function(error){
+      console.log('error: ',error);
+    }
+  })
+  showMenu();
 }
 
 
 //Delete a single gun from db
 function deleteGun(gunId){
-
+  console.log('Do you really want to delete gun: ', gunId);
 }
 
 
@@ -172,8 +193,8 @@ function showMenu(){
   template += '<button id="list_all">List All Guns</button>';
   template += '<button id="create_gun">Add Gun</button>';
   template += '<button id="read_gun">Find Gun</button>';
-  template += '<button id="update_gun">Modify Gun</button>';
-  template += '<button id="delete_gun">Delete Gun</button>';
+  //template += '<button id="update_gun">Modify Gun</button>';
+  //template += '<button id="delete_gun">Delete Gun</button>';
   template += '</div>';
 
   $("#output").html(template);
@@ -276,12 +297,12 @@ function showMenu(){
       let returnTemplate = '<div id="edit_guns">';
       newArray.forEach(function(gun){
         returnTemplate += '<p>'+gun.fullName+
-        `<button class="update_gun" data-gunobj="${gun.id}">update</button><button id="delete_gun">delete</button></p>`;
+        `<button class="update_gun" data-gunobj="${gun.id}">update</button><button class="delete_gun" data-gunobj="${gun.id}">delete</button></p>`;
 
       })
       // put the 'home' button on the page
       returnTemplate += '<button id="home_page">Home</button>';
-      returnTemplate += '</div>'
+      returnTemplate += '</div>';
 
       $("#output").html(returnTemplate);
 
@@ -296,8 +317,9 @@ function showMenu(){
         getOneGun(targetId);
       })
 
-      $("#delete_gun").click(function(){
-        //deleteGun();
+      $("#edit_guns").click('.delete_gun', function(ev){
+        var gunId = $(ev.target).data('gunobj');
+        deleteGun(gunId);
       })
 
       console.log('NewArray returned: ', newArray);
@@ -305,15 +327,13 @@ function showMenu(){
   })  //end of searchgun menu pick
 
 
-
-  $("#update_gun").click(function(){
-    console.log('Update gun clicked')
-  })
-
+  // $("#update_gun").click(function(){
+  //   console.log('Update gun clicked')
+  // })
 
 
-  $("#delete_gun").click(function(){
-    console.log('Delete gun clicked')
-  })
+  // $("#delete_gun").click(function(){
+  //   console.log('Delete gun clicked')
+  // })
 
 }  // end of showMenu()
