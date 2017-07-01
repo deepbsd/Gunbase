@@ -4,9 +4,9 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-router.use(jsonParser);
+// router.use(jsonParser);  // this may not be necessary
 
-const {firearm} = require('./models');
+const {firearm} = require('./models');  // it may be best practice to capitalize this
 
 // get request at /guns
 router.get('/', (req,res) => {

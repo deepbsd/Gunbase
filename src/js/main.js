@@ -152,15 +152,21 @@ function getOneGun(gunId){
 }
 
 // Update a single gun record
-function updateGun(updateData, gunId){
+function updateGun(updateData, gunId){ console.log('aa', updateData, gunId);
   var myURL = rootURL + '/' + gunId;
+  // HERE IS WHERE THE PROBLEM LIES. THE KEYS NEED TO BE SURROUNDED BY DOUBLE QUOTES, 'updateData' as passed in shows "id" as just id. YOU MAY WANT TO CONSIDER BUILDING THE OBJECT HERE. WE CAN DISCUSS MORE LATER.
+  body = {
+    "id": gunId,
+    "buyer": "jayjay"
+  }
   $.ajax({
     url: myURL,
     type: 'PUT',
     headers: {
       "accept": "application/json;odata=verbose",
     },
-    data: JSON.stringify(updateData),
+    // data: JSON.stringify(updateData),
+    data: JSON.stringify(body),
     contentType: "application/json; charset=utf-8",
     dataType: 'json',
     success: function(gundata) {
@@ -269,10 +275,12 @@ function showMenu(){
         type: $("#type").val(),
         serial_number: $("#serial_number").val(),
         image: $("#image").val(),
-        value: $("#value").val(),
+        estvalue: $("#value").val(),
         sold: $("#sold").val(),
         buyer: $("#buyer").val()
       }
+      // gunObj = {};
+      // gunObj.manufacturer = $('#manufacturer').val();
 
       //searchKeys are the fields the user is looking for
       var searchKeys = {};
@@ -287,6 +295,7 @@ function showMenu(){
         Object.keys(searchKeys).forEach(function(key) {
           if(searchKeys[key] !== gun[key]) {
             gun['delete'] = true;
+            console.log;
           }
         });
         return !gun.delete;
