@@ -7,9 +7,9 @@ const state = {
 
 
 
-const rootURL = 'http://localhost:8080/guns';
+//const rootURL = 'http://localhost:8080/guns';
 
-//const rootURL = 'https://firearmbase.herokuapp.com/guns';
+const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -132,11 +132,12 @@ function getOneGun(gunId){
         let fields = ['manufacturer', 'model', 'chambering', 'type', 'serial_number', 'image', 'value', 'sold', 'buyer'];
 
         let updateData = {};
+        updateData.id = `${gunId}`;
 
+        //Modify this so you can update more than one field!!!
         fields.forEach(function(field){
           if ($('#'+field).val()) {
             let thevalue = $('#'+field).val();
-            updateData.id =  `${gunId}`,
             updateData[field] = `${thevalue}`
           }
         })
@@ -339,10 +340,11 @@ function showMenu(){
         getOneGun(targetId);
       })
 
-      // $("#edit_guns").click('.delete_gun', function(ev){
-      //   var gunId = $(ev.target).data('gunobj');
-      //   deleteGun(gunId);
-      // })
+      $("#edit_guns").click('.delete_gun', function(ev){
+        var gunId = $(ev.target).data('gunobj');
+        //deleteGun(gunId);
+        console.log('about to delete gun: ', gunId);
+      })
 
       console.log('NewArray returned: ', newArray);
     })
