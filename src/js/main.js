@@ -125,6 +125,7 @@ function getOneGun(gunId){
       template += `<input id="sold" type="text" placeholder="${gundata.sold}" name="sold">`;
       template += `<input id="buyer" type="text" placeholder="${gundata.buyer}" name="buyer">`;
       template += '<button type="submit" id="update_gun_submit">Submit</submit> ';
+      template += '<button type="submit" id="delete_gun_submit">Delete?</submit>';
       template += '</form></div>';
       $("#output").html(template);
       $("#update_gun_submit").click(function(ev){
@@ -144,6 +145,15 @@ function getOneGun(gunId){
 
         console.log('TYPEOF:  ',typeof updateData, ' DATA: ',updateData);
         updateGun(updateData, gunId);
+      })
+
+      //If the delete button gets pressed...
+      $("#delete_gun_submit").click(function(ev){
+        ev.preventDefault();
+        console.log('Deleting gun with id: ', gunId);
+
+        deleteGun(gunId);
+
       })
     },
     error: function(error){
@@ -194,7 +204,7 @@ function deleteGun(gunId){
     success: function() {
 
       getAllGuns();
-      console.log('Gun deleted!');
+      console.log(`Gun ${gunId} deleted!`);
       // res();
     },
     error: function(error){
@@ -319,8 +329,8 @@ function showMenu(){
       let returnTemplate = '<div id="edit_guns">';
       newArray.forEach(function(gun){
         returnTemplate += '<p>'+gun.fullName+
-        `<button class="update_gun" data-gunobj="${gun.id}">update</button>`+
-        `<button class="delete_gun" data-gunobj="${gun.id}">delete</button></p>`;
+        `<button class="update_gun" data-gunobj="${gun.id}">Update or Delete</button>`;
+
 
       })
       // put the 'home' button on the page
