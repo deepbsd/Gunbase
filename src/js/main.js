@@ -5,7 +5,6 @@ const state = {
   guns: []
 }
 
-//var template = '';
 
 
 const rootURL = 'http://localhost:8080/guns';
@@ -110,7 +109,7 @@ function getOneGun(gunId){
     headers: {
       "accept": "application/json;odata=verbose",
     },
-    data: JSON.stringify(gunId),
+    //data: JSON.stringify(gunId),
     contentType: "application/json; charset=utf-8",
     dataType: 'json',
     success: function(gundata) {
@@ -132,16 +131,17 @@ function getOneGun(gunId){
         ev.preventDefault();
         let fields = ['manufacturer', 'model', 'chambering', 'type', 'serial_number', 'image', 'value', 'sold', 'buyer'];
 
-        let updateData = '{ ';
+        let updateData = {};
+
         fields.forEach(function(field){
           if ($('#'+field).val()) {
             let thevalue = $('#'+field).val();
-            updateData += `id: "${gunId}",`;
-            updateData += `${field}: "${thevalue}"`;
+            updateData.id =  `${gunId}`,
+            updateData[field] = `${thevalue}`
           }
         })
-        updateData += ' }';
-        console.log(updateData);
+
+        console.log('TYPEOF:  ',typeof updateData, ' DATA: ',updateData);
         updateGun(updateData, gunId);
       })
     },
@@ -170,7 +170,7 @@ function updateGun(updateData, gunId){
       // res();
     },
     error: function(error){
-      console.log('error: ',error);
+      console.log('Update failed.  Error: ',error);
     }
   })
   showMenu();
@@ -179,7 +179,28 @@ function updateGun(updateData, gunId){
 
 //Delete a single gun from db
 function deleteGun(gunId){
-  console.log('Do you really want to delete gun: ', gunId);
+  console.log('Do you really want to delete this gun: ', gunId);
+  var myURL = rootURL + '/' + gunId;
+  $.ajax({
+    url: myURL,
+    type: 'DELETE',
+    headers: {
+      "accept": "application/json;odata=verbose",
+    },
+    //data: JSON.stringify(updateData),
+    contentType: "application/json; charset=utf-8",
+    dataType: 'json',
+    success: function() {
+
+      getAllGuns();
+      console.log('Gun deleted!');
+      // res();
+    },
+    error: function(error){
+      console.log('Update failed.  Error: ',error);
+    }
+  })
+  showMenu();
 }
 
 
@@ -297,7 +318,8 @@ function showMenu(){
       let returnTemplate = '<div id="edit_guns">';
       newArray.forEach(function(gun){
         returnTemplate += '<p>'+gun.fullName+
-        `<button class="update_gun" data-gunobj="${gun.id}">update</button><button class="delete_gun" data-gunobj="${gun.id}">delete</button></p>`;
+        `<button class="update_gun" data-gunobj="${gun.id}">update</button>`+
+        `<button class="delete_gun" data-gunobj="${gun.id}">delete</button></p>`;
 
       })
       // put the 'home' button on the page
@@ -317,10 +339,10 @@ function showMenu(){
         getOneGun(targetId);
       })
 
-      $("#edit_guns").click('.delete_gun', function(ev){
-        var gunId = $(ev.target).data('gunobj');
-        deleteGun(gunId);
-      })
+      // $("#edit_guns").click('.delete_gun', function(ev){
+      //   var gunId = $(ev.target).data('gunobj');
+      //   deleteGun(gunId);
+      // })
 
       console.log('NewArray returned: ', newArray);
     })
