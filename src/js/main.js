@@ -153,7 +153,6 @@ function getOneGun(gunId){
         console.log('Deleting gun with id: ', gunId);
 
         deleteGun(gunId);
-
       })
     },
     error: function(error){
@@ -184,7 +183,8 @@ function updateGun(updateData, gunId){
       console.log('Update failed.  Error: ',error);
     }
   })
-  showMenu();
+  getAllGuns()
+  .then(showMenu);
 }
 
 
@@ -203,7 +203,6 @@ function deleteGun(gunId){
     dataType: 'json',
     success: function() {
 
-      getAllGuns();
       console.log(`Gun ${gunId} deleted!`);
       // res();
     },
@@ -211,7 +210,7 @@ function deleteGun(gunId){
       console.log('Update failed.  Error: ',error);
     }
   })
-  showMenu();
+  getAllGuns().then(showMenu);
 }
 
 
@@ -330,9 +329,10 @@ function showMenu(){
       newArray.forEach(function(gun){
         returnTemplate += '<p>'+gun.fullName+
         `<button class="update_gun" data-gunobj="${gun.id}">Update or Delete</button>`;
-
-
       })
+
+      if (newArray.length === 0) returnTemplate += "No Guns Found.";
+
       // put the 'home' button on the page
       returnTemplate += '<button id="home_page">Home</button>';
       returnTemplate += '</div>';
