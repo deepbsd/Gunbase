@@ -52,7 +52,7 @@ getAllGuns()
 
 
 function outputGunsReport() {
-  // return new Promise( (res, rej) => {
+
     var template = '<ul class="list-one">';
     state.guns.forEach( gun => {
       console.log('ONE: ', typeof gun);
@@ -66,7 +66,7 @@ function outputGunsReport() {
     $("#home_page").click(function(){
       showMenu();
     })
-  // });
+
 }
 
 //#########################################################
