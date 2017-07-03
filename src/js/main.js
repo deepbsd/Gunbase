@@ -7,9 +7,9 @@ const state = {
 
 
 
-//const rootURL = 'http://localhost:8080/guns';
+const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'https://firearmbase.herokuapp.com/guns';
+//const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -53,13 +53,14 @@ getAllGuns()
 
 function outputGunsReport() {
   // return new Promise( (res, rej) => {
-    var template = '<div>';
+    var template = '<ul class="list-one">';
     state.guns.forEach( gun => {
       console.log('ONE: ', typeof gun);
-      template += '<p>'+gun.fullName+'</p>';
+      template += '<li class="cf"><div class="vcenter"><div class="itemdata">'+gun.type+'</div><div class="itemdata">'+gun.manufacturer+'</div><div class="itemdata">'+gun.model+'</div><div class="itemdata">'+gun.chambering+'</div></div></li>';
     })
+
+    template += '</ul>';
     template += '<button id="home_page">Home</button>';
-    template += '</div>';
     console.log('state.guns object ', state.guns);
     $("#output").html(template);
     $("#home_page").click(function(){
@@ -324,7 +325,6 @@ function showMenu(){
       // newArray will contain only matching guns to be returned to user
       let newArray = searchList.filter(function(gun, index, array) {
         Object.keys(searchKeys).forEach(function(key) {
-          // if(searchKeys[key] !== gun[key]) {
           if (!gun[key].includes(searchKeys[key])) {
             gun['delete'] = true;
           }

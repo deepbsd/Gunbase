@@ -1,4 +1,41 @@
 /* Media Queries */
 
+.vcenter {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.itemdata {
+  li & {
+    .list-one & {
+      display: inline-block;
+      vertical-align: middle;
+      width: 25%;
+    }
+  }
+}
+
+li {
+  .list-one & {
+    cursor: pointer;
+    margin: 6px 0;
+    min-height: 38px;
+    padding: 24px 0;
+    position: relative;
+    transition: color 400ms ease-in-out;
+  }
+  &:nth-of-type(odd) {
+    padding: 12px 0;
+  }
+  &:nth-of-type(even) {
+    background: #ddd;
+  }
+  &:hover {
+    color: crimson;
+  }
+}
+
 
 /*  Output Styles   */
