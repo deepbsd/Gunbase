@@ -100,6 +100,7 @@ function gunDbTalk(gunData, http_method){
 }
 
 //GET single gun from db
+//From here the user can either update or delete the record or go to home menu
 function getOneGun(gunId){
   //console.log('UPDATE: You want to update: ',gunId)
   var myURL = rootURL + '/' + gunId;
@@ -126,8 +127,14 @@ function getOneGun(gunId){
       template += `<input id="buyer" type="text" placeholder="${gundata.buyer}" name="buyer">`;
       template += '<button type="submit" id="update_gun_submit">Submit</submit> ';
       template += '<button type="submit" id="delete_gun_submit">Delete?</submit>';
+      template += '<button type="submit" id="load_home_page">Home</submit>';
       template += '</form></div>';
       $("#output").html(template);
+
+      $("#load_home_page").click(function(){
+        showMenu();
+      })
+
       $("#update_gun_submit").click(function(ev){
         ev.preventDefault();
         let fields = ['manufacturer', 'model', 'chambering', 'type', 'serial_number', 'image', 'value', 'sold', 'buyer'];
@@ -159,7 +166,7 @@ function getOneGun(gunId){
       console.log('error *getting* the record: ',error);
     }
   })
-}
+}  // End of getOneGun()  (Includes calls to deleteGun() and updateGun() and showMenu()! )
 
 // Update a single gun record
 function updateGun(updateData, gunId){
@@ -224,8 +231,6 @@ function showMenu(){
   template += '<button id="list_all">List All Guns</button>';
   template += '<button id="create_gun">Add Gun</button>';
   template += '<button id="read_gun">Find Gun</button>';
-  //template += '<button id="update_gun">Modify Gun</button>';
-  //template += '<button id="delete_gun">Delete Gun</button>';
   template += '</div>';
 
   $("#output").html(template);
@@ -275,7 +280,7 @@ function showMenu(){
   //Search for a gun in the state.guns object
   $("#read_gun").click(function(){
     console.log('Find gun clicked')
-    var template = `<div><form>`;
+    var template = '<div><h3 class="search_for_gun">Search for Gun</h3><form>';
     template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
     template += '<input id="model"  type="text" placeholder="model" name="model">';
     template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
@@ -313,10 +318,14 @@ function showMenu(){
         if (value) { searchKeys[key] = value; }
       }
 
+      //Why are some guns not being returned?
+      console.log('Looking for: ', searchKeys);
+
       // newArray will contain only matching guns to be returned to user
       let newArray = searchList.filter(function(gun, index, array) {
         Object.keys(searchKeys).forEach(function(key) {
-          if(searchKeys[key] !== gun[key]) {
+          // if(searchKeys[key] !== gun[key]) {
+          if (!gun[key].includes(searchKeys[key])) {
             gun['delete'] = true;
           }
         });
@@ -327,6 +336,7 @@ function showMenu(){
 
       let returnTemplate = '<div id="edit_guns">';
       newArray.forEach(function(gun){
+        console.log('newArray size: ', newArray.length);
         returnTemplate += '<p>'+gun.fullName+
         `<button class="update_gun" data-gunobj="${gun.id}">Update or Delete</button>`;
       })
@@ -348,12 +358,6 @@ function showMenu(){
         console.log('ClickHandler!  target id:', targetId);
 
         getOneGun(targetId);
-      })
-
-      $("#edit_guns").click('.delete_gun', function(ev){
-        var gunId = $(ev.target).data('gunobj');
-        //deleteGun(gunId);
-        console.log('about to delete gun: ', gunId);
       })
 
       console.log('NewArray returned: ', newArray);
