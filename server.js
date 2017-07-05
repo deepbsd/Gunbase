@@ -21,6 +21,8 @@ app.use( '/css', express.static(__dirname + '/src/css') );
 app.use( '/img', express.static(__dirname + '/src/img') );
 app.use( '/js', express.static(__dirname + '/src/js') );
 app.use('/jquery', express.static(__dirname+'/node_modules/jquery/dist'));
+app.use('/fonts', express.static(__dirname + '/src/fonts/oldbob'));
+app.use('/sounds', express.static(__dirname + '/src/sounds'));
 
 
 
