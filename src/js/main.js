@@ -115,6 +115,7 @@ function getOneGun(gunId){
     contentType: "application/json; charset=utf-8",
     dataType: 'json',
     success: function(gundata) {
+
       console.log('HEY!  Object: ',gundata);
       var template = '<div id="update_gun_function"><form id="update_gun_form">';
       template += `<input id="manufacturer" type="text" placeholder="${gundata.manufacturer}" name="manufacturer">`;
@@ -336,10 +337,11 @@ function showMenu(){
 
       let returnTemplate = '<div id="edit_guns">';
       newArray.forEach(function(gun){
-        console.log('newArray size: ', newArray.length);
         returnTemplate += '<p>'+gun.fullName+
         `<button class="update_gun" data-gunobj="${gun.id}">Update or Delete</button>`;
       })
+
+      console.log('newArray size: ', newArray.length);
 
       if (newArray.length === 0) returnTemplate += "No Guns Found.";
 
