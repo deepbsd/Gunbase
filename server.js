@@ -41,10 +41,14 @@ mongoose.Promise = global.Promise;
 
 
 app.use('*', function(req, res) {
-  res.header('Access-Control-Allow-Origin', '*');
   res.status(404).json({message: 'Not Found'});
 });
 
+app.all('*', function(req, res) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE');
+  next();
+});
 
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
