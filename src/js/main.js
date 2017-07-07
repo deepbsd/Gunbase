@@ -7,9 +7,9 @@ const state = {
 
 
 
-//const rootURL = 'http://localhost:8080/guns';
+const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'https://firearmbase.herokuapp.com/guns';
+//const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -56,13 +56,25 @@ function outputGunsReport() {
     var template = '<ul class="list-one">';
     state.guns.forEach( gun => {
       console.log('ONE: ', typeof gun);
-      template += '<li class="cf"><div class="vcenter"><div class="itemdata">'+gun.type+'</div><div class="itemdata">'+gun.manufacturer+'</div><div class="itemdata">'+gun.model+'</div><div class="itemdata">'+gun.chambering+'</div></div></li>';
+      template += `<li class="cf"><div class="vcenter"><div class="itemdata" data-gunobj="${gun.id}">${gun.type}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
     })
 
     template += '</ul>';
     template += '<button id="home_page">Home</button>';
     console.log('state.guns object ', state.guns);
+
+    // Display all guns to screen
     $("#output").html(template);
+
+    //Listen for click on any individual guns
+    $(".itemdata").click(function(ev){
+      var targetId = $(ev.target).data('gunobj');
+      console.log(targetId, ' Item clicked!')
+      getOneGun(targetId);
+    })
+
+
+    // Listen for click on 'home' button
     $("#home_page").click(function(){
       showMenu();
     })
@@ -240,9 +252,9 @@ function deleteGun(gunId){
 //This function shows the opening menu
 function showMenu(){
   var template = '<div>'
-  template += '<button id="list_all">List All Guns</button>';
-  template += '<button id="create_gun">Add Gun</button>';
-  template += '<button id="read_gun">Find Gun</button>';
+  template += '<button class="topmenu" id="list_all">List All Guns</button>';
+  template += '<button class="topmenu" id="create_gun">Add a Gun</button>';
+  template += '<button class="topmenu" id="read_gun">Search Guns</button>';
   template += '</div>';
 
   $("#output").html(template);
@@ -348,7 +360,7 @@ function showMenu(){
       let returnTemplate = '<div id="edit_guns">';
       newArray.forEach(function(gun){
         returnTemplate += '<p>'+gun.fullName+
-        `<button class="update_gun" data-gunobj="${gun.id}">Update or Delete</button>`;
+        `<button class="update_gun" data-gunobj="${gun.id}">Update/Delete</button>`;
       })
 
       console.log('newArray size: ', newArray.length);
@@ -377,13 +389,5 @@ function showMenu(){
   })  //end of searchgun menu pick
 
 
-  // $("#update_gun").click(function(){
-  //   console.log('Update gun clicked')
-  // })
-
-
-  // $("#delete_gun").click(function(){
-  //   console.log('Delete gun clicked')
-  // })
 
 }  // end of showMenu()

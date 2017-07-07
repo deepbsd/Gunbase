@@ -255,6 +255,14 @@ html {
 /*----------------------------------------------------------------------------
   Headings
 ----------------------------------------------------------------------------*/
+h1 {
+  font-size: 40px;
+  text-align: center; }
+
+h2 {
+  font-size: 30px;
+  text-align: center; }
+
 /*----------------------------------------------------------------------------
   HTML
 ----------------------------------------------------------------------------*/
@@ -292,6 +300,18 @@ html {
   Vendor
 ----------------------------------------------------------------------------*/
 /* Media Queries */
+button {
+  background-color: darkgray;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  padding: 9px 9px;
+  text-align: center;
+  text-decoration: none;
+  margin: 4px 2px; }
+
 ul.list-one {
   margin-left: 3%; }
 
@@ -303,6 +323,7 @@ ul.list-one {
 
 .list-one li .itemdata {
   display: inline-block;
+  padding-left: 5px;
   vertical-align: middle;
   width: 25%; }
 
