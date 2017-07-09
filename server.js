@@ -23,6 +23,7 @@ app.use( '/js', express.static(__dirname + '/src/js') );
 app.use('/jquery', express.static(__dirname+'/node_modules/jquery/dist'));
 app.use('/fonts', express.static(__dirname + '/src/fonts/oldbob'));
 app.use('/sounds', express.static(__dirname + '/src/sounds'));
+app.use('/icons', express.static(__dirname + '/src/icons'));
 
 
 
@@ -44,6 +45,7 @@ app.use('*', function(req, res) {
   res.status(404).json({message: 'Not Found'});
 });
 
+//Heroku keeps giving an CORS exception.  Trying to fix that here...
 app.all('*', function(req, res) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE');

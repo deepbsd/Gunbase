@@ -43,7 +43,8 @@ function getAllGuns() {
 
 
 getAllGuns()
-.then(showMenu);
+//.then(showMenu);
+.then(outputGunsReport);
 
 //#########################################################
 //#################  DOM MODIFICATION METHODS  ############
@@ -53,14 +54,17 @@ getAllGuns()
 
 function outputGunsReport() {
 
-    var template = '<ul class="list-one">';
+    var template = '<form class="centered"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
+        template += '<ul class="list-one">';
     state.guns.forEach( gun => {
       console.log('ONE: ', typeof gun);
-      template += `<li class="cf"><div class="vcenter"><div class="itemdata" data-gunobj="${gun.id}">${gun.type}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
+      // template += `<li class="cf"><div class="vcenter"><div class="itemdata" data-gunobj="${gun.id}">${gun.type}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
+      template += `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/glock.png" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
     })
 
     template += '</ul>';
-    template += '<button id="home_page">Home</button>';
+
+    template += '<button id="home_page">HomeX</button>';
     console.log('state.guns object ', state.guns);
 
     // Display all guns to screen
@@ -155,10 +159,13 @@ function getOneGun(gunId){
       template += '</form></div>';
       $("#output").html(template);
 
+      //Home page button listener (not used currently)
       $("#load_home_page").click(function(){
-        showMenu();
+        //showMenu();
+        outputGunsReport();
       })
 
+      // Update gun listener
       $("#update_gun_submit").click(function(ev){
         ev.preventDefault();
         let fields = ['manufacturer', 'model', 'chambering', 'type', 'serial_number', 'image', 'value', 'sold', 'buyer'];
@@ -179,6 +186,7 @@ function getOneGun(gunId){
       })
 
       //If the delete button gets pressed...
+      // ###################################
       $("#delete_gun_submit").click(function(ev){
         ev.preventDefault();
         console.log('Deleting gun with id: ', gunId);
@@ -193,6 +201,7 @@ function getOneGun(gunId){
 }  // End of getOneGun()  (Includes calls to deleteGun() and updateGun() and showMenu()! )
 
 // Update a single gun record
+//############################
 function updateGun(updateData, gunId){
   var myURL = rootURL + '/' + gunId;
   $.ajax({
@@ -215,7 +224,8 @@ function updateGun(updateData, gunId){
     }
   })
   getAllGuns()
-  .then(showMenu);
+    .then(outputGunsReport);
+  // .then(showMenu);
 }
 
 
@@ -241,7 +251,7 @@ function deleteGun(gunId){
       console.log('Update failed.  Error: ',error);
     }
   })
-  getAllGuns().then(showMenu);
+  getAllGuns().then(outputGunsReport);
 }
 
 
@@ -250,6 +260,8 @@ function deleteGun(gunId){
 //#########################################################
 
 //This function shows the opening menu
+// We changed the app so we don't show this anymore.  We just
+// go right to outputGunsReport()
 function showMenu(){
   var template = '<div>'
   template += '<button class="topmenu" id="list_all">List All Guns</button>';

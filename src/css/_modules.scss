@@ -1,20 +1,11 @@
 /* Media Queries */
 
-button {
-  background-color: darkgray;
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 13px;
-  padding: 9px 9px;
-  text-align: center;
-  text-decoration: none;
-  margin: 4px 2px;
-}
-
 ul.list-one {
   margin-left: 3%;
+}
+
+.centered {
+  text-align: center;
 }
 
 .vcenter {
@@ -33,6 +24,11 @@ ul.list-one {
       width: 25%;
     }
   }
+}
+
+.nimg {
+  display: inline-block;
+  width: 30px;
 }
 
 li {
