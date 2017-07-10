@@ -322,6 +322,7 @@ img {
   Vendor
 ----------------------------------------------------------------------------*/
 /* Media Queries */
+/* For Main Listing */
 ul.list-one {
   margin-left: 3%; }
 
@@ -373,4 +374,43 @@ li:hover {
   margin-top: 16px;
   text-transform: uppercase; }
 
+/* Put header stuff here when we sort it out */
+ul.navs {
+  list-style: none;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 50%;
+  transform: translateY(-50%); }
+
+header {
+  position: relative; }
+
+ul.navs li {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 8px; }
+
+.iphone {
+  border: 1px solid #ddd;
+  width: 320px; }
+
+.hdrnimg {
+  float: left;
+  vertical-align: middle;
+  width: 60px; }
+
+div.hdrnimg img {
+  width: 100%; }
+
+.cf:before,
+.cf:after {
+  content: "";
+  display: table; }
+
+.cf:after {
+  clear: both; }
+
+/* End of Header Styles */
 /*  Output Styles   */

@@ -51,7 +51,8 @@ getAllGuns()
 //#########################################################
 
 
-
+// This function now represents the Main Navigational Page
+// that the user sees first.  There's a nav header in the index.html
 function outputGunsReport() {
 
     var template = '<form class="centered"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
@@ -64,7 +65,7 @@ function outputGunsReport() {
 
     template += '</ul>';
 
-    template += '<button id="home_page">HomeX</button>';
+    template += '<button id="home_page">Home</button>';
     console.log('state.guns object ', state.guns);
 
     // Display all guns to screen
@@ -77,8 +78,139 @@ function outputGunsReport() {
       getOneGun(targetId);
     })
 
+    // NAV HEADER: Listen for Add Gun click
+    $("#navaddgun").click(function(){
+      var template = `<div><form>`;
+      template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
+      template += '<input id="model"  type="text" placeholder="model" name="model">';
+      template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
+      template += '<input id="type" type="text" placeholder="type" name="type">';
+      template += '<input  id="serial_number" type="text" placeholder="serial_number" name="serial_number">';
+      template += '<input id="image" type="text" placeholder="image" name="image">'
+      template += '<input id="value" type="text" placeholder="value" name="value">';
+      template += '<input id="sold" type="text" placeholder="sold" name="sold">';
+      template += '<input id="buyer" type="text" placeholder="buyer" name="buyer">';
+      template += '<button type="submit" id="create_gun_submit">Submit</submit> ';
+      template += '</form></div>';
 
-    // Listen for click on 'home' button
+      $("#output").html(template);
+
+      $("#create_gun_submit").click(function(e){
+        e.preventDefault();
+        gunObj = {
+          manufacturer: $("#manufacturer").val(),
+          model: $("#model").val(),
+          chambering: $("#chambering").val(),
+          type: $("#type").val(),
+          serial_number: $("#serial_number").val(),
+          image: $("#image").val(),
+          value: $("#value").val(),
+          sold: $("#sold").val(),
+          buyer: $("#buyer").val()
+        }
+
+        console.log("From showmenu() ",gunObj);
+        gunDbTalk(gunObj, "POST");
+      })
+    }) //end of #navaddgun listener
+
+
+    // NAVBAR SEARCH: Listen for clicks on Search/Edit
+    // Replaces search for guns on 'main menu'
+    $("#navsearch").click(function(){
+      console.log('Nav Search clicked')
+      var template = '<div><h3 class="search_for_gun">Search for Gun</h3><form>';
+      template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
+      template += '<input id="model"  type="text" placeholder="model" name="model">';
+      template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
+      template += '<input id="type" type="text" placeholder="type" name="type">';
+      template += '<input  id="serial_number" type="text" placeholder="serial_number" name="serial_number">';
+      template += '<input id="image" type="text" placeholder="image" name="image">'
+      template += '<input id="value" type="text" placeholder="value" name="value">';
+      template += '<input id="sold" type="text" placeholder="sold" name="sold">';
+      template += '<input id="buyer" type="text" placeholder="buyer" name="buyer">';
+      template += '<button type="submit" id="search_gun_submit">Submit</submit> ';
+      template += '</form></div>';
+
+      $("#output").html(template);
+
+      // Collect info from the search fields
+      $("#search_gun_submit").click(function(e){
+        e.preventDefault();
+        gunObj = {
+          manufacturer: $("#manufacturer").val(),
+          model: $("#model").val(),
+          chambering: $("#chambering").val(),
+          type: $("#type").val(),
+          serial_number: $("#serial_number").val(),
+          image: $("#image").val(),
+          value: $("#value").val(),
+          sold: $("#sold").val(),
+          buyer: $("#buyer").val()
+        }
+
+        //searchKeys are the fields the user is looking for
+        var searchKeys = {};
+        //searchList is a big list to be whittled down...
+        var searchList = state.guns;
+        for (var [key, value] of Object.entries(gunObj)) {
+          if (value) { searchKeys[key] = value; }
+        }
+
+        //Why are some guns not being returned?
+        console.log('Looking for: ', searchKeys);
+
+        // newArray will contain only matching guns to be returned to user
+        let newArray = searchList.filter(function(gun, index, array) {
+          Object.keys(searchKeys).forEach(function(key) {
+            if (!gun[key].includes(searchKeys[key])) {
+              gun['delete'] = true;
+            }
+          });
+          return !gun.delete;
+        });
+
+        let returnTemplate = '<div id="edit_guns">';
+        newArray.forEach(function(gun){
+          returnTemplate += '<p>'+gun.fullName+
+          `<button class="update_gun" data-gunobj="${gun.id}">Update/Delete</button>`;
+        })
+
+        console.log('newArray size: ', newArray.length);
+
+        if (newArray.length === 0) returnTemplate += "No Guns Found.";
+
+        // put the 'home' button on the page
+        returnTemplate += '<button id="home_page">Home</button>';
+        returnTemplate += '</div>';
+
+        $("#output").html(returnTemplate);
+
+        $("#home_page").click(function(){
+          //showMenu();
+          outputGunsReport();
+        })
+
+        $("#edit_guns").click('.update_gun', function(ev) {
+          var targetId = $(ev.target).data('gunobj');
+          console.log('ClickHandler!  target id:', targetId);
+
+          getOneGun(targetId);
+        })
+
+        console.log('NewArray returned: ', newArray);
+      })
+    }) // End of NavSearch click Listener
+
+
+    // Listen for clicks on 'Home' in navbar
+    $("#navhome").click(function(){
+      console.log('navhome clicked')
+      //Recursion here? side effects???
+      outputGunsReport();
+    })
+
+    // Listen for click on 'home' button at bottom of page
     $("#home_page").click(function(){
       showMenu();
     })
@@ -161,11 +293,11 @@ function getOneGun(gunId){
 
       //Home page button listener (not used currently)
       $("#load_home_page").click(function(){
-        //showMenu();
-        outputGunsReport();
+        showMenu();
+        //outputGunsReport();
       })
 
-      // Update gun listener
+      // Update_gun listener
       $("#update_gun_submit").click(function(ev){
         ev.preventDefault();
         let fields = ['manufacturer', 'model', 'chambering', 'type', 'serial_number', 'image', 'value', 'sold', 'buyer'];
@@ -262,6 +394,8 @@ function deleteGun(gunId){
 //This function shows the opening menu
 // We changed the app so we don't show this anymore.  We just
 // go right to outputGunsReport()
+
+// NO LONGER USED...
 function showMenu(){
   var template = '<div>'
   template += '<button class="topmenu" id="list_all">List All Guns</button>';
