@@ -374,7 +374,7 @@ li:hover {
   margin-top: 16px;
   text-transform: uppercase; }
 
-/* Put header stuff here when we sort it out */
+/*  Header Stuff */
 ul.navs {
   list-style: none;
   margin: 0;
@@ -393,8 +393,7 @@ ul.navs li {
   margin: 0 8px; }
 
 .iphone {
-  border: 1px solid #ddd;
-  width: 320px; }
+  border: 1px solid #ddd; }
 
 .hdrnimg {
   float: left;
