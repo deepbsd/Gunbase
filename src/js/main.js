@@ -59,6 +59,7 @@ function outputGunsReport() {
         template += '<ul class="list-one">';
     state.guns.forEach( gun => {
       console.log('ONE: ', typeof gun);
+      // Set the gunicon for each gun that is printed to the screen
       var gunicon;
       switch (gun.type){
         case 'pistol':
