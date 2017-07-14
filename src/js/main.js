@@ -59,8 +59,26 @@ function outputGunsReport() {
         template += '<ul class="list-one">';
     state.guns.forEach( gun => {
       console.log('ONE: ', typeof gun);
+      var gunicon;
+      switch (gun.type){
+        case 'pistol':
+          gunicon = '1911.png';
+          break;
+        case 'revolver':
+          gunicon = 'revolver.png';
+          break;
+        case 'rifle':
+          gunicon = 'rifle1.png';
+          break;
+        case 'shotgun':
+          gunicon = 'shotgun.png';
+          break;
+        default:
+          gunicon = 'glock.png';
+          break;
+      }
       // template += `<li class="cf"><div class="vcenter"><div class="itemdata" data-gunobj="${gun.id}">${gun.type}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
-      template += `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/glock.png" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
+      template += `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
     })
 
     template += '</ul>';
