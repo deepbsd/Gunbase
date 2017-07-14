@@ -186,6 +186,7 @@ function outputGunsReport() {
 
         $("#output").html(returnTemplate);
 
+        // 'Home' button at bottom of page
         $("#home_page").click(function(){
           //showMenu();
           outputGunsReport();
@@ -210,13 +211,7 @@ function outputGunsReport() {
       outputGunsReport();
     })
 
-    // Listen for click on 'home' button at bottom of page
-    $("#home_page").click(function(){
-      // showMenu();
-      outputGunsReport();
-    })
-
-}
+}  // end of outputGunsReport()
 
 //#########################################################
 //#################  DATABASE METHODS      ################
