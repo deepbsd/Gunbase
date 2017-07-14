@@ -55,6 +55,8 @@ getAllGuns()
 // that the user sees first.  There's a nav header in the index.html
 function outputGunsReport() {
 
+    // Set up the output template that will be the main page for the app
+    // There's a switch statement that chooses the gun's icon
     var template = '<form class="centered"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
         template += '<ul class="list-one">';
     state.guns.forEach( gun => {
@@ -80,10 +82,9 @@ function outputGunsReport() {
       }
       // template += `<li class="cf"><div class="vcenter"><div class="itemdata" data-gunobj="${gun.id}">${gun.type}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
       template += `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
-    })
+    })  // End of the switch statement for icon chooser
 
     template += '</ul>';
-
     template += '<button id="home_page">Home</button>';
     console.log('state.guns object ', state.guns);
 
@@ -91,6 +92,8 @@ function outputGunsReport() {
     $("#output").html(template);
 
     //Listen for click on any individual guns
+    // I'm using jQuery's ability to preserve object data-gunobj (gun.id)
+    // and storing that in the data-gunobj attribute in the itemdata class
     $(".itemdata").click(function(ev){
       var targetId = $(ev.target).data('gunobj');
       console.log(targetId, ' Item clicked!')
@@ -112,8 +115,11 @@ function outputGunsReport() {
       template += '<button type="submit" id="create_gun_submit">Submit</submit> ';
       template += '</form></div>';
 
+      // This will be the form the user fills out to add a
+      // gun to the database
       $("#output").html(template);
 
+      // gunObj is what will eventually gets added to the database
       $("#create_gun_submit").click(function(e){
         e.preventDefault();
         gunObj = {
@@ -129,6 +135,9 @@ function outputGunsReport() {
         }
 
         console.log("From showmenu() ",gunObj);
+        // I had originally thought I could use gunDbTalk() for everything...
+        // I'm not so sure now, but it still works for adding guns to the
+        // database
         gunDbTalk(gunObj, "POST");
       })
     }) //end of #navaddgun listener
