@@ -151,6 +151,9 @@ function outputGunsReport() {
 
         //searchKeys are the fields the user is looking for
         var searchKeys = {};
+        //Update the state.guns to be sure it's fully populated.
+        //This seems to fix a long-standing 'delay' bug in the update function.
+        getAllGuns();
         //searchList is a big list to be whittled down...
         var searchList = state.guns;
         for (var [key, value] of Object.entries(gunObj)) {
