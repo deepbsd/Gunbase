@@ -50,6 +50,20 @@ getAllGuns()
 //#################  DOM MODIFICATION METHODS  ############
 //#########################################################
 
+function getIcon(type){
+  switch (type){
+    case 'pistol':
+      return '1911.png';
+    case 'revolver':
+      return 'revolver.png';
+    case 'rifle':
+      return 'rifle1.png';
+    case 'shotgun':
+      return 'shotgun.png';
+    default:
+      return 'glock.png';
+  }
+}
 
 // This function now represents the Main Navigational Page
 // that the user sees first.  There's a nav header in the index.html
@@ -57,30 +71,11 @@ function outputGunsReport() {
 
     // Set up the output template that will be the main page for the app
     // There's a switch statement that chooses the gun's icon
-    var template = '<form class="centered"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
-        template += '<ul class="list-one">';
+    var template = '<form class="centered" id="top-form-find"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
+        template += '<ul class="list-one" id="list-top">';
     state.guns.forEach( gun => {
       console.log('ONE: ', typeof gun);
-      // Set the gunicon for each gun that is printed to the screen
-      var gunicon;
-      switch (gun.type){
-        case 'pistol':
-          gunicon = '1911.png';
-          break;
-        case 'revolver':
-          gunicon = 'revolver.png';
-          break;
-        case 'rifle':
-          gunicon = 'rifle1.png';
-          break;
-        case 'shotgun':
-          gunicon = 'shotgun.png';
-          break;
-        default:
-          gunicon = 'glock.png';
-          break;
-      }
-      // template += `<li class="cf"><div class="vcenter"><div class="itemdata" data-gunobj="${gun.id}">${gun.type}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
+      let gunicon = getIcon(gun.type)
       template += `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
     })  // End of the switch statement for icon chooser
 
@@ -90,6 +85,24 @@ function outputGunsReport() {
 
     // Display all guns to screen
     $("#output").html(template);
+
+    // #############################################
+    // FILTERING SEARCH listener on Search field
+    // #############################################
+    // $("#top-find").on('input', "#top-form-find", function(){
+    $(document).on('input', "#top-form-find", function(){
+
+      let criteria = $("#top-find").val();
+      console.log('SEARCH BOX: -->', criteria);
+      // template = '<form class="centered" id="top-form-find"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
+      // template += '<ul class="list-one">';
+      template += loadFindData(criteria);
+      // template += '</ul>';
+
+      // $("#top-form-find").html(template)
+      $("#top-form-find").empty();
+      $("#top-form-find").html(template);
+    });
 
     //Listen for click on any individual guns
     // I'm using jQuery's ability to preserve object data-gunobj (gun.id)
@@ -422,149 +435,31 @@ function deleteGun(gunId){
 //#################  PROGRAM CONTROL FLOW  ################
 //#########################################################
 
+// FILTERING SEARCH METHOD that gets loaded from top page
+function loadFindData(criteria) {
+  console.log('LOADFINDDATA!!!  -> ',criteria)
+  if (!criteria){
+    // $("#list-top").empty();
+
+    state.guns.forEach((gun, index, array) => {
+      let gunicon = getIcon(gun.type);
+      // $("#list-top").append(`<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`);
+      return `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
+    })
+  } else {
+    let selections = state.guns.filter( gun => {
+      gun.manufacturer.toLowerCase().includes(criteria.toLowerCase())
+    });
+    $("#list-top").empty();
+    selections.forEach((gun, index, array) => {
+      let gunicon = getIcon(currentGun.type);
+      // $("#list-top").append(`<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`);
+      return `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
+    })
+  }
+}
+
+
 //This function shows the opening menu
 // We changed the app so we don't show this anymore.  We just
 // go right to outputGunsReport()
-
-// NO LONGER USED...
-// function showMenu(){
-//   var template = '<div>'
-//   template += '<button class="topmenu" id="list_all">List All Guns</button>';
-//   template += '<button class="topmenu" id="create_gun">Add a Gun</button>';
-//   template += '<button class="topmenu" id="read_gun">Search Guns</button>';
-//   template += '</div>';
-//
-//   $("#output").html(template);
-//
-//   // List all guns
-//   $("#list_all").click(function(){
-//     outputGunsReport();
-//   })
-//
-//   // Add a gun to database
-//   $("#create_gun").click(function(){
-//
-//     var template = `<div><form>`;
-//     template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
-//     template += '<input id="model"  type="text" placeholder="model" name="model">';
-//     template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
-//     template += '<input id="type" type="text" placeholder="type" name="type">';
-//     template += '<input  id="serial_number" type="text" placeholder="serial_number" name="serial_number">';
-//     template += '<input id="image" type="text" placeholder="image" name="image">'
-//     template += '<input id="value" type="text" placeholder="value" name="value">';
-//     template += '<input id="sold" type="text" placeholder="sold" name="sold">';
-//     template += '<input id="buyer" type="text" placeholder="buyer" name="buyer">';
-//     template += '<button type="submit" id="create_gun_submit">Submit</submit> ';
-//     template += '</form></div>';
-//
-//     $("#output").html(template);
-//
-//     $("#create_gun_submit").click(function(e){
-//       e.preventDefault();
-//       gunObj = {
-//         manufacturer: $("#manufacturer").val(),
-//         model: $("#model").val(),
-//         chambering: $("#chambering").val(),
-//         type: $("#type").val(),
-//         serial_number: $("#serial_number").val(),
-//         image: $("#image").val(),
-//         value: $("#value").val(),
-//         sold: $("#sold").val(),
-//         buyer: $("#buyer").val()
-//       }
-//
-//       console.log("From showmenu() ",gunObj);
-//       gunDbTalk(gunObj, "POST");
-//     })
-//   })  //end of #create_gun listener
-//
-//   //Search for a gun in the state.guns object
-//   $("#read_gun").click(function(){
-//     console.log('Find gun clicked')
-//     var template = '<div><h3 class="search_for_gun">Search for Gun</h3><form>';
-//     template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
-//     template += '<input id="model"  type="text" placeholder="model" name="model">';
-//     template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
-//     template += '<input id="type" type="text" placeholder="type" name="type">';
-//     template += '<input  id="serial_number" type="text" placeholder="serial_number" name="serial_number">';
-//     template += '<input id="image" type="text" placeholder="image" name="image">'
-//     template += '<input id="value" type="text" placeholder="value" name="value">';
-//     template += '<input id="sold" type="text" placeholder="sold" name="sold">';
-//     template += '<input id="buyer" type="text" placeholder="buyer" name="buyer">';
-//     template += '<button type="submit" id="search_gun_submit">Submit</submit> ';
-//     template += '</form></div>';
-//
-//     $("#output").html(template);
-//
-//     // Collect info from the search fields
-//     $("#search_gun_submit").click(function(e){
-//       e.preventDefault();
-//       gunObj = {
-//         manufacturer: $("#manufacturer").val(),
-//         model: $("#model").val(),
-//         chambering: $("#chambering").val(),
-//         type: $("#type").val(),
-//         serial_number: $("#serial_number").val(),
-//         image: $("#image").val(),
-//         value: $("#value").val(),
-//         sold: $("#sold").val(),
-//         buyer: $("#buyer").val()
-//       }
-//
-//       //searchKeys are the fields the user is looking for
-//       var searchKeys = {};
-//       //searchList is a big list to be whittled down...
-//       var searchList = state.guns;
-//       for (var [key, value] of Object.entries(gunObj)) {
-//         if (value) { searchKeys[key] = value; }
-//       }
-//
-//       //Why are some guns not being returned?
-//       console.log('Looking for: ', searchKeys);
-//
-//       // newArray will contain only matching guns to be returned to user
-//       let newArray = searchList.filter(function(gun, index, array) {
-//         Object.keys(searchKeys).forEach(function(key) {
-//           if (!gun[key].includes(searchKeys[key])) {
-//             gun['delete'] = true;
-//           }
-//         });
-//         return !gun.delete;
-//       });
-//
-//
-//
-//       let returnTemplate = '<div id="edit_guns">';
-//       newArray.forEach(function(gun){
-//         returnTemplate += '<p>'+gun.fullName+
-//         `<button class="update_gun" data-gunobj="${gun.id}">Update/Delete</button>`;
-//       })
-//
-//       console.log('newArray size: ', newArray.length);
-//
-//       if (newArray.length === 0) returnTemplate += "No Guns Found.";
-//
-//       // put the 'home' button on the page
-//       returnTemplate += '<button id="home_page">Home</button>';
-//       returnTemplate += '</div>';
-//
-//       $("#output").html(returnTemplate);
-//
-//       $("#home_page").click(function(){
-//         showMenu();
-//       })
-//
-//       $("#edit_guns").click('.update_gun', function(ev) {
-//         var targetId = $(ev.target).data('gunobj');
-//         console.log('ClickHandler!  target id:', targetId);
-//
-//         getOneGun(targetId);
-//       })
-//
-//       console.log('NewArray returned: ', newArray);
-//     })
-//   })  //end of searchgun menu pick
-//
-//
-//
-// }  // end of showMenu()
