@@ -89,19 +89,10 @@ function outputGunsReport() {
     // #############################################
     // FILTERING SEARCH listener on Search field
     // #############################################
-    // $("#top-find").on('input', "#top-form-find", function(){
+
     $(document).on('input', "#top-form-find", function(){
-
       let criteria = $("#top-find").val();
-      console.log('SEARCH BOX: -->', criteria);
-      // template = '<form class="centered" id="top-form-find"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
-      // template += '<ul class="list-one">';
-      template += loadFindData(criteria);
-      // template += '</ul>';
-
-      // $("#top-form-find").html(template)
-      $("#top-form-find").empty();
-      $("#top-form-find").html(template);
+      loadFindData(criteria);
     });
 
     //Listen for click on any individual guns
@@ -376,6 +367,7 @@ function getOneGun(gunId){
   })
 }  // End of getOneGun()  (Includes calls to deleteGun() and updateGun() and showMenu()! )
 
+// ###########################
 // Update a single gun record
 //############################
 function updateGun(updateData, gunId){
@@ -439,23 +431,30 @@ function deleteGun(gunId){
 function loadFindData(criteria) {
   console.log('LOADFINDDATA!!!  -> ',criteria)
   if (!criteria){
-    // $("#list-top").empty();
+
+    console.log('No Criteria! ',criteria);
+
+    $("#list-top").empty();
 
     state.guns.forEach((gun, index, array) => {
       let gunicon = getIcon(gun.type);
-      // $("#list-top").append(`<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`);
-      return `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
+      $("#list-top").append(`<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`);
     })
   } else {
+    //getAllGuns();
     let selections = state.guns.filter( gun => {
-      gun.manufacturer.toLowerCase().includes(criteria.toLowerCase())
+      return gun.manufacturer.toLowerCase().includes(criteria.toLowerCase());
     });
     $("#list-top").empty();
     selections.forEach((gun, index, array) => {
-      let gunicon = getIcon(currentGun.type);
-      // $("#list-top").append(`<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`);
-      return `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
-    })
+      let gunicon = getIcon(gun.type);
+
+      $("#list-top").append(`<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`);
+      $(".itemdata").click(function(ev){
+        var targetId = $(ev.target).data('gunobj');
+        getOneGun(targetId);
+      });
+    });
   }
 }
 
