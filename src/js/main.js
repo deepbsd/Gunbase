@@ -80,7 +80,7 @@ function outputGunsReport() {
     })  // End of the switch statement for icon chooser
 
     template += '</ul>';
-    template += '<button id="home_page">Home</button>';
+    //template += '<button id="home_page">Home</button>';
     console.log('state.guns object ', state.guns);
 
     // Display all guns to screen
@@ -207,7 +207,7 @@ function outputGunsReport() {
 
         let returnTemplate = '<div id="edit_guns">';
         newArray.forEach(function(gun){
-          returnTemplate += '<p>'+gun.fullName+
+          returnTemplate += '<p>'+gun.fullName+'</p>'+
           `<button class="update_gun" data-gunobj="${gun.id}">Update/Delete</button>`;
         })
 
