@@ -341,6 +341,9 @@ ul.list-one {
   vertical-align: middle;
   width: 25%; }
 
+.hdr {
+  background: white; }
+
 .nimg {
   display: inline-block;
   width: 30px; }
