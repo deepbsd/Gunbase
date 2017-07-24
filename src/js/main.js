@@ -23,6 +23,7 @@ function getAllGuns() {
       type: "GET",
       headers: {
         "accept": "application/jsonp;odata=verbose",
+        "accept": "Access-Control-Allow-Origin",
       },
       success: function(gundata) {
         var num=0;
