@@ -7,9 +7,9 @@ const state = {
 
 
 
-//const rootURL = 'http://localhost:8080/guns';
+const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'https://firearmbase.herokuapp.com/guns';
+//const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -21,7 +21,6 @@ function getAllGuns() {
       crossOrigin: true,
       url: rootURL,
       type: "GET",
-      dataType: 'jsonp',
       headers: {
         "accept": "application/jsonp;odata=verbose",
       },
