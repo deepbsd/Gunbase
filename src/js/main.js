@@ -18,10 +18,9 @@ const rootURL = 'https://firearmbase.herokuapp.com/guns';
 function getAllGuns() {
   return new Promise(function (res, rej) {
     $.ajax({
+      crossOrigin: true,
       url: rootURL,
       type: "GET",
-      crossDomain: true,
-      dataType: 'json',
       headers: {
         "accept": "application/jsonp;odata=verbose",
       },
