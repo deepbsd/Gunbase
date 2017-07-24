@@ -106,7 +106,7 @@ function outputGunsReport() {
 
     // NAV HEADER: Listen for Add Gun click
     $("#navaddgun").click(function(){
-      var template = `<div><form>`;
+      var template = `<div><h3>Add A Gun</h3><form>`;
       template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
       template += '<input id="model"  type="text" placeholder="model" name="model">';
       template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
