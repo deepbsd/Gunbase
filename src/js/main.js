@@ -20,6 +20,7 @@ function getAllGuns() {
     $.ajax({
       url: rootURL,
       type: "GET",
+      crossDomain: true,
       headers: {
         "accept": "application/jsonp;odata=verbose",
       },
