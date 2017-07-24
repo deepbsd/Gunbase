@@ -21,7 +21,7 @@ function getAllGuns() {
       url: rootURL,
       type: "GET",
       crossDomain: true,
-      dataType: 'jsonp',
+      dataType: 'json',
       headers: {
         "accept": "application/jsonp;odata=verbose",
       },
