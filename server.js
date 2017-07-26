@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const morgan = require('morgan');
 
 const {DATABASE_URL, PORT} = require('./config');
@@ -10,6 +11,7 @@ const app = express();
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
+app.use(cors());   // This is the middleware Chris Keen told me about
 
 
 
