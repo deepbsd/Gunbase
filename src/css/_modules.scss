@@ -1,5 +1,11 @@
 /* Media Queries */
 
+.y-wrap {
+  @include responsive(nixon) {
+    display: inline-block;
+    max-width: 992px;
+  }
+}
 
 
 /* For Main Listing */
