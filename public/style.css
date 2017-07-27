@@ -325,7 +325,8 @@ img {
 @media only screen and (min-width: 992px) {
   .y-wrap {
     display: inline-block;
-    max-width: 992px; } }
+    max-width: 992px;
+    margin: 0 auto; } }
 
 /* For Main Listing */
 ul.list-one {

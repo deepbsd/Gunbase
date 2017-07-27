@@ -4,6 +4,7 @@
   @include responsive(nixon) {
     display: inline-block;
     max-width: 992px;
+    margin: 0 auto;
   }
 }
 
