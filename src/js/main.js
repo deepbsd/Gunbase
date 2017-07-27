@@ -242,8 +242,14 @@ function outputGunsReport() {
 
     // Listen for clicks on 'Home' in navbar
     $("#navhome").click(function(){
-      console.log('navhome clicked')
+      console.log('navhome clicked');
       //Recursion here? side effects???
+      outputGunsReport();
+    })
+
+    // Listen for click on 'GunBase' Logo
+    $("#navhome1").click(function(){
+      console.log('navhome1 Logo clicked');
       outputGunsReport();
     })
 

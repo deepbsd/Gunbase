@@ -420,5 +420,9 @@ div.hdrnimg img {
 .cf:after {
   clear: both; }
 
+#navhome1:hover {
+  color: maroon;
+  cursor: pointer; }
+
 /* End of Header Styles */
 /*  Output Styles   */
