@@ -374,6 +374,10 @@ li:hover {
   margin: 6px 0;
   width: 100%; }
 
+#addagun input {
+  display: block;
+  width: 100%; }
+
 #update_gun_form label {
   display: block;
   font-size: 0.857rem;
@@ -386,14 +390,20 @@ li:hover {
 #delete_gun_submit:hover {
   color: crimson; }
 
+button:hover {
+  color: crimson; }
+
 #update_gun_function {
-  text-align: center; }
+  display: inline-block; }
 
 #search_gun_submit {
-  text-align: center; }
+  display: inline-block; }
+
+#addagun {
+  display: inline-block; }
 
 .btn_wrapper {
-  display: inline-block; }
+  text-align: center; }
 
 /*  Header Stuff */
 ul.navs {

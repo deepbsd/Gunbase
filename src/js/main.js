@@ -107,7 +107,7 @@ function outputGunsReport() {
 
     // NAV HEADER: Listen for Add Gun click
     $("#navaddgun").click(function(){
-      var template = `<div><h3>Add A Gun</h3><form>`;
+      var template = `<div><h3>Add A Gun</h3><form >`;
       template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
       template += '<input id="model"  type="text" placeholder="model" name="model">';
       template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
@@ -117,7 +117,8 @@ function outputGunsReport() {
       template += '<input id="value" type="text" placeholder="value" name="value">';
       template += '<input id="sold" type="text" placeholder="sold" name="sold">';
       template += '<input id="buyer" type="text" placeholder="buyer" name="buyer">';
-      template += '<button type="submit" id="create_gun_submit">Submit</submit> ';
+      template += '<br><div class="btn_wrapper"><button type="submit" id="create_gun_submit">Submit</submit></div>';
+      // template += '<button type="submit" id="create_gun_submit">Submit</submit> ';
       template += '</form></div>';
 
       // This will be the form the user fills out to add a

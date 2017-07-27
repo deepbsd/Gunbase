@@ -65,7 +65,10 @@ input {
     font-size: $large;
     margin: 6px 0;
     width: 100%;
-
+  }
+  #addagun & {
+    display: block;
+    width: 100%;
   }
 }
 
@@ -91,16 +94,29 @@ label {
   }
 }
 
+button {
+  &:hover {
+    color: crimson;
+  }
+}
+
 #update_gun_function  {
-  text-align: center;
+  // text-align: center;
+  display: inline-block;
 }
 
 #search_gun_submit {
-  text-align: center;
+  // text-align: center;
+  display: inline-block;
+}
+
+#addagun {
+  display: inline-block;
 }
 
 .btn_wrapper {
-  display: inline-block;
+  //display: inline-block;
+  text-align: center;
 }
 
 /*  Header Stuff */
