@@ -1,17 +1,11 @@
 /* Media Queries */
 
-.y-wrap {
-  @include responsive(nixon) {
-    display: inline-block;
-    max-width: 992px;
-    margin: 0 auto;
-  }
-}
+
 
 
 /* For Main Listing */
 ul.list-one {
-  margin-left: 3%;
+  //margin-left: 3%;
 }
 
 .centered {

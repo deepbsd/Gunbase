@@ -307,7 +307,13 @@ img {
 /* layout styles */
 .y-wrap {
   margin: 0 auto;
-  width: 90%; }
+  width: 290px; }
+  @media only screen and (min-width: 375px) {
+    .y-wrap {
+      width: 90%; } }
+  @media only screen and (min-width: 1100px) {
+    .y-wrap {
+      max-width: 992px; } }
 
 /*----------------------------------------------------------------------------
   Base
@@ -322,16 +328,7 @@ img {
   Vendor
 ----------------------------------------------------------------------------*/
 /* Media Queries */
-@media only screen and (min-width: 992px) {
-  .y-wrap {
-    display: inline-block;
-    max-width: 992px;
-    margin: 0 auto; } }
-
 /* For Main Listing */
-ul.list-one {
-  margin-left: 3%; }
-
 .centered {
   text-align: center; }
 

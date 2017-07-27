@@ -1,5 +1,11 @@
 /* layout styles */
 .y-wrap {
   margin: 0 auto;
-  width: 90%;
+  width: 290px;
+  @include responsive(taft) {
+    width: 90%;
+  }
+  @include responsive(carter) {
+    max-width: 992px;
+  }
 }
