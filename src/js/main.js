@@ -113,7 +113,7 @@ function outputGunsReport() {
 
     // NAV HEADER: Listen for Add Gun click
     $("#navaddgun").click(function(){
-      var template = `<div><h3>Add A Gun</h3><form >`;
+      var template = `<div><h3>Add A Gun</h3><form id="addagun_form">`;
       template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
       template += '<input id="model"  type="text" placeholder="model" name="model">';
       template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
@@ -159,7 +159,7 @@ function outputGunsReport() {
     // Replaces search for guns on 'main menu'
     $("#navsearch").click(function(){
       console.log('Nav Search clicked')
-      var template = '<div><h3 class="search_for_gun">Search for Gun</h3><form>';
+      var template = '<div><h3 class="search_for_gun">Search for Gun</h3><form id="findagun_form">';
       template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
       template += '<input id="model"  type="text" placeholder="model" name="model">';
       template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';

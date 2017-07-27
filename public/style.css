@@ -305,6 +305,9 @@ img {
   Paragraph
 ----------------------------------------------------------------------------*/
 /* layout styles */
+body {
+  margin-bottom: 80px; }
+
 .y-wrap {
   margin: 0 auto;
   width: 290px; }
@@ -377,6 +380,12 @@ li:hover {
 #addagun input {
   display: block;
   width: 100%; }
+
+#addagun_form input {
+  margin: 5px 0; }
+
+#findagun_form input {
+  margin: 5px 0; }
 
 #update_gun_form label {
   display: block;
