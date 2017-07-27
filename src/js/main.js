@@ -162,7 +162,7 @@ function outputGunsReport() {
       template += '<input id="value" type="text" placeholder="value" name="value">';
       template += '<input id="sold" type="text" placeholder="sold" name="sold">';
       template += '<input id="buyer" type="text" placeholder="buyer" name="buyer">';
-      template += '<button type="submit" id="search_gun_submit">Submit</submit> ';
+      template += '<br><div class="btn_wrapper"><button type="submit" id="search_gun_submit">Submit</submit></div>';
       template += '</form></div>';
 
       $("#output").html(template);
@@ -207,17 +207,23 @@ function outputGunsReport() {
         });
 
         let returnTemplate = '<div id="edit_guns">';
+        returnTemplate += '<ul class="list-one" id="list-top">';
         newArray.forEach(function(gun){
-          returnTemplate += '<p>'+gun.fullName+'</p>'+
-          `<button class="update_gun" data-gunobj="${gun.id}">Update/Delete</button>`;
+
+          let gunicon = getIcon(gun.type)
+          returnTemplate += `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
+
         })
+
+        returnTemplate += "</ul>";
+
 
         console.log('newArray size: ', newArray.length);
 
         if (newArray.length === 0) returnTemplate += "No Guns Found.";
 
         // put the 'home' button on the page
-        returnTemplate += '<button id="home_page">Home</button>';
+        // returnTemplate += '<button id="home_page">Home</button>';
         returnTemplate += '</div>';
 
         $("#output").html(returnTemplate);
@@ -329,9 +335,9 @@ function getOneGun(gunId){
       template += `<input id="sold" type="text" placeholder="${gundata.sold}" name="sold">`;
       template += `<label for="buyer">Buyer</label>`;
       template += `<input id="buyer" type="text" placeholder="${gundata.buyer}" name="buyer">`;
-      template += '<button type="submit" id="update_gun_submit">Submit</submit> ';
-      template += '<button type="submit" id="delete_gun_submit">Delete?</submit>';
-      template += '<button type="submit" id="load_home_page">Home</submit>';
+      template += '<div class="btn_wrapper"><button type="submit" id="update_gun_submit">Update</submit> ';
+      template += '<button type="submit" id="delete_gun_submit">Delete</div></submit>';
+      //template += '<button type="submit" id="load_home_page">Home</submit>';
       template += '</form></div>';
       $("#output").html(template);
 

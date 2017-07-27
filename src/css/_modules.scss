@@ -79,6 +79,30 @@ label {
   }
 }
 
+#update_gun_submit {
+  &:hover {
+    color: crimson;
+  }
+}
+
+#delete_gun_submit {
+  &:hover {
+    color: crimson;
+  }
+}
+
+#update_gun_function  {
+  text-align: center;
+}
+
+#search_gun_submit {
+  text-align: center;
+}
+
+.btn_wrapper {
+  display: inline-block;
+}
+
 /*  Header Stuff */
 
 ul.navs {
