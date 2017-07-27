@@ -396,6 +396,7 @@ header {
 ul.navs li {
   cursor: pointer;
   display: inline-block;
+  font-size: 12px;
   margin: 0 8px; }
 
 .iphone {
@@ -403,6 +404,8 @@ ul.navs li {
 
 .hdrnimg {
   float: left;
+  font-family: 'Russo One', sans-serif;
+  font-size: 28px;
   vertical-align: middle;
   width: 60px; }
 
