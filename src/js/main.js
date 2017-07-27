@@ -66,6 +66,12 @@ function getIcon(type){
   }
 }
 
+function imgPath(obj){
+  // This prettifies the path so the user doesn't have to
+  // remember to type 'img/path'
+  return obj.substring(obj.lastIndexOf("/")+1, obj.length);
+}
+
 // This function now represents the Main Navigational Page
 // that the user sees first.  There's a nav header in the index.html
 function outputGunsReport() {
@@ -329,7 +335,7 @@ function getOneGun(gunId){
       template += `<label for="serial_number">Serial Number</label>`;
       template += `<input  id="serial_number" type="text" placeholder="${gundata.serial_number}" name="serial_number">`;
       template += `<label for="image">Image</label>`;
-      template += `<input id="image" type="text" placeholder="${gundata.image}" name="image">`;
+      template += `<input id="image" type="text" placeholder="${imgPath(gundata.image)}" name="image">`;
       template += `<label for="value">Value</label>`;
       template += `<input id="value" type="text" placeholder="${gundata.value}" name="value">`;
       template += `<label for="sold">Sold</label>`;
@@ -360,7 +366,11 @@ function getOneGun(gunId){
         fields.forEach(function(field){
           if ($('#'+field).val()) {
             let thevalue = $('#'+field).val();
-            updateData[field] = `${thevalue}`
+            if (field == 'image'){
+              updateData[field] = `img/${thevalue}`;
+            } else {
+              updateData[field] = `${thevalue}`;
+            }
           }
         })
 
