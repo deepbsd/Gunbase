@@ -143,6 +143,8 @@ function outputGunsReport() {
           buyer: $("#buyer").val()
         }
 
+        gunObj.image = `img/${gunObj.image}`;
+
         console.log("submitting this gun to Db: ",gunObj);
         // I had originally thought I could use gunDbTalk() for everything...
         // I'm not so sure now, but it still works for adding guns to the
@@ -254,6 +256,7 @@ function outputGunsReport() {
 
 // I was thinking this one method might eventually be used for all methods
 // Not sure if that's a good idea though.
+// Now it's just used for adding a gun to the db
 function gunDbTalk(gunData, http_method){
   console.log('gunTalk ', gunData);
   if (gunData.id) myURL = rootURL + "/" + gunData.id;
@@ -355,12 +358,14 @@ function getOneGun(gunId){
         console.log('Deleting gun with id: ', gunId);
 
         deleteGun(gunId);
+
       })
     },
     error: function(error){
       console.log('error *getting* the record: ',error);
     }
   })
+
 }  // End of getOneGun()  (Includes calls to deleteGun() and updateGun() and showMenu()! )
 
 // ###########################
@@ -408,13 +413,15 @@ function deleteGun(gunId){
     success: function() {
 
       console.log(`Gun ${gunId} deleted!`);
+      getAllGuns();
       // res();
     },
     error: function(error){
       console.log('Update failed.  Error: ',error);
     }
   })
-  getAllGuns().then(outputGunsReport);
+  getAllGuns()
+    .then(outputGunsReport);
 }
 
 
