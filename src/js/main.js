@@ -44,7 +44,7 @@ function getAllGuns() {
 
 
 getAllGuns()
-//.then(showMenu);
+
 .then(outputGunsReport);
 
 //#########################################################
@@ -75,7 +75,7 @@ function imgPath(obj){
 // This function now represents the Main Navigational Page
 // that the user sees first.  There's a nav header in the index.html
 function outputGunsReport() {
-
+    console.log('outputGunsReport() called!');
     // Set up the output template that will be the main page for the app
     // There's a switch statement that chooses the gun's icon
     var template = '<form class="centered" id="top-form-find"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
@@ -320,15 +320,9 @@ function getOneGun(gunId){
       template += `<input id="buyer" type="text" placeholder="${gundata.buyer}" name="buyer">`;
       template += '<div class="btn_wrapper"><button type="submit" id="update_gun_submit">Update</submit> ';
       template += '<button type="submit" id="delete_gun_submit">Delete</div></submit>';
-      //template += '<button type="submit" id="load_home_page">Home</submit>';
       template += '</form></div>';
       $("#output").html(template);
 
-      //Home page button listener (not used currently)
-      $("#load_home_page").click(function(){
-        // showMenu();
-        outputGunsReport();
-      })
 
       // Update_gun listener
       $("#update_gun_submit").click(function(ev){
