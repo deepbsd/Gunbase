@@ -234,7 +234,7 @@ function outputGunsReport() {
     $("#navhome").click(function(e){
       e.preventDefault();
       console.log('navhome clicked');
-      //Recursion here? side effects???
+      //Recursion here? side effects???  Yes!!!
       outputGunsReport();
     })
 
@@ -242,10 +242,12 @@ function outputGunsReport() {
     $("#navhome1").click(function(e){
       e.preventDefault();
       console.log('navhome1 Logo clicked');
+      //Recursion here! Side effects!!!
       outputGunsReport();
     })
 
-}  // end of outputGunsReport()
+  }  // end of outputGunsReport()
+
 
 //#########################################################
 //#################  DATABASE METHODS      ################
@@ -277,7 +279,7 @@ function gunDbTalk(gunData, http_method){
       }
     })
   getAllGuns()
-  //showMenu();
+
   .then(outputGunsReport);
 }
 
@@ -379,7 +381,6 @@ function updateGun(updateData, gunId){
     dataType: 'json',
     success: function(gundata) {
 
-      //console.log('StateObject: ',state.guns);
       console.log('Gun updated!  Object: ',gundata);
       // res();
     },
