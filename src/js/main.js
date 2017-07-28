@@ -389,7 +389,7 @@ function updateGun(updateData, gunId){
   })
   getAllGuns()
     .then(outputGunsReport);
-  // .then(showMenu);
+
 }
 
 
