@@ -303,6 +303,7 @@ function getOneGun(gunId){
       console.log('HEY!  Object: ',gundata);
       var template = '<div id="update_gun_function"><form id="update_gun_form">';
       template += `<img class="medium-img"  src="${gundata.image}"/>`;
+      template += `<div class="basicFieldWrap">`
       template += `<label for="manufacturer">Manufacturer</label>`;
       template += `<input id="manufacturer" type="text" placeholder="${gundata.manufacturer}" name="manufacturer">`;
       template += `<label for="model">Model</label>`;
@@ -313,6 +314,7 @@ function getOneGun(gunId){
       template += `<input id="type" type="text" placeholder="${gundata.type}" name="type">`;
       template += `<label for="serial_number">Serial Number</label>`;
       template += `<input  id="serial_number" type="text" placeholder="${gundata.serial_number}" name="serial_number">`;
+      template += `</div><div class="basicFieldWrap">`
       template += `<label for="image">Image</label>`;
       template += `<input id="image" type="text" placeholder="${imgPath(gundata.image)}" name="image">`;
       template += `<label for="value">Value</label>`;
@@ -321,8 +323,10 @@ function getOneGun(gunId){
       template += `<input id="sold" type="text" placeholder="${gundata.sold}" name="sold">`;
       template += `<label for="buyer">Buyer</label>`;
       template += `<input id="buyer" type="text" placeholder="${gundata.buyer}" name="buyer">`;
+
       template += '<div class="btn_wrapper"><button type="submit" id="update_gun_submit">Update</submit> ';
       template += '<button type="submit" id="delete_gun_submit">Delete</div></submit>';
+      template += `</div>`
       template += '</form></div>';
       $("#output").html(template);
 

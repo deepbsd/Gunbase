@@ -295,9 +295,6 @@ input {
 /*----------------------------------------------------------------------------
   Image
 ----------------------------------------------------------------------------*/
-.medium-img {
-  width: 280px; }
-
 img {
   width: 100%; }
 
@@ -423,6 +420,9 @@ button:hover {
 
 .btn_wrapper {
   text-align: center; }
+  @media only screen and (min-width: 900px) {
+    .btn_wrapper {
+      margin-top: 24px; } }
 
 /*  Header Stuff */
 ul.navs {
@@ -473,3 +473,17 @@ div.hdrnimg img {
 
 /* End of Header Styles */
 /*  Output Styles   */
+.medium-img {
+  margin-top: 20px;
+  width: 280px; }
+  @media only screen and (min-width: 900px) {
+    .medium-img {
+      border: 1px solid thistle;
+      display: inline-block;
+      vertical-align: top; } }
+
+@media only screen and (min-width: 900px) {
+  .basicFieldWrap {
+    display: inline-block;
+    margin: 0 40px;
+    vertical-align: top; } }
