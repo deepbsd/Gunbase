@@ -7,9 +7,9 @@ const state = {
 
 
 
-const rootURL = 'http://localhost:8080/guns';
+// const rootURL = 'http://localhost:8080/guns';
 
-// const rootURL = 'https://firearmbase.herokuapp.com/guns';
+const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -269,8 +269,7 @@ function gunDbTalk(gunData, http_method){
       dataType: 'json',
       success: function(gundata) {
 
-        //console.log('StateObject: ',state.guns);
-        console.log('HEY!  Object: ',gundata);
+        console.log('gunDbTalk() Object: ',gundata);
         // res();
       },
       error: function(error){
