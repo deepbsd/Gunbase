@@ -468,5 +468,8 @@ div.hdrnimg img {
   color: maroon;
   cursor: pointer; }
 
+.formWrap {
+  text-align: center; }
+
 /* End of Header Styles */
 /*  Output Styles   */

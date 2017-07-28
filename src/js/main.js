@@ -32,14 +32,14 @@ function getAllGuns() {
           num++;
         });
         console.log('StateObject: ',state.guns);
-        res();
+        res(state);
       },
       error: function(error){
         console.log('getAllGuns() error: ',error);
       }
     })
   })
-  return state;
+  //return state;
 }
 
 
@@ -111,7 +111,7 @@ function outputGunsReport() {
 
     // NAV HEADER: Listen for Add Gun click
     $("#navaddgun").click(function(){
-      var template = `<div><h3>Add A Gun</h3><form id="addagun_form">`;
+      var template = '<div class="formWrap"><h3>Add A Gun</h3><form id="addagun_form">';
       template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
       template += '<input id="model"  type="text" placeholder="model" name="model">';
       template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
@@ -158,7 +158,7 @@ function outputGunsReport() {
     // Replaces search for guns on 'main menu'  (no longer have main menu)
     $("#navsearch").click(function(){
       console.log('Nav Search clicked')
-      var template = '<div><h3 class="search_for_gun">Search for Gun</h3><form id="findagun_form">';
+      var template = '<div class="formWrap"><h3 class="search_for_gun">Search for Gun</h3><form id="findagun_form">';
       template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
       template += '<input id="model"  type="text" placeholder="model" name="model">';
       template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
@@ -365,7 +365,6 @@ function getOneGun(gunId){
       console.log('error *getting* the record: ',error);
     }
   })
-
 }  // End of getOneGun()  (Includes calls to deleteGun() and updateGun() and showMenu()! )
 
 // ###########################
@@ -413,7 +412,7 @@ function deleteGun(gunId){
     success: function() {
 
       console.log(`Gun ${gunId} deleted!`);
-      getAllGuns();
+      //getAllGuns();
       // res();
     },
     error: function(error){
@@ -422,6 +421,7 @@ function deleteGun(gunId){
   })
   getAllGuns()
     .then(outputGunsReport);
+
 }
 
 
