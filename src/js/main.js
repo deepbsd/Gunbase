@@ -7,9 +7,9 @@ const state = {
 
 
 
-// const rootURL = 'http://localhost:8080/guns';
+const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'https://firearmbase.herokuapp.com/guns';
+// const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -81,14 +81,12 @@ function outputGunsReport() {
     var template = '<form class="centered" id="top-form-find"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
         template += '<ul class="list-one" id="list-top">';
     state.guns.forEach( gun => {
-      console.log('ONE: ', typeof gun);
+
       let gunicon = getIcon(gun.type)
       template += `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
-    })  // End of the switch statement for icon chooser
+    }) // end of forEach
 
     template += '</ul>';
-    //template += '<button id="home_page">Home</button>';
-    console.log('state.guns object ', state.guns);
 
     // Display all guns to screen
     $("#output").html(template);
@@ -102,7 +100,7 @@ function outputGunsReport() {
       loadFindData(criteria);
     });
 
-    //Listen for click on any individual guns
+    // Listen for click on any individual guns
     // I'm using jQuery's ability to preserve object data-gunobj (gun.id)
     // and storing that in the data-gunobj attribute in the itemdata class
     $(".itemdata").click(function(ev){
@@ -124,7 +122,6 @@ function outputGunsReport() {
       template += '<input id="sold" type="text" placeholder="sold" name="sold">';
       template += '<input id="buyer" type="text" placeholder="buyer" name="buyer">';
       template += '<br><div class="btn_wrapper"><button type="submit" id="create_gun_submit">Submit</submit></div>';
-      // template += '<button type="submit" id="create_gun_submit">Submit</submit> ';
       template += '</form></div>';
 
       // This will be the form the user fills out to add a
@@ -156,7 +153,7 @@ function outputGunsReport() {
 
 
     // NAVBAR SEARCH: Listen for clicks on Search/Edit
-    // Replaces search for guns on 'main menu'
+    // Replaces search for guns on 'main menu'  (no longer have main menu)
     $("#navsearch").click(function(){
       console.log('Nav Search clicked')
       var template = '<div><h3 class="search_for_gun">Search for Gun</h3><form id="findagun_form">';
@@ -200,7 +197,6 @@ function outputGunsReport() {
           if (value) { searchKeys[key] = value; }
         }
 
-        //Why are some guns not being returned?
         console.log('Looking for: ', searchKeys);
 
         // newArray will contain only matching guns to be returned to user
@@ -210,6 +206,7 @@ function outputGunsReport() {
               gun['delete'] = true;
             }
           });
+          // return only guns *without* gun.delete=true
           return !gun.delete;
         });
 
@@ -224,29 +221,21 @@ function outputGunsReport() {
 
         returnTemplate += "</ul>";
 
-
         console.log('newArray size: ', newArray.length);
 
         if (newArray.length === 0) returnTemplate += "No Guns Found.";
 
-        // put the 'home' button on the page
-        // returnTemplate += '<button id="home_page">Home</button>';
         returnTemplate += '</div>';
 
         $("#output").html(returnTemplate);
 
-        // 'Home' button at bottom of page
-        $("#home_page").click(function(){
-          //showMenu();
-          outputGunsReport();
-        })
-
-        $("#edit_guns").click('.update_gun', function(ev) {
-          var targetId = $(ev.target).data('gunobj');
-          console.log('ClickHandler!  target id:', targetId);
-
-          getOneGun(targetId);
-        })
+        // Looks like this button went away...  Do we still need this listener?
+        // $("#edit_guns").click('.update_gun', function(ev) {
+        //   var targetId = $(ev.target).data('gunobj');
+        //   console.log('ClickHandler!  target id:', targetId);
+        //
+        //   getOneGun(targetId);
+        // })
 
         console.log('NewArray returned: ', newArray);
       })

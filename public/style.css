@@ -307,6 +307,7 @@ img {
 /* layout styles */
 body {
   margin-top: 40px;
+  /* make room for header */
   margin-bottom: 80px; }
 
 .y-wrap {
