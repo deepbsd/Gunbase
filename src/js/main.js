@@ -143,7 +143,7 @@ function outputGunsReport() {
           buyer: $("#buyer").val()
         }
 
-        console.log("From showmenu() ",gunObj);
+        console.log("submitting this gun to Db: ",gunObj);
         // I had originally thought I could use gunDbTalk() for everything...
         // I'm not so sure now, but it still works for adding guns to the
         // database
@@ -213,29 +213,17 @@ function outputGunsReport() {
         let returnTemplate = '<div id="edit_guns">';
         returnTemplate += '<ul class="list-one" id="list-top">';
         newArray.forEach(function(gun){
-
           let gunicon = getIcon(gun.type)
           returnTemplate += `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
 
         })
 
         returnTemplate += "</ul>";
-
         console.log('newArray size: ', newArray.length);
-
         if (newArray.length === 0) returnTemplate += "No Guns Found.";
-
         returnTemplate += '</div>';
 
         $("#output").html(returnTemplate);
-
-        // Looks like this button went away...  Do we still need this listener?
-        // $("#edit_guns").click('.update_gun', function(ev) {
-        //   var targetId = $(ev.target).data('gunobj');
-        //   console.log('ClickHandler!  target id:', targetId);
-        //
-        //   getOneGun(targetId);
-        // })
 
         console.log('NewArray returned: ', newArray);
       })
