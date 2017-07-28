@@ -425,7 +425,7 @@ function deleteGun(gunId){
 
 // FILTERING SEARCH METHOD that gets loaded from top page
 function loadFindData(criteria) {
-  console.log('LOADFINDDATA!!!  -> ',criteria)
+  console.log('LOAD FIND DATA!!!  -> ',criteria)
   if (!criteria){
 
     console.log('No Criteria! ',criteria);
@@ -437,7 +437,7 @@ function loadFindData(criteria) {
       $("#list-top").append(`<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`);
     })
   } else {
-    //getAllGuns();
+
     let selections = state.guns.filter( gun => {
       return gun.manufacturer.toLowerCase().includes(criteria.toLowerCase());
     });
@@ -453,8 +453,3 @@ function loadFindData(criteria) {
     });
   }
 }
-
-
-//This function shows the opening menu
-// We changed the app so we don't show this anymore.  We just
-// go right to outputGunsReport()
