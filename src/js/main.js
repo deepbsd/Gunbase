@@ -234,16 +234,14 @@ function outputGunsReport() {
     $("#navhome").click(function(e){
       e.preventDefault();
       console.log('navhome clicked');
-      //Recursion here? side effects???  Yes!!!
-      outputGunsReport();
+      location.reload();
     })
 
     // Listen for click on 'GunBase' Logo
     $("#navhome1").click(function(e){
       e.preventDefault();
       console.log('navhome1 Logo clicked');
-      //Recursion here! Side effects!!!
-      outputGunsReport();
+      location.reload();
     })
 
   }  // end of outputGunsReport()
