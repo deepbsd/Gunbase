@@ -114,12 +114,10 @@ button {
 }
 
 #update_gun_function  {
-  // text-align: center;
   display: inline-block;
 }
 
 #search_gun_submit {
-  // text-align: center;
   display: inline-block;
 }
 
@@ -128,7 +126,6 @@ button {
 }
 
 .btn_wrapper {
-  //display: inline-block;
   text-align: center;
   @include responsive(johnson){
     margin-top: 24px;
@@ -201,12 +198,23 @@ div.hdrnimg img {
 .medium-img {
   margin-top: 20px;
   width: 280px;
+  @include responsive(hoover){
+    display: inline-block;
+    vertical-align: top;
+  }
   @include responsive(johnson){
-    border: 1px solid thistle;
     display: inline-block;
     vertical-align: top;
   }
 }
+
+.fieldWrapWrapper {
+  @include responsive(hoover){
+    display: inline-block;
+    margin: 0 13px;     // had to cut down this margin to prevent weirdness
+  }
+}
+
 .basicFieldWrap {
   @include responsive(johnson){
     display: inline-block;
