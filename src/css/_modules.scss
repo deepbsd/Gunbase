@@ -3,7 +3,10 @@
 
 
 
-/* For Main Listing */
+/* ###################
+     For Main Listing
+   ###################   */
+
 ul.list-one {
   //margin-left: 3%;
 }
@@ -132,9 +135,26 @@ button {
   }
 }
 
-/*  Header Stuff */
+/*  ####################
+       Header Stuff
+    #################### */
+
+/*  This is for the burger menu so the body gets covered by a dark window  */
+.overlay {
+  background: inherit;
+  position: fixed;
+  top: 0;
+  transition: background 0.6s ease-in-out;
+  width: 100%;
+  z-index: 1;
+  &.active {
+    background: rgba(0, 0, 0, 0.7);
+    height: 2000px;
+  }
+}
 
 ul.navs {
+  display: none;
   list-style: none;
   margin: 0;
   position: absolute;
@@ -165,8 +185,7 @@ ul.navs li {
   float: left;
   font-family: 'Russo One', sans-serif;
   font-size: 28px;
-  vertical-align: middle;
-  width: 60px;
+  width: 50%;
 }
 
 div.hdrnimg img {
@@ -192,9 +211,86 @@ div.hdrnimg img {
 .formWrap {
   text-align: center;
 }
+
+.navswrap {
+  float: left;
+  height: 34px;
+  position: relative;
+  width: 50%;
+}
+/* Hamburger Menu */
+// Burger menu button
+.mobile {
+  right: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+$burger--thickness: 4px;
+.burger {
+	$width: 28px;
+  background: none;
+  border: 0;
+  border-bottom: $burger--thickness solid currentColor;
+  cursor: pointer;
+	outline: 0;
+	padding: 0;
+  transition: border-bottom 1s ease-in-out;
+	-webkit-transition: border-bottom 1s ease-in-out;
+	width: $width;
+
+	// Fix for extra space in Firefox
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
+
+  &.active {
+    border-bottom: 4px solid transparent;
+    &:before {
+      transform: rotate(-405deg) translateY(1px) translateX(-3px);
+      -webkit-transform: rotate(-405deg) translateY(1px) translateX(-3px);
+    }
+    &:after {
+      transform: rotate(405deg) translateY(-4px) translateX(-5px);
+      -webkit-transform: rotate(405deg) translateY(-4px) translateX(-5px);
+    }
+  }
+
+	&:before {
+		content: "";
+		display: block;
+		border-bottom: $burger--thickness solid currentColor;
+		width: 100%;
+		margin-bottom: 5px;
+		transition: transform 0.5s ease-in-out;
+		-webkit-transition: -webkit-transform 0.5s ease-in-out;
+	}
+
+	&:after {
+		content: "";
+		display: block;
+		border-bottom: $burger--thickness solid currentColor;
+		width: 100%;
+		margin-bottom: 5px;
+		transition: transform 0.5s ease-in-out;
+		-webkit-transition: -webkit-transform 0.5s ease-in-out;
+	}
+}
+
+
+
+
 /* End of Header Styles */
 
-/*  Output Styles   */
+
+
+/*  ####################
+       Output Styles
+    ####################  */
+
+/* These are for the individual record display styles */
+
 .medium-img {
   margin-top: 20px;
   width: 280px;
