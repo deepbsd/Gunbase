@@ -7,9 +7,9 @@ const state = {
 
 
 
-// const rootURL = 'http://localhost:8080/guns';
+const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'https://firearmbase.herokuapp.com/guns';
+// const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -462,4 +462,15 @@ function loadFindData(criteria) {
       });
     });
   }
+}
+
+function burgerMenu(){
+  $(document).on('click', '#whatever', function(){
+    $('html').toggleClass('disable');
+    $('#mobile').toggleClass('active');
+    $('#themobilemenu').toggleClass('active');
+    $('#thenav').toggleClass('inactive');
+    $('#thenimg').toggleClass('opacity');
+    $('theoverlay').toggleClass('active');
+  })
 }
