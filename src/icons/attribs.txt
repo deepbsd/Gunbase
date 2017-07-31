@@ -1,3 +1,4 @@
 revolver.png  ...  Simon Child
-glock.png     ...
-1911.png      ...  
+glock.png     ...  Alexandr Cherkinsky
+1911.png      ...  Alexandr Cherkinsky
+shotgun.png   ...  Simon Child
