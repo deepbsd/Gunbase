@@ -51,6 +51,53 @@ getAllGuns()
 //#################  DOM MODIFICATION METHODS  ############
 //#########################################################
 
+// This function creates the summary page
+function createSummaryPg(){
+  var pistols, revolvers, rifles, shotguns, others, totalguns, value;
+  pistols = revolvers = rifles = shotguns = others = totalguns = value = 0;
+
+  state.guns.forEach( gun => {
+    switch (gun.type) {
+      case 'revolver':
+      revolvers += 1;
+      break;
+    case 'rifle':
+      rifles += 1;
+      break;
+    case 'pistol':
+      pistols += 1;
+      break;
+    case 'shotgun':
+      shotguns += 1;
+      break;
+    default:
+      others += 1;
+    }
+    value += gun.value
+  })
+  totalguns = state.guns.length;
+
+  template = `<div class="summaryWrap"><h2>Summary</h2>
+  <h3 class="summaryHdr">Pistols</h3><h3 class="summaryHdr">Revolvers</h3><h3 class="summaryHdr">Rifles</h3>
+  <div class="summaryDiv">${pistols}</div><div class="summaryDiv">${revolvers}</div><div class="summaryDiv">${rifles}</div>
+  <h3 class="summaryHdr">Shotguns</h3><h3 class="summaryHdr">Others</h3><h3 class="summaryHdr">Total Guns</h3>
+  <div class="">${shotguns}</div><div class="">${others}</div><div class="">${totalguns}</div>
+  <h3 class="summaryHdr">Value</h3><div class="summaryDiv">${value}</div></div>`;
+
+  //event listener for summary report
+  $("#summary").click(function(e){
+    e.preventdefault();
+    $("#output").html(template);
+    
+  })
+
+
+
+
+}
+
+
+// Get the right icon for each type of gun in the listing
 function getIcon(type){
   switch (type){
     case 'pistol':
@@ -66,9 +113,9 @@ function getIcon(type){
   }
 }
 
+// This prettifies the path so the user doesn't have to
+// remember to type 'img/path'
 function imgPath(obj){
-  // This prettifies the path so the user doesn't have to
-  // remember to type 'img/path'
   return obj.substring(obj.lastIndexOf("/")+1, obj.length);
 }
 
@@ -154,7 +201,7 @@ function outputGunsReport() {
     }) //end of #navaddgun listener
 
 
-    // NAVBAR SEARCH: Listen for clicks on Search/Edit
+    // NAVBAR SEARCH: Listen for clicks on Adv. Search
     // Replaces search for guns on 'main menu'  (no longer have main menu)
     $("#navsearch").click(function(){
       console.log('Nav Search clicked')
@@ -229,7 +276,7 @@ function outputGunsReport() {
 
         console.log('NewArray returned: ', newArray);
       })
-    }) // End of NavSearch click Listener
+    }) // End of Gun Search click Listener
 
 
     // Listen for clicks on 'Home' in navbar
