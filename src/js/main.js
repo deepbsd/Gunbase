@@ -246,6 +246,16 @@ function outputGunsReport() {
       location.reload();
     })
 
+    // hamburger icon listener
+    $(document).on('click', '#themobile', function(){
+      $('html').toggleClass('disable');
+      $('#theburger').toggleClass('active');
+      $('#thenavs').toggleClass('active');   // not working
+      $('#theiphone').toggleClass('inactive');  // not working
+      $('#hdrnimg').toggleClass('opacity');     // not working
+      $('#theoverlay').toggleClass('active');
+    })
+
   }  // end of outputGunsReport()
 
 
@@ -463,17 +473,3 @@ function loadFindData(criteria) {
     });
   }
 }
-
-
-(function($) {
-
-  $(document).on('click', '#themobile', function(){
-    $('html').toggleClass('disable');
-    $('#theburger').toggleClass('active');
-    $('#thenavs').toggleClass('active');   // not working
-    $('#theiphone').toggleClass('inactive');  // not working
-    $('#hdrnimg').toggleClass('opacity');     // not working
-    $('#theoverlay').toggleClass('active');
-  })
-
-})(window.jQuery)
