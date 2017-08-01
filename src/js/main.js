@@ -88,12 +88,23 @@ function createSummaryPg(){
   $("#summary").click(function(e){
     e.preventdefault();
     $("#output").html(template);
-    
+
   })
+}
 
+// Function for showing credits for icons
+function showCredits(){
+  template = '<div class="credits">'
+  template += '<h3>Credits</h3>'
+  template += '<p class="creditPerson">revolver.png..........Simon Child</p>'
+  template += '<p class="creditPerson">shotgun.png..........Simon Child</p>'
+  template += '<p class="creditPerson">1911.png..........Alexandr Cherkinsky</p>'
+  template += '<p class="creditPerson">glock.png..........Alexandr Cherkinsky</p></div>';
 
-
-
+  $("#attributions").click(function(e){
+    e.preventdefault();
+    $("#output").html(template);
+  })
 }
 
 
