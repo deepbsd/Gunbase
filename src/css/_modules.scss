@@ -12,7 +12,7 @@ ul.list-one {
 }
 
 form#top-form-find {
-  margin-top: 60px;
+  margin-top: 90px;  // changed after addition of "hamburger"
   margin-bottom: 20px;
   text-align: left;
   max-width: 700px;
@@ -154,14 +154,14 @@ button {
 }
 
 ul.navs {
-  display: none;
-  list-style: none;
-  margin: 0;
-  position: absolute;
-  right: 0;
-  text-align: right;
-  top: 50%;
-  transform: translateY(-50%);
+  // display: none;
+  // list-style: none;
+  // margin: 0;
+  // position: absolute;
+  // right: 0;
+  // text-align: right;
+  // top: 50%;
+  // transform: translateY(-50%);
 }
 
 header {
@@ -172,13 +172,25 @@ header {
 ul.navs li {
   cursor: pointer;
   display: inline-block;
-  font-size: 12px;
+  font-size: 18px;
   margin: 0 8px;
 }
 
-.iphone {
-  border: 1px solid #ddd;
-  // width: 320px;
+.iphone {           // same as .nav in fiddle
+   // border: 1px solid #ddd;   //comment this out
+   // width: 320px;
+   border: 1px solid #ccc;
+   background: white;
+   margin: 0 0 24px;
+   padding: 12px 0;
+   position: fixed;
+   top: 0;
+   width: 100%;
+   z-index: 4;
+   &.inactive {
+     background: none;
+     border: 1px solid transparent;
+   }
 }
 
 .hdrnimg {
@@ -278,8 +290,34 @@ $burger--thickness: 4px;
 	}
 }
 
+/* Monday night... mobilmenu styles */
+.navs {           // this was called mobilemenu
+  background: white;
+  height: 2000px;
+  padding: 130px 60px 24px 24px;
+  position: absolute;
+  right: -200px;
+  top: -68px; // same height as the nav
+  transition: right 0.6s ease-in-out;
+  width: 160px;
+  z-index: 2;
+  &.active {
+    right: 0;
+  }
+}
 
-
+li {
+  .navs & {         // this was called mobilmenu
+    color: inherit;
+    cursor: pointer;
+    margin: 18px 0;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      color: crimson;
+      padding-left: 5px;
+    }
+  }
+}
 
 /* End of Header Styles */
 

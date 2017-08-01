@@ -464,13 +464,16 @@ function loadFindData(criteria) {
   }
 }
 
-function burgerMenu(){
-  $(document).on('click', '#whatever', function(){
+
+(function($) {
+
+  $(document).on('click', '#themobile', function(){
     $('html').toggleClass('disable');
-    $('#mobile').toggleClass('active');
-    $('#themobilemenu').toggleClass('active');
-    $('#thenav').toggleClass('inactive');
-    $('#thenimg').toggleClass('opacity');
-    $('theoverlay').toggleClass('active');
+    $('#theburger').toggleClass('active');
+    $('#thenavs').toggleClass('active');   // not working
+    $('#theiphone').toggleClass('inactive');  // not working
+    $('#hdrnimg').toggleClass('opacity');     // not working
+    $('#theoverlay').toggleClass('active');
   })
-}
+
+})(window.jQuery)
