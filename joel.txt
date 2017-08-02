@@ -1,0 +1,9 @@
+- Add a short description of your website - e.g.: _“Welcome to GunBase, the largest firegun database on the Internet!“_
+- Make the Home button re-render the home page without reloading it. It seems like a bug to me
+- I really liked the search on the home page. Real time filtering as you type is really cool!
+
+[11:30] 
+- in your function `getAllGuns()` you are returning a promise that you explicity resolve in the success callback, but you never reject it - even when you get an error
+
+[11:30] 
+you should reject the promise from the error callback that you set in your `jQuery.ajax()` call

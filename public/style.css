@@ -381,6 +381,9 @@ li:nth-of-type(even) {
 li:hover {
   color: crimson; }
 
+#update_gun_form {
+  margin-top: 40px; }
+
 #update_gun_form input {
   display: block;
   font-size: 1.143rem;
