@@ -36,7 +36,7 @@ function getAllGuns() {
       },
       error: function(error){
         console.log('getAllGuns() error: ',error);
-        rej();
+        rej('There was an error: ',error);
       }
     })
   })
