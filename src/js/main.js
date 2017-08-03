@@ -7,9 +7,9 @@ const state = {
 
 
 
-// const rootURL = 'http://localhost:8080/guns';
+const rootURL = 'http://localhost:8080/guns';
 
-const rootURL = 'https://firearmbase.herokuapp.com/guns';
+// const rootURL = 'https://firearmbase.herokuapp.com/guns';
 
 //#########################################################
 //#################  STATE MODIFICATION METHODS  ##########
@@ -481,7 +481,7 @@ function deleteGun(gunId){
     headers: {
       "accept": "application/json;odata=verbose",
     },
-    //data: JSON.stringify(updateData),
+
     contentType: "application/json; charset=utf-8",
     dataType: 'json',
     success: function() {
