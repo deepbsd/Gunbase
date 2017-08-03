@@ -342,15 +342,15 @@ function gunDbTalk(gunData, http_method){
       success: function(gundata) {
 
         console.log('gunDbTalk() Object: ',gundata);
+        getAllGuns()
+        .then(outputGunsReport);
         // res();
       },
       error: function(error){
         console.log('error: ',error);
       }
     })
-  getAllGuns()
 
-  .then(outputGunsReport);
 }
 
 //GET single gun from db
@@ -374,7 +374,7 @@ function getOneGun(gunId){
       template += `<img class="medium-img"  src="${gundata.image}"/>`;
       template += `<div class="fieldWrapWrapper"><div class="basicFieldWrap">`
       template += `<label for="manufacturer">Manufacturer</label>`;
-      template += `<input id="manufacturer" type="text" placeholder="${gundata.manufacturer}" name="manufacturer">`;
+      template += `<input id="manufacturer" type="text" placeholder="${gundata.manufacturer}" name="manufacturer" value="${gundata.manufacturer}">`;
       template += `<label for="model">Model</label>`;
       template += `<input id="model"  type="text" placeholder="${gundata.model}" name="model">`;
       template += `<label for="chambering">Chambering</label>`;
@@ -457,14 +457,16 @@ function updateGun(updateData, gunId){
     success: function(gundata) {
 
       console.log('Gun updated!  Object: ',gundata);
+      getAllGuns()
+      .then(outputGunsReport);
       // res();
     },
     error: function(error){
       console.log('Update failed.  Error: ',error);
     }
   })
-  getAllGuns()
-    .then(outputGunsReport);
+  // getAllGuns()
+    // .then(outputGunsReport);
 
 }
 
@@ -485,15 +487,15 @@ function deleteGun(gunId){
     success: function() {
 
       console.log(`Gun ${gunId} deleted!`);
-      //getAllGuns();
-      // res();
+      getAllGuns()
+        .then(outputGunsReport);
+
     },
     error: function(error){
       console.log('Update failed.  Error: ',error);
     }
   })
-  getAllGuns()
-    .then(outputGunsReport);
+
 
 }
 

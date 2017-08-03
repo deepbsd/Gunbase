@@ -2,8 +2,39 @@
 - Make the Home button re-render the home page without reloading it. It seems like a bug to me
 - I really liked the search on the home page. Real time filtering as you type is really cool!
 
-[11:30] 
+[11:30]
 - in your function `getAllGuns()` you are returning a promise that you explicity resolve in the success callback, but you never reject it - even when you get an error
 
-[11:30] 
+[11:30]
 you should reject the promise from the error callback that you set in your `jQuery.ajax()` call
+
+
+Peter:
+
+1. Landing page  https://land-book.com/gallery/landings
+
+2. Increase sizes a bit -- icons and font-size for larger viewports
+
+3. padding on indiv records input fields
+
+4. center entire indiv record on record page horizontally  (vertically not required)
+
+5. change 'value' to 'dollar value'
+
+6. look into update lag   use incognito window (nothing in cache)
+
+7. increase search bar size add padding etc
+
+8. increase size of 'add a gun' and add padding and everything to enlarge
+
+9. indiv record page values should appear as live data not as placeholder data
+
+10. Table headers for main listing...
+
+11. replace adv search with search function on search bar (with toggle for parameter gun type, value, etc)
+
+12. use the burger menu just mobile viewports
+
+13. add user accounts
+
+Start time was march 6.  about sept 17.
