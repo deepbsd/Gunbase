@@ -90,6 +90,10 @@ input {
   #findagun_form & {
     margin: 5px 0;
   }
+  #top-form-find & {
+    padding: 8px;
+    // font-size: 1.3em;
+  }
 }
 
 label {
@@ -325,7 +329,14 @@ li {
 
 /* End of Header Styles */
 
+/* #####################
+       Landing Styles
+   #####################  */
 
+  .landing {
+    background: powderblue;
+    text-align: center;
+  }
 
 /*  ####################
        Output Styles

@@ -46,7 +46,8 @@ function getAllGuns() {
 
 getAllGuns()
 
-.then(outputGunsReport);
+// .then(outputGunsReport);
+.then(showLandingPg);
 
 //#########################################################
 //#################  DOM MODIFICATION METHODS  ############
@@ -108,6 +109,20 @@ function showCredits(){
   })
 }
 
+// Show the page that a user first sees when visiting the site
+function showLandingPg(){
+  template = '<div class="landing"><h1 class="landing">Welcome to Gunbase</h1>';
+  template += '<div class="landing-text">Gunbase is a database for your firearms collection';
+  template += 'that keeps track of the important and legal information for each of your firearms.';
+  template += '<button id="landing-btn">Proceed</button></div>';
+
+  $("#output").html(template);
+
+  $("#landing-btn").click(function(){
+    outputGunsReport();
+  })
+
+}
 
 // Get the right icon for each type of gun in the listing
 function getIcon(type){
@@ -295,14 +310,16 @@ function outputGunsReport() {
     $("#navhome").click(function(e){
       e.preventDefault();
       console.log('navhome clicked');
-      location.reload();
+      // location.reload();
+      outputGunsReport();
     })
 
     // Listen for click on 'GunBase' Logo
     $("#navhome1").click(function(e){
       e.preventDefault();
       console.log('navhome1 Logo clicked');
-      location.reload();
+      // location.reload();
+      outputGunsReport();
     })
 
     // hamburger icon listener
@@ -376,22 +393,22 @@ function getOneGun(gunId){
       template += `<label for="manufacturer">Manufacturer</label>`;
       template += `<input id="manufacturer" type="text" placeholder="${gundata.manufacturer}" name="manufacturer" value="${gundata.manufacturer}">`;
       template += `<label for="model">Model</label>`;
-      template += `<input id="model"  type="text" placeholder="${gundata.model}" name="model">`;
+      template += `<input id="model"  type="text" placeholder="${gundata.model}" name="model" value="${gundata.model}">`;
       template += `<label for="chambering">Chambering</label>`;
-      template += `<input id="chambering"  type="text" placeholder="${gundata.chambering}" name="chambering">`;
+      template += `<input id="chambering"  type="text" placeholder="${gundata.chambering}" name="chambering" value="${gundata.chambering}">`;
       template += `<label for="type">Type</label>`;
-      template += `<input id="type" type="text" placeholder="${gundata.type}" name="type">`;
+      template += `<input id="type" type="text" placeholder="${gundata.type}" name="type" value="${gundata.type}">`;
       template += `<label for="serial_number">Serial Number</label>`;
-      template += `<input  id="serial_number" type="text" placeholder="${gundata.serial_number}" name="serial_number">`;
+      template += `<input  id="serial_number" type="text" placeholder="${gundata.serial_number}" name="serial_number" value="${gundata.serial_number}">`;
       template += `</div><div class="basicFieldWrap">`
       template += `<label for="image">Image</label>`;
-      template += `<input id="image" type="text" placeholder="${imgPath(gundata.image)}" name="image">`;
-      template += `<label for="value">Value</label>`;
-      template += `<input id="value" type="text" placeholder="${gundata.value}" name="value">`;
+      template += `<input id="image" type="text" placeholder="${imgPath(gundata.image)}" name="image" value="${imgPath(gundata.image)}">`;
+      template += `<label for="value">Dollar Value</label>`;
+      template += `<input id="value" type="text" placeholder="${gundata.value}" name="value" value="${gundata.value}">`;
       template += `<label for="sold">Sold</label>`;
-      template += `<input id="sold" type="text" placeholder="${gundata.sold}" name="sold">`;
+      template += `<input id="sold" type="text" placeholder="${gundata.sold}" name="sold" value="${gundata.sold}">`;
       template += `<label for="buyer">Buyer</label>`;
-      template += `<input id="buyer" type="text" placeholder="${gundata.buyer}" name="buyer">`;
+      template += `<input id="buyer" type="text" placeholder="${gundata.buyer}" name="buyer" value="${gundata.buyer}">`;
 
       template += '<div class="btn_wrapper"><button type="submit" id="update_gun_submit">Update</submit> ';
       template += '<button type="submit" id="delete_gun_submit">Delete</div></submit>';
