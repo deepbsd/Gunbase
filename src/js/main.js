@@ -46,8 +46,8 @@ function getAllGuns() {
 
 getAllGuns()
 
-// .then(outputGunsReport);
-.then(showLandingPg);
+.then(outputGunsReport);
+// .then(showLandingPg);
 
 //#########################################################
 //#################  DOM MODIFICATION METHODS  ############
@@ -323,13 +323,15 @@ function outputGunsReport() {
     })
 
     // hamburger icon listener
-    $(document).on('click', '#themobile', function(){
+    // $(document).on('click', '#themobile', function(){
+    $(document).on('click', '#t-mobileicon', function(){
       $('html').toggleClass('disable');
-      $('#theburger').toggleClass('active');
-      $('#thenavs').toggleClass('active');   // not working
-      $('#theiphone').toggleClass('inactive');  // not working
-      $('#hdrnimg').toggleClass('opacity');     // not working
-      $('#theoverlay').toggleClass('active');
+      // $('#theburger').toggleClass('active');
+      // $('#thenavs').toggleClass('active');   // not working
+      // $('#theiphone').toggleClass('inactive');  // not working
+      $(this).toggleClass('active');
+      $('#t-navitems').toggleClass('active');
+      $('#t-overlay').toggleClass('active');
     })
 
   }  // end of outputGunsReport()

@@ -9,33 +9,45 @@
 </head>
 <body>
   <!-- Nav Header  -->
-  <div id="theoverlay" class="overlay"></div>
+  <div id="t-overlay" class="y-overlay"></div>
 
-  <div id="theiphone" class="iphone">
-    <header class="y-wrap cf">
-      <div id="thehdrnimg" class="hdrnimg">
-        <!-- <img src="/icons/gun_locker.png" /> -->
-        <p id="navhome1">GunBase</p>
-      </div>
-      <div class="navswrap">
-        <div id="themobile" class="mobile">
-          <div id="theburger" class="burger"></div>
+  <div class="navwrap">
+    <div class="y-wrap wide">
+      <!-- <div id="theiphone" class="iphone"> -->
+
+        <!-- <div id="thehdrnimg" class="hdrnimg"> -->
+        <div class="navlogo">
+          <!-- <img src="/icons/gun_locker.png" /> -->
+          <p id="navhome1">GunBase</p>
         </div>
-        <ul id="thenavs" class="navs">
+
+        <!-- <ul id="thenavs" class="navs"> -->
+        <ul id="t-navitems" class="navitems">
           <li id="navhome">Home</li>
+          <!-- <li id="navaddgun" style="background: white">Add a gun</li> -->
           <li id="navaddgun" style="background: white">Add a gun</li>
           <li id="navsearch">Adv. Search</li>
           <!-- <li id="summary">Summary Report</li>
           <li id="attributions">Credits</li> -->
         </ul>
-      </div>
-    </header>
-  </div>  <!-- End of iphone .iphone div -->
-  <!-- End of Nav Header -->
+
+        <!-- <div class="navswrap"> -->
+        <div class="navicon">
+            <div id="t-mobileicon" class="mobileicon"></div>
+        </div>
+        <!--
+          <div id="themobile" class="mobile">
+            <div id="theburger" class="burger"></div>
+          </div> -->
 
 
-  <div class="y-wrap" id="output">
+        </div>
+      <!-- </div>   End of iphone .iphone div -->
+    </div>  <!-- End of y-wrap  -->
+  </div>  <!-- End of navwrap  -->
 
+  <div class="y-wrap">
+    <div id="output"></div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>

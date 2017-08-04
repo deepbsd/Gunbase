@@ -319,19 +319,65 @@ img {
   @media only screen and (min-width: 1100px) {
     .y-wrap {
       max-width: 992px; } }
+  .y-wrap.wide {
+    width: 100%; }
+    @media only screen and (min-width: 768px) {
+      .y-wrap.wide {
+        width: 90%; } }
 
-/*----------------------------------------------------------------------------
-  Base
-----------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------
-  Layout
-----------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------
-  Modules
-----------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------
-  Vendor
-----------------------------------------------------------------------------*/
+/*  This is for the burger menu so the body gets covered by a dark window  */
+.y-overlay {
+  background: inherit;
+  height: 2000px;
+  position: fixed;
+  top: 0;
+  transition: background 0.6s ease-in-out;
+  width: 100%;
+  z-index: 30; }
+  .y-overlay.active {
+    background: rgba(0, 0, 0, 0.7); }
+
+#output {
+  margin-top: 110px; }
+
+.mobileicon {
+  background: none;
+  border: 0;
+  border-bottom: 4px solid currentColor;
+  cursor: pointer;
+  outline: 0;
+  padding: 0;
+  transition: border-bottom 1s ease-in-out;
+  -webkit-transition: border-bottom 1s ease-in-out;
+  width: 28px; }
+  .mobileicon::-moz-focus-inner {
+    border: 0;
+    padding: 0; }
+  .mobileicon.active {
+    border-bottom: 4px solid transparent; }
+    .mobileicon.active:before {
+      transform: rotate(-405deg) translateY(1px) translateX(-3px);
+      -webkit-transform: rotate(-405deg) translateY(1px) translateX(-3px); }
+    .mobileicon.active:after {
+      transform: rotate(405deg) translateY(-4px) translateX(-5px);
+      -webkit-transform: rotate(405deg) translateY(-4px) translateX(-5px); }
+  .mobileicon:before {
+    content: "";
+    display: block;
+    border-bottom: 4px solid currentColor;
+    width: 100%;
+    margin-bottom: 5px;
+    transition: transform 0.5s ease-in-out;
+    -webkit-transition: -webkit-transform 0.5s ease-in-out; }
+  .mobileicon:after {
+    content: "";
+    display: block;
+    border-bottom: 4px solid currentColor;
+    width: 100%;
+    margin-bottom: 5px;
+    transition: transform 0.5s ease-in-out;
+    -webkit-transition: -webkit-transform 0.5s ease-in-out; }
+
 /* Media Queries */
 /* ###################
      For Main Listing
@@ -436,39 +482,8 @@ button:hover {
 /*  ####################
        Header Stuff
     #################### */
-/*  This is for the burger menu so the body gets covered by a dark window  */
-.overlay {
-  background: inherit;
-  position: fixed;
-  top: 0;
-  transition: background 0.6s ease-in-out;
-  width: 100%;
-  z-index: 1; }
-  .overlay.active {
-    background: rgba(0, 0, 0, 0.7);
-    height: 2000px; }
-
 header {
   position: relative; }
-
-ul.navs li {
-  cursor: pointer;
-  display: inline-block;
-  font-size: 18px;
-  margin: 0 8px; }
-
-.iphone {
-  border: 1px solid #ccc;
-  background: white;
-  margin: 0 0 24px;
-  padding: 12px 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 4; }
-  .iphone.inactive {
-    background: none;
-    border: 1px solid transparent; }
 
 .hdrnimg {
   float: left;
@@ -507,54 +522,108 @@ div.hdrnimg img {
   top: 50%;
   transform: translateY(-50%); }
 
-.burger {
-  background: none;
-  border: 0;
-  border-bottom: 4px solid currentColor;
-  cursor: pointer;
-  outline: 0;
-  padding: 0;
-  transition: border-bottom 1s ease-in-out;
-  -webkit-transition: border-bottom 1s ease-in-out;
-  width: 28px; }
-  .burger::-moz-focus-inner {
-    border: 0;
-    padding: 0; }
-  .burger.active {
-    border-bottom: 4px solid transparent; }
-    .burger.active:before {
-      transform: rotate(-405deg) translateY(1px) translateX(-3px);
-      -webkit-transform: rotate(-405deg) translateY(1px) translateX(-3px); }
-    .burger.active:after {
-      transform: rotate(405deg) translateY(-4px) translateX(-5px);
-      -webkit-transform: rotate(405deg) translateY(-4px) translateX(-5px); }
-  .burger:before {
-    content: "";
-    display: block;
-    border-bottom: 4px solid currentColor;
-    width: 100%;
-    margin-bottom: 5px;
-    transition: transform 0.5s ease-in-out;
-    -webkit-transition: -webkit-transform 0.5s ease-in-out; }
-  .burger:after {
-    content: "";
-    display: block;
-    border-bottom: 4px solid currentColor;
-    width: 100%;
-    margin-bottom: 5px;
-    transition: transform 0.5s ease-in-out;
-    -webkit-transition: -webkit-transform 0.5s ease-in-out; }
+.navicon {
+  position: fixed;
+  right: 5%;
+  top: 32px;
+  z-index: 50; }
+  @media only screen and (min-width: 768px) {
+    .navicon {
+      display: none; } }
 
-/* Monday night... mobilmenu styles */
-.navs li {
+.navitems {
+  background: white;
+  height: 2000px;
+  padding: 80px 0 0 26px;
+  position: fixed;
+  right: -300px;
+  top: 0;
+  transition: right 0.6s ease-in-out;
+  width: 180px;
+  z-index: 40; }
+  @media only screen and (min-width: 768px) {
+    .navitems {
+      background: none;
+      display: inline-block;
+      height: auto;
+      padding: 0;
+      position: static;
+      text-align: right;
+      width: calc(80% - 2px); } }
+  .navitems.active {
+    right: 0; }
+
+.navitems li {
   color: inherit;
   cursor: pointer;
-  margin: 18px 0;
+  margin: 10px 0;
   transition: all 0.3s ease-in-out; }
-  .navs li:hover {
+  @media only screen and (min-width: 768px) {
+    .navitems li {
+      display: inline-block;
+      margin: 0 20px; }
+      .navitems li:last-of-type {
+        margin-right: 0; } }
+  .navitems li:hover {
     color: crimson;
     padding-left: 5px; }
+    @media only screen and (min-width: 768px) {
+      .navitems li:hover {
+        padding-left: 0; } }
 
+@media only screen and (min-width: 768px) {
+  .navwrap {
+    background: white;
+    border-bottom: 1px solid #aaa;
+    border-top: 8px solid #aaa;
+    left: 0;
+    margin: 0 0 24px;
+    position: fixed;
+    top: 0;
+    padding: 16px 0;
+    width: 100%;
+    z-index: 20; }
+    .navwrap:after {
+      background: linear-gradient(to bottom, white 0%, rgba(255, 255, 255, 0) 100%);
+      bottom: -13px;
+      content: '';
+      height: 12px;
+      position: absolute;
+      width: 100%; } }
+
+.navlogo {
+  background: white;
+  border-bottom: 1px solid #aaa;
+  border-top: 8px solid #aaa;
+  left: 0;
+  margin: 0 0 24px;
+  position: fixed;
+  top: 0;
+  padding: 16px 0;
+  width: 100%;
+  z-index: 20; }
+  @media only screen and (min-width: 768px) {
+    .navlogo {
+      background: none;
+      border: none;
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      position: static;
+      width: calc(20% - 2px); } }
+  .navlogo:after {
+    background: linear-gradient(to bottom, white 0%, rgba(255, 255, 255, 0) 100%);
+    bottom: -13px;
+    content: '';
+    height: 12px;
+    position: absolute;
+    width: 100%; }
+    @media only screen and (min-width: 768px) {
+      .navlogo:after {
+        display: none; } }
+
+/* moved burger stuff to vendor.scss */
+/* Monday night... mobilmenu styles */
 /* End of Header Styles */
 /* #####################
        Landing Styles

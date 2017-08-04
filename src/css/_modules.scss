@@ -147,59 +147,47 @@ button {
        Header Stuff
     #################### */
 
-/*  This is for the burger menu so the body gets covered by a dark window  */
-.overlay {
-  background: inherit;
-  position: fixed;
-  top: 0;
-  transition: background 0.6s ease-in-out;
-  width: 100%;
-  z-index: 1;
-  &.active {
-    background: rgba(0, 0, 0, 0.7);
-    height: 2000px;
-  }
-}
 
-ul.navs {
-  // display: none;
-  // list-style: none;
-  // margin: 0;
-  // position: absolute;
-  // right: 0;
-  // text-align: right;
-  // top: 50%;
-  // transform: translateY(-50%);
-}
+
+// ul.navs {
+//   // display: none;
+//   // list-style: none;
+//   // margin: 0;
+//   // position: absolute;
+//   // right: 0;
+//   // text-align: right;
+//   // top: 50%;
+//   // transform: translateY(-50%);
+// }
 
 header {
   // border-bottom: 1px solid #666;
   position: relative;
 }
 
-ul.navs li {
-  cursor: pointer;
-  display: inline-block;
-  font-size: 18px;
-  margin: 0 8px;
-}
+// ul.navs li {
+//   cursor: pointer;
+//   display: inline-block;
+//   font-size: 18px;
+//   margin: 0 8px;
+// }
 
-.iphone {           // same as .nav in fiddle
-   // border: 1px solid #ddd;   //comment this out
-   // width: 320px;
-   border: 1px solid #ccc;
-   background: white;
-   margin: 0 0 24px;
-   padding: 12px 0;
-   position: fixed;
-   top: 0;
-   width: 100%;
-   z-index: 4;
-   &.inactive {
-     background: none;
-     border: 1px solid transparent;
-   }
-}
+// .iphone {           // same as .nav in fiddle
+//    // border: 1px solid #ddd;   //comment this out
+//    // width: 320px;
+//    border: 1px solid #ccc;
+//    background: white;
+//    margin: 0 0 24px;
+//    padding: 12px 0;
+//    position: fixed;
+//    top: 0;
+//    width: 100%;
+//    z-index: 4;
+//    &.inactive {
+//      background: none;
+//      border: 1px solid transparent;
+//    }
+// }
 
 .hdrnimg {
   float: left;
@@ -246,57 +234,122 @@ div.hdrnimg img {
   top: 50%;
   transform: translateY(-50%);
 }
-$burger--thickness: 4px;
-.burger {
-	$width: 28px;
-  background: none;
-  border: 0;
-  border-bottom: $burger--thickness solid currentColor;
-  cursor: pointer;
-	outline: 0;
-	padding: 0;
-  transition: border-bottom 1s ease-in-out;
-	-webkit-transition: border-bottom 1s ease-in-out;
-	width: $width;
 
-	// Fix for extra space in Firefox
-	&::-moz-focus-inner {
-		border: 0;
-		padding: 0;
-	}
+.navicon {  //c005   **
+  position: fixed;
+  right: 5%;  //c004
+  top: 32px;
+  z-index: 50;
+  @include responsive(truman) {
+    display: none;
+  }
+}
 
+.navitems {  //c005  **  down to 293
+  background: white;
+  height: 2000px;
+  padding: 80px 0 0 26px;
+  position: fixed;
+  right: -300px;
+  top: 0;
+  transition: right 0.6s ease-in-out;
+  width: 180px;
+  z-index: 40;
+  @include responsive(truman) {
+    background: none;
+    display: inline-block;
+    height: auto;
+    padding: 0;
+    position: static;
+    text-align: right;
+    width: calc(80% - 2px);
+  }
   &.active {
-    border-bottom: 4px solid transparent;
-    &:before {
-      transform: rotate(-405deg) translateY(1px) translateX(-3px);
-      -webkit-transform: rotate(-405deg) translateY(1px) translateX(-3px);
+    right: 0;
+  }
+}
+
+li {
+  .navitems & {
+    color: inherit;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: all 0.3s ease-in-out;
+    @include responsive(truman) {
+      display: inline-block;
+      margin: 0 20px;
+      &:last-of-type {
+        margin-right: 0;
+      }
     }
-    &:after {
-      transform: rotate(405deg) translateY(-4px) translateX(-5px);
-      -webkit-transform: rotate(405deg) translateY(-4px) translateX(-5px);
+    &:hover {
+      color: crimson;
+      padding-left: 5px;
+      @include responsive(truman) {
+        padding-left: 0;
+      }
     }
   }
-
-	&:before {
-		content: "";
-		display: block;
-		border-bottom: $burger--thickness solid currentColor;
-		width: 100%;
-		margin-bottom: 5px;
-		transition: transform 0.5s ease-in-out;
-		-webkit-transition: -webkit-transform 0.5s ease-in-out;
-	}
-
-	&:after {
-		content: "";
-		display: block;
-		border-bottom: $burger--thickness solid currentColor;
-		width: 100%;
-		margin-bottom: 5px;
-		transition: transform 0.5s ease-in-out;
-		-webkit-transition: -webkit-transform 0.5s ease-in-out;
-	}
 }
+
+.navwrap {                        // **
+  @include responsive(truman) {  //c011
+    background: white;
+    border-bottom: 1px solid #aaa;
+    border-top: 8px solid #aaa;
+    left: 0;
+    margin: 0 0 24px;
+    position: fixed;
+    top: 0;
+    padding: 16px 0;
+    width: 100%;
+    z-index: 20;
+    &:after {  //c008, c012
+      background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+      bottom: -13px;
+      content: '';
+      height: 12px;
+      position: absolute;
+      width: 100%;
+    }
+  }
+}
+
+.navlogo {  //c005, c006, c011  **
+  background: white;
+  border-bottom: 1px solid #aaa;
+  border-top: 8px solid #aaa;
+  left: 0;
+  margin: 0 0 24px;
+  position: fixed;
+  top: 0;
+  padding: 16px 0;
+  width: 100%;
+  z-index: 20;
+  @include responsive(truman) { //c013
+    background: none;
+    border: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    position: static;
+    width: calc(20% - 2px);
+  }
+  &:after {  //c008, c012
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+    bottom: -13px;
+    content: '';
+    height: 12px;
+    position: absolute;
+    width: 100%;
+    @include responsive(truman) {
+      display: none;
+    }
+  }
+}
+
+/* moved burger stuff to vendor.scss */
+
 
 /* Monday night... mobilmenu styles */
 // .navs {           // this was called mobilemenu
@@ -314,18 +367,18 @@ $burger--thickness: 4px;
 //   }
 // }
 
-li {
-  .navs & {         // this was called mobilmenu
-    color: inherit;
-    cursor: pointer;
-    margin: 18px 0;
-    transition: all 0.3s ease-in-out;
-    &:hover {
-      color: crimson;
-      padding-left: 5px;
-    }
-  }
-}
+// li {
+//   .navs & {         // this was called mobilmenu
+//     color: inherit;
+//     cursor: pointer;
+//     margin: 18px 0;
+//     transition: all 0.3s ease-in-out;
+//     &:hover {
+//       color: crimson;
+//       padding-left: 5px;
+//     }
+//   }
+// }
 
 /* End of Header Styles */
 

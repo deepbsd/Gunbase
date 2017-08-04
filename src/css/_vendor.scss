@@ -1,21 +1,52 @@
-/*----------------------------------------------------------------------------
-  Base
-----------------------------------------------------------------------------*/
 
+$burger--thickness: 4px;
+.mobileicon {
+	$width: 28px;
+  background: none;
+  border: 0;
+  border-bottom: $burger--thickness solid currentColor;
+  cursor: pointer;
+	outline: 0;
+	padding: 0;
+  transition: border-bottom 1s ease-in-out;
+	-webkit-transition: border-bottom 1s ease-in-out;
+	width: $width;
 
+	// Fix for extra space in Firefox
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
 
-/*----------------------------------------------------------------------------
-  Layout
-----------------------------------------------------------------------------*/
+  &.active {
+    border-bottom: 4px solid transparent;
+    &:before {
+      transform: rotate(-405deg) translateY(1px) translateX(-3px);
+      -webkit-transform: rotate(-405deg) translateY(1px) translateX(-3px);
+    }
+    &:after {
+      transform: rotate(405deg) translateY(-4px) translateX(-5px);
+      -webkit-transform: rotate(405deg) translateY(-4px) translateX(-5px);
+    }
+  }
 
+	&:before {
+		content: "";
+		display: block;
+		border-bottom: $burger--thickness solid currentColor;
+		width: 100%;
+		margin-bottom: 5px;
+		transition: transform 0.5s ease-in-out;
+		-webkit-transition: -webkit-transform 0.5s ease-in-out;
+	}
 
-
-/*----------------------------------------------------------------------------
-  Modules
-----------------------------------------------------------------------------*/
-
-
-
-/*----------------------------------------------------------------------------
-  Vendor
-----------------------------------------------------------------------------*/
+	&:after {
+		content: "";
+		display: block;
+		border-bottom: $burger--thickness solid currentColor;
+		width: 100%;
+		margin-bottom: 5px;
+		transition: transform 0.5s ease-in-out;
+		-webkit-transition: -webkit-transform 0.5s ease-in-out;
+	}
+}
