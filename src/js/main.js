@@ -311,6 +311,11 @@ function outputGunsReport() {
       e.preventDefault();
       console.log('navhome clicked');
       // location.reload();
+      // Disable any mobile menu leftovers...
+      // $('html').removeClass('disable');
+      // $('#t-mobileicon').removeClass('active');
+      // $('#t-navitems').removeClass('active');
+      // $('#t-overlay').removeClass('active');
       outputGunsReport();
     })
 
@@ -319,6 +324,12 @@ function outputGunsReport() {
       e.preventDefault();
       console.log('navhome1 Logo clicked');
       // location.reload();
+      // Disable any mobile menu leftovers...
+      // $('html').removeClass('disable');
+      // $('#t-mobileicon').removeClass('active');
+      // $('#t-navitems').removeClass('active');
+      // $('#t-overlay').removeClass('active');
+      // Then output the gunreport
       outputGunsReport();
     })
 
@@ -335,6 +346,12 @@ function outputGunsReport() {
     })
 
   }  // end of outputGunsReport()
+
+  // 
+  // $('html').removeClass('disable');
+  // $('#t-mobileicon').removeClass('active');
+  // $('#t-navitems').removeClass('active');
+  // $('#t-overlay').removeClass('active');
 
 
 //#########################################################
