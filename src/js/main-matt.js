@@ -113,7 +113,6 @@
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function(gundata) {
-
           console.log('HEY!  Object: ',gundata);
           var template = '<div id="update_gun_function"><form id="update_gun_form">';
           template += `<img class="medium-img"  src="${gundata.image}"/>`;
@@ -142,7 +141,6 @@
           template += `</div></div>`;  //end of second basicFieldWrap and fieldWrapWrapper
           template += '</form></div>';
           $("#output").html(template);
-
           //Update_gun listener
           $("#update_gun_submit").click(function(ev){
             ev.preventDefault();
@@ -162,7 +160,7 @@
             console.log('TYPEOF:  ',typeof updateData, ' DATA: ',updateData);
             app.updateGun(updateData, gunId);
           })
-
+          // delete gun listener
           $("#delete_gun_submit").click(function(ev){
             ev.preventDefault();
             console.log('Deleting gun with id: ', gunId);
