@@ -44,15 +44,12 @@
         headers: {
           "accept": "application/json;odata=verbose",
         },
-
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function() {
-
           console.log(`Gun ${gunId} deleted!`);
           app.getAllGuns()
             .then(app.outputGunsReport);
-
         },
         error: function(error){
           console.log('Update failed.  Error: ',error);
@@ -146,16 +143,12 @@
           template += '</form></div>';
           $("#output").html(template);
 
-
-          // Update_gun listener
+          //Update_gun listener
           $("#update_gun_submit").click(function(ev){
             ev.preventDefault();
             let fields = ['manufacturer', 'model', 'chambering', 'type', 'serial_number', 'image', 'value', 'sold', 'buyer'];
-
             let updateData = {};
             updateData.id = `${gunId}`;
-
-            //Modify this so you can update more than one field!!!
             fields.forEach(function(field){
               if ($('#'+field).val()) {
                 let thevalue = $('#'+field).val();
@@ -166,17 +159,13 @@
                 }
               }
             })
-
             console.log('TYPEOF:  ',typeof updateData, ' DATA: ',updateData);
-            updateGun(updateData, gunId);
+            app.updateGun(updateData, gunId);
           })
 
-          //If the delete button gets pressed...
-          // ###################################
           $("#delete_gun_submit").click(function(ev){
             ev.preventDefault();
             console.log('Deleting gun with id: ', gunId);
-
             app.deleteGun(gunId);
             app.outputGunsReport();
           })
@@ -185,7 +174,18 @@
           console.log('error *getting* the record: ',error);
         }
       })
-
+    },
+    logoListener: function(){
+      $(document).on("click", "#navhome1", function(ev){
+        ev.preventDefault();
+        app.outputGunsReport();
+      })
+    },
+    homeListener: function(ev){
+      $(document).on("click", "#navhome", function(ev){
+        ev.preventDefault();
+        app.outputGunsReport();
+      })
     },
     imgPath: function(obj){
       return obj.substring(obj.lastIndexOf("/")+1, obj.length);
@@ -196,6 +196,9 @@
       app.singleEntryListener();
       app.buildAddAGunTemplate();
       app.createGun();
+      app.logoListener();
+      app.homeListener();
+      app.searchListener();
     },
     loadFindData: function(criteria) {
       if (!criteria){
@@ -244,14 +247,100 @@
           }
         })
     },
+    searchListener: function(){
+      $(document).on("click", "#navsearch", function(){
+        console.log('Nav Search clicked')
+        var template = '<div class="formWrap"><h3 class="search_for_gun">Search for Gun</h3><form id="findagun_form">';
+        template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
+        template += '<input id="model"  type="text" placeholder="model" name="model">';
+        template += '<input id="chambering"  type="text" placeholder="chambering" name="chambering">';
+        template += '<input id="type" type="text" placeholder="type" name="type">';
+        template += '<input  id="serial_number" type="text" placeholder="serial_number" name="serial_number">';
+        template += '<input id="image" type="text" placeholder="image" name="image">'
+        template += '<input id="value" type="text" placeholder="value" name="value">';
+        template += '<input id="sold" type="text" placeholder="sold" name="sold">';
+        template += '<input id="buyer" type="text" placeholder="buyer" name="buyer">';
+        template += '<br><div class="btn_wrapper"><button type="submit" id="search_gun_submit">Submit</submit></div>';
+        template += '</form></div>';
+        $("#output").html(template);
+        // Collect info from the search fields
+        $("#search_gun_submit").click(function(e){
+          e.preventDefault();
+          gunObj = {
+            manufacturer: $("#manufacturer").val(),
+            model: $("#model").val(),
+            chambering: $("#chambering").val(),
+            type: $("#type").val(),
+            serial_number: $("#serial_number").val(),
+            image: $("#image").val(),
+            value: $("#value").val(),
+            sold: $("#sold").val(),
+            buyer: $("#buyer").val()
+          }
+          //searchKeys are the fields the user is looking for
+          var searchKeys = {};
+          //Update the state.guns to be sure it's fully populated.
+          //This seems to fix a long-standing 'delay' bug in the update function.
+          app.getAllGuns();
+          //searchList is a big list to be whittled down...
+          var searchList = state.guns;
+          for (var [key, value] of Object.entries(gunObj)) {
+            if (value) { searchKeys[key] = value; }
+          }
+          console.log('Looking for: ', searchKeys);
+          // newArray will contain only matching guns to be returned to user
+          let newArray = searchList.filter(function(gun, index, array) {
+            Object.keys(searchKeys).forEach(function(key) {
+              if (!gun[key].includes(searchKeys[key])) {
+                gun['delete'] = true;
+              }
+            });
+            // return only guns *without* gun.delete=true
+            return !gun.delete;
+          });
+          let returnTemplate = '<div id="edit_guns">';
+          returnTemplate += '<ul class="list-one" id="list-top">';
+          newArray.forEach(function(gun){
+            let gunicon = app.getIcon(gun.type)
+            returnTemplate += `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
+          })
+          returnTemplate += "</ul>";
+          console.log('newArray size: ', newArray.length);
+          if (newArray.length === 0) returnTemplate += "No Guns Found.";
+          returnTemplate += '</div>';
+          $("#output").html(returnTemplate);
+          console.log('NewArray returned: ', newArray);
+        })
+      })
+    },
     singleEntryListener: function() {
       $(document).on("click", ".itemdata", function(ev){
         var targetId = $(ev.target).data('gunobj');
         app.getOneGun(targetId);
       })
     },
+    updateGun: function(updateData, gunId){
+      var myURL = app.rootURL + '/' + gunId;
+      $.ajax({
+        url: myURL,
+        type: 'PUT',
+        headers: {
+          "accept": "application/json;odata=verbose",
+        },
+        data: JSON.stringify(updateData),
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function(gundata) {
+          console.log('Gun updated!  Object: ',gundata);
+          app.getAllGuns()
+          .then(app.outputGunsReport);
+        },
+        error: function(error){
+          console.log('Update failed.  Error: ', error);
+        }
+      })
+    },
     rootURL: 'http://localhost:8080/guns'
-
   };
 
   const state = {
