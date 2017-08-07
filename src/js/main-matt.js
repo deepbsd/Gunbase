@@ -221,7 +221,8 @@
       return obj.substring(obj.lastIndexOf("/")+1, obj.length);
     },
     init: function() {
-      app.getAllGuns().then(app.outputGunsReport);
+      // app.getAllGuns().then(app.outputGunsReport);
+      app.getAllGuns().then(app.landingPage);
       app.filterSearch();
       app.singleEntryListener();
       app.buildAddAGunTemplate();
@@ -230,6 +231,19 @@
       app.homeListener();
       app.searchListener();
       app.summaryListener();
+      app.landingPgListener();
+    },
+    landingPage: function(){
+      template = '<div class="landing"><h1 class="landing">Welcome to Gunbase</h1>';
+      template += '<div class="landing-text">Gunbase is a database for your firearms collection';
+      template += 'that keeps track of the important and legal information for each of your firearms.';
+      template += '<button id="landing-btn">Proceed</button></div>';
+      $("#output").html(template);
+    },
+    landingPgListener: function(){
+      $(document).on("click", "#landing-btn", function(){
+        app.outputGunsReport();
+      })
     },
     loadFindData: function(criteria) {
       if (!criteria){
