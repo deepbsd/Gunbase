@@ -1,3 +1,4 @@
+
 (function($) {
 
   var app = {
@@ -35,6 +36,37 @@
         gunObj.image = `img/${gunObj.image}`;
         app.postNewGun(gunObj);
       })
+    },
+    createSummaryPg: function(){
+      var pistols, revolvers, rifles, shotguns, others, totalguns, value;
+      pistols = revolvers = rifles = shotguns = others = totalguns = value = 0;
+      state.guns.forEach( gun => {
+        switch (gun.type) {
+          case 'revolver':
+          revolvers += 1;
+          break;
+        case 'rifle':
+          rifles += 1;
+          break;
+        case 'pistol':
+          pistols += 1;
+          break;
+        case 'shotgun':
+          shotguns += 1;
+          break;
+        default:
+          others += 1;
+        }
+        value += gun.value
+      })
+      totalguns = state.guns.length;
+      template = `<div class="summaryWrap"><h2>Summary</h2>
+      <h3 class="summaryHdr">Pistols</h3><h3 class="summaryHdr">Revolvers</h3><h3 class="summaryHdr">Rifles</h3>
+      <div class="summaryDiv">${pistols}</div><div class="summaryDiv">${revolvers}</div><div class="summaryDiv">${rifles}</div>
+      <h3 class="summaryHdr">Shotguns</h3><h3 class="summaryHdr">Others</h3><h3 class="summaryHdr">Total Guns</h3>
+      <div class="">${shotguns}</div><div class="">${others}</div><div class="">${totalguns}</div>
+      <h3 class="summaryHdr">Value</h3><div class="summaryDiv">${value}</div></div>`;
+      $("#output").html(template);
     },
     deleteGun: function(gunId){
       var myURL = app.rootURL + '/' + gunId;
@@ -197,6 +229,7 @@
       app.logoListener();
       app.homeListener();
       app.searchListener();
+      app.summaryListener();
     },
     loadFindData: function(criteria) {
       if (!criteria){
@@ -315,6 +348,12 @@
       $(document).on("click", ".itemdata", function(ev){
         var targetId = $(ev.target).data('gunobj');
         app.getOneGun(targetId);
+      })
+    },
+    summaryListener: function(){
+      $(document).on("click", "#summary", function(ev){
+        ev.preventDefault();
+        app.createSummaryPg();
       })
     },
     updateGun: function(updateData, gunId){
