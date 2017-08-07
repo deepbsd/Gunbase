@@ -332,8 +332,7 @@ img {
   position: fixed;
   top: 0;
   transition: background 0.6s ease-in-out;
-  width: 100%;
-  z-index: 30; }
+  width: 100%; }
   .y-overlay.active {
     background: rgba(0, 0, 0, 0.7); }
 
@@ -485,7 +484,7 @@ button:hover {
 header {
   position: relative; }
 
-.hdrnimg {
+.navlogo {
   float: left;
   font-family: 'Russo One', sans-serif;
   font-size: 28px;

@@ -231,6 +231,12 @@ function outputGunsReport() {
     // NAVBAR SEARCH: Listen for clicks on Adv. Search
     // Replaces search for guns on 'main menu'  (no longer have main menu)
     $("#navsearch").click(function(){
+
+      $('html').removeClass('disable');
+      $('#t-mobileicon').removeClass('active');
+      $('#t-navitems').removeClass('active');
+      $('#t-overlay').removeClass('active');
+
       console.log('Nav Search clicked')
       var template = '<div class="formWrap"><h3 class="search_for_gun">Search for Gun</h3><form id="findagun_form">';
       template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
@@ -312,10 +318,10 @@ function outputGunsReport() {
       console.log('navhome clicked');
       // location.reload();
       // Disable any mobile menu leftovers...
-      // $('html').removeClass('disable');
-      // $('#t-mobileicon').removeClass('active');
-      // $('#t-navitems').removeClass('active');
-      // $('#t-overlay').removeClass('active');
+      $('html').removeClass('disable');
+      $('#t-mobileicon').removeClass('active');
+      $('#t-navitems').removeClass('active');
+      $('#t-overlay').removeClass('active');
       outputGunsReport();
     })
 
@@ -347,7 +353,7 @@ function outputGunsReport() {
 
   }  // end of outputGunsReport()
 
-  // 
+  //
   // $('html').removeClass('disable');
   // $('#t-mobileicon').removeClass('active');
   // $('#t-navitems').removeClass('active');
