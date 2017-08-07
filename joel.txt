@@ -9,6 +9,27 @@
 you should reject the promise from the error callback that you set in your `jQuery.ajax()` call
 
 
+Joel suggestion:  "Suggestions: 1) try to do one thing at a time, and finish what you’ve started.
+it avoids mixing too many bugs of two major tasks (it’s almost impossible to avoid bugs at all, but if
+you move to another task only when you’re confident that the last one was properly fullfilled chances
+are that you’ll not have so many bugs from multiple tasks to solve); 2) try to take more value from
+branches. create one branch per feature/task/bug/issue, and only merge it if everything is really working
+as expected. be extremely careful at this point"
+
+Joel on Modules:  "React uses ES6 Modules, which are now part of JavaScript itself
+[9:23]
+However, we had multiple patterns for modularization, both synchronous and asynchronous, as well as patterns for front-end and back-end
+deepbsd
+[9:25 AM]
+I guess all the external libraries are examples of that, right?
+joelwallis [9:25 AM]
+Module Pattern
+Revealing Module Pattern
+AMD (Async Module Definition)
+CommonJS Modules (the one that Node.js uses, i.e.: `require()`)
+UMD (Universal Module Definition - mostly AMD + CommonJS, w/ fallback to global scope)"
+
+
 Peter:
 
 1. Landing page  https://land-book.com/gallery/landings
@@ -21,7 +42,7 @@ Peter:
 
 5. change 'value' to 'dollar value'
 
-6. look into update lag   use incognito window (nothing in cache)
+6. look into update lag use incognito window (nothing in cache)
 
 7. increase search bar size add padding etc
 

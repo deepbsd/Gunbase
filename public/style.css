@@ -327,6 +327,7 @@ img {
 
 /*  This is for the burger menu so the body gets covered by a dark window  */
 .y-overlay {
+  display: none;
   background: inherit;
   height: 2000px;
   position: fixed;
@@ -334,7 +335,8 @@ img {
   transition: background 0.6s ease-in-out;
   width: 100%; }
   .y-overlay.active {
-    background: rgba(0, 0, 0, 0.7); }
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 30; }
 
 #output {
   margin-top: 110px; }
