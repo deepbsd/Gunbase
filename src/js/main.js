@@ -413,7 +413,8 @@
         }
       })
     },
-    rootURL: 'http://localhost:8080/guns'
+    // rootURL: 'http://localhost:8080/guns'
+    rootURL: 'https://firearmbase.herokuapp.com/guns'
   };
 
   const state = {
