@@ -20,13 +20,14 @@
 
 /*  This is for the burger menu so the body gets covered by a dark window  */
 .y-overlay {
-  display: none; // this is temporary
+  // display: none; // this is temporary
   background: inherit;
   height: 2000px;
   position: fixed;
   top: 0;
   transition: background 0.6s ease-in-out;
   width: 100%;
+  z-index: -1;
   &.active {
     background: rgba(0, 0, 0, 0.7);
     z-index: 30;

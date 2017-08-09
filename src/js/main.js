@@ -4,6 +4,7 @@
   var app = {
     buildAddAGunTemplate: function() {
       $("#navaddgun").click(function(){
+        app.disableOverlay();
         var template = '<div class="formWrap"><h3>Add A Gun</h3><form id="addagun_form">';
         template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
         template += '<input id="model"  type="text" placeholder="model" name="model">';
@@ -21,6 +22,7 @@
     },
     createGun: function() {
       $(document).on("submit", "#addagun_form", function(e){
+        app.disableOverlay();
         e.preventDefault();
         let gunObj = {
           manufacturer: $("#manufacturer").val(),
@@ -38,6 +40,8 @@
       })
     },
     createSummaryPg: function(){
+
+      app.disableOverlay();
       var pistols, revolvers, rifles, shotguns, others, totalguns, value;
       pistols = revolvers = rifles = shotguns = others = totalguns = value = 0;
       state.guns.forEach( gun => {
@@ -87,6 +91,12 @@
           console.log('Update failed.  Error: ',error);
         }
       })
+    },
+    disableOverlay: function(){
+      $("html").removeClass("disable");
+      $("#t-navitems").removeClass("active");
+      $("#t-overlay").removeClass("active");
+      $("#t-mobileicon").removeClass("active");
     },
     filterSearch: function() {
       $(document).on('input', "#top-form-find", function(){
@@ -214,9 +224,6 @@
     hamburgerListener: function(){
       $(document).on('click', '#t-mobileicon', function(){
         $('html').toggleClass('disable');
-        // $('#theburger').toggleClass('active');
-        // $('#thenavs').toggleClass('active');   // not working
-        // $('#theiphone').toggleClass('inactive');  // not working
         $(this).toggleClass('active');
         $('#t-navitems').toggleClass('active');
         $('#t-overlay').toggleClass('active');
@@ -225,6 +232,7 @@
     homeListener: function(ev){
       $(document).on("click", "#navhome", function(ev){
         ev.preventDefault();
+        app.disableOverlay();
         app.outputGunsReport();
       })
     },
@@ -306,6 +314,7 @@
     },
     searchListener: function(){
       $(document).on("click", "#navsearch", function(){
+        app.disableOverlay();
         console.log('Nav Search clicked')
         var template = '<div class="formWrap"><h3 class="search_for_gun">Search for Gun</h3><form id="findagun_form">';
         template += '<input id="manufacturer" type="text" placeholder="manufacturer" name="manufacturer">';
@@ -379,6 +388,7 @@
     summaryListener: function(){
       $(document).on("click", "#summary", function(ev){
         ev.preventDefault();
+        app.disableOverlay();
         app.createSummaryPg();
       })
     },

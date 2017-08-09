@@ -201,16 +201,7 @@ header {
 // }
 
 // .hdrnimg {
-  .navlogo {
-  float: left;
-  font-family: 'Russo One', sans-serif;
-  font-size: 28px;
-  width: 50%;
-}
 
-div.hdrnimg img {
-  width: 100%;
-}
 
 .cf:before,
 .cf:after {
@@ -221,12 +212,6 @@ div.hdrnimg img {
   clear: both;
 }
 
-#navhome1 {
-  &:hover {
-    color: maroon;
-    cursor: pointer;
-  }
-}
 
 .formWrap {
   text-align: center;
@@ -331,11 +316,13 @@ li {
   background: white;
   border-bottom: 1px solid #aaa;
   border-top: 8px solid #aaa;
+  font-family: 'Russo One', sans-serif;
+  font-size: 28px;
   left: 0;
   margin: 0 0 24px;
   position: fixed;
   top: 0;
-  padding: 16px 0;
+  padding: 16px 0 16px 5%;
   width: 100%;
   z-index: 20;
   @include responsive(truman) { //c013
@@ -347,6 +334,8 @@ li {
     position: static;
     width: calc(20% - 2px);
   }
+
+
   &:after {  //c008, c012
     background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
     bottom: -13px;

@@ -309,6 +309,9 @@ img {
 /*----------------------------------------------------------------------------
   Paragraph
 ----------------------------------------------------------------------------*/
+a {
+  cursor: pointer; }
+
 /* layout styles */
 .y-wrap {
   margin: 0 auto;
@@ -327,13 +330,13 @@ img {
 
 /*  This is for the burger menu so the body gets covered by a dark window  */
 .y-overlay {
-  display: none;
   background: inherit;
   height: 2000px;
   position: fixed;
   top: 0;
   transition: background 0.6s ease-in-out;
-  width: 100%; }
+  width: 100%;
+  z-index: -1; }
   .y-overlay.active {
     background: rgba(0, 0, 0, 0.7);
     z-index: 30; }
@@ -496,15 +499,6 @@ button:hover {
 header {
   position: relative; }
 
-.navlogo {
-  float: left;
-  font-family: 'Russo One', sans-serif;
-  font-size: 28px;
-  width: 50%; }
-
-div.hdrnimg img {
-  width: 100%; }
-
 .cf:before,
 .cf:after {
   content: "";
@@ -512,10 +506,6 @@ div.hdrnimg img {
 
 .cf:after {
   clear: both; }
-
-#navhome1:hover {
-  color: maroon;
-  cursor: pointer; }
 
 .formWrap {
   text-align: center; }
@@ -606,11 +596,13 @@ div.hdrnimg img {
   background: white;
   border-bottom: 1px solid #aaa;
   border-top: 8px solid #aaa;
+  font-family: 'Russo One', sans-serif;
+  font-size: 28px;
   left: 0;
   margin: 0 0 24px;
   position: fixed;
   top: 0;
-  padding: 16px 0;
+  padding: 16px 0 16px 5%;
   width: 100%;
   z-index: 20; }
   @media only screen and (min-width: 768px) {
