@@ -380,6 +380,16 @@ img {
     -webkit-transition: -webkit-transform 0.5s ease-in-out; }
 
 /* Media Queries */
+/* ####################
+    Landing Page
+   #################### */
+.landing {
+  padding: 90px; }
+
+.landingbtnwrapper {
+  padding: 30px;
+  text-align: center; }
+
 /* ###################
      For Main Listing
    ###################   */
@@ -623,8 +633,6 @@ div.hdrnimg img {
       .navlogo:after {
         display: none; } }
 
-/* moved burger stuff to vendor.scss */
-/* Monday night... mobilmenu styles */
 /* End of Header Styles */
 /* #####################
        Landing Styles

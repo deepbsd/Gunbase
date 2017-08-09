@@ -211,6 +211,17 @@
         app.outputGunsReport();
       })
     },
+    hamburgerListener: function(){
+      $(document).on('click', '#t-mobileicon', function(){
+        $('html').toggleClass('disable');
+        // $('#theburger').toggleClass('active');
+        // $('#thenavs').toggleClass('active');   // not working
+        // $('#theiphone').toggleClass('inactive');  // not working
+        $(this).toggleClass('active');
+        $('#t-navitems').toggleClass('active');
+        $('#t-overlay').toggleClass('active');
+      })
+    },
     homeListener: function(ev){
       $(document).on("click", "#navhome", function(ev){
         ev.preventDefault();
@@ -223,6 +234,7 @@
     init: function() {
       // app.getAllGuns().then(app.outputGunsReport);
       app.getAllGuns().then(app.landingPage);
+      app.hamburgerListener();
       app.filterSearch();
       app.singleEntryListener();
       app.buildAddAGunTemplate();
@@ -236,8 +248,8 @@
     landingPage: function(){
       template = '<div class="landing"><h1 class="landing">Welcome to Gunbase</h1>';
       template += '<div class="landing-text">Gunbase is a database for your firearms collection';
-      template += 'that keeps track of the important and legal information for each of your firearms.';
-      template += '<button id="landing-btn">Proceed</button></div>';
+      template += 'that keeps track of the important legal information for each of your firearms.</div>';
+      template += '<div class="landingbtnwrapper"><button class="" id="landing-btn">Proceed</button></div></div>';
       $("#output").html(template);
     },
     landingPgListener: function(){
