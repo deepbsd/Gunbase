@@ -429,6 +429,10 @@ form#top-form-find {
   vertical-align: middle;
   width: 25%; }
 
+@media only screen and (min-width: 768px) {
+  .itemdata {
+    font-size: 1.143rem; } }
+
 .hdr {
   background: white; }
 
@@ -460,6 +464,7 @@ li:hover {
   display: block;
   font-size: 1.143rem;
   margin: 6px 0;
+  padding: 5px 5px;
   width: 100%; }
 
 #addagun input {
