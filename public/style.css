@@ -440,17 +440,20 @@ form#top-form-find {
   color: black;
   cursor: default;
   display: inline-block;
+  font-size: 0.714rem;
   font-style: italic;
   margin: auto 3%;
   word-break: break-all; }
   @media only screen and (min-width: 480px) {
     .listhdr {
+      font-size: 0.857rem;
       margin: auto 6%; } }
   @media only screen and (min-width: 680px) {
     .listhdr {
       margin: auto 7%; } }
   @media only screen and (min-width: 768px) {
     .listhdr {
+      font-size: 1.143rem;
       margin: auto 8%; } }
 
 .nimg {

@@ -78,16 +78,19 @@ form#top-form-find {
   color: black;
   cursor: default;
   display: inline-block;
+  font-size: $small;
   font-style: italic;
   margin: auto 3%;
   word-break: break-all;
   @include responsive(harding){
+    font-size: $medium;
     margin: auto 6%;
   }
   @include responsive(froosevelt){
     margin: auto 7%;
   }
   @include responsive(truman){
+    font-size: $large;
     margin: auto 8%;
   }
 }
