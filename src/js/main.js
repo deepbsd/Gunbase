@@ -211,7 +211,7 @@
             ev.preventDefault();
             console.log('Deleting gun with id: ', gunId);
             app.deleteGun(gunId);
-            app.outputGunsReport();
+            // app.outputGunsReport();
           })
         },
         error: function(error){
@@ -419,8 +419,8 @@
         }
       })
     },
-    rootURL: 'http://localhost:8080/guns'
-    // rootURL: 'https://firearmbase.herokuapp.com/guns'
+    // rootURL: 'http://localhost:8080/guns'
+    rootURL: 'https://firearmbase.herokuapp.com/guns'
   };
 
   const state = {
