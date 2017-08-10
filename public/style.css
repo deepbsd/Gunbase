@@ -727,3 +727,7 @@ header {
   margin: 20px 0;
   text-align: center;
   width: 25%; }
+
+.summaryDiv {
+  display: inline-block;
+  width: 25%; }

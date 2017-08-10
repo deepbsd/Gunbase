@@ -66,9 +66,9 @@
       totalguns = state.guns.length;
       template = `<div class="summaryWrap"><h2>Summary</h2>
       <div class="summaryHdr">Pistols</div><div class="summaryHdr">Revolvers</div><div class="summaryHdr">Rifles</div>
-      <div class="summaryDiv">${pistols}</div><div class="summaryDiv">${revolvers}</div><div class="summaryDiv">${rifles}</div>
+      <div class="summaryDivWrap"><div class="summaryDiv">${pistols}</div><div class="summaryDiv">${revolvers}</div><div class="summaryDiv">${rifles}</div></div>
       <div class="summaryHdr">Shotguns</div><div class="summaryHdr">Others</div><div class="summaryHdr">Total Guns</div>
-      <div class="">${shotguns}</div><div class="">${others}</div><div class="">${totalguns}</div>
+      <div class="summaryDivWrap"><div class="summaryDiv">${shotguns}</div><div class="summaryDiv">${others}</div><div class="summaryDiv">${totalguns}</div></div>
       <h3 class="summaryHdr">Value</h3><div class="summaryDiv">${value}</div></div>`;
       $("#output").html(template);
     },

@@ -431,6 +431,8 @@ li {
   text-align: center;
   width: 25%;
 }
+.summaryDivWrap {}
 .summaryDiv {
-  // display: inline;
+  display: inline-block;
+  width: 25%;
 }
