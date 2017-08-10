@@ -290,6 +290,7 @@ li {
     transition: all 0.3s ease-in-out;
     @include responsive(truman) {
       display: inline-block;
+      font-size: $large;
       margin: 0 20px;
       &:last-of-type {
         margin-right: 0;

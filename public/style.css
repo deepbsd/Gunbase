@@ -574,6 +574,7 @@ header {
   @media only screen and (min-width: 768px) {
     .navitems li {
       display: inline-block;
+      font-size: 1.143rem;
       margin: 0 20px; }
       .navitems li:last-of-type {
         margin-right: 0; } }
