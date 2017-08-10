@@ -359,7 +359,7 @@
           // newArray will contain only matching guns to be returned to user
           let newArray = searchList.filter(function(gun, index, array) {
             Object.keys(searchKeys).forEach(function(key) {
-              if (!gun[key].includes(searchKeys[key])) {
+              if (!gun[key].toLowerCase().includes(searchKeys[key].toLowerCase())) {
                 gun['delete'] = true;
               }
             });
