@@ -437,10 +437,21 @@ form#top-form-find {
   background: white; }
 
 .listhdr {
-  display: inline-block;
-  margin: auto 6%;
   color: black;
-  font-style: italic; }
+  cursor: default;
+  display: inline-block;
+  font-style: italic;
+  margin: auto 3%;
+  word-break: break-all; }
+  @media only screen and (min-width: 480px) {
+    .listhdr {
+      margin: auto 6%; } }
+  @media only screen and (min-width: 680px) {
+    .listhdr {
+      margin: auto 7%; } }
+  @media only screen and (min-width: 768px) {
+    .listhdr {
+      margin: auto 8%; } }
 
 .nimg {
   display: inline-block;

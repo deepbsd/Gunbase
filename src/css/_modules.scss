@@ -75,10 +75,21 @@ form#top-form-find {
 }
 
 .listhdr {
-  display: inline-block;
-  margin: auto 6%;
   color: black;
+  cursor: default;
+  display: inline-block;
   font-style: italic;
+  margin: auto 3%;
+  word-break: break-all;
+  @include responsive(harding){
+    margin: auto 6%;
+  }
+  @include responsive(froosevelt){
+    margin: auto 7%;
+  }
+  @include responsive(truman){
+    margin: auto 8%;
+  }
 }
 
 .nimg {
