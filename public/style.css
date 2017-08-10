@@ -436,6 +436,12 @@ form#top-form-find {
 .hdr {
   background: white; }
 
+.listhdr {
+  display: inline-block;
+  margin: auto 6%;
+  color: black;
+  font-style: italic; }
+
 .nimg {
   display: inline-block;
   width: 30px; }

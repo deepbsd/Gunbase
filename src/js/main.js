@@ -286,6 +286,8 @@
     outputGunsReport: function() {
       var template = '<form class="centered" class="ctop-find" id="top-form-find"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
           template += '<ul class="list-one" id="list-top">';
+          // This line is for the column headers
+          template += '<li class="itemdata centered cf"><div class="listhdr">Type</div><div class="listhdr">Manufacturer</div><div class="listhdr">Model</div><div class="listhdr">Chambering</div></li>';
       state.guns.forEach( gun => {
         let gunicon = app.getIcon(gun.type)
         template += `<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" data-gunobj="${gun.id}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`;
@@ -413,8 +415,8 @@
         }
       })
     },
-    rootURL: 'http://localhost:8080/guns'
-    // rootURL: 'https://firearmbase.herokuapp.com/guns'
+    // rootURL: 'http://localhost:8080/guns'
+    rootURL: 'https://firearmbase.herokuapp.com/guns'
   };
 
   const state = {
