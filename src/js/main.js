@@ -86,7 +86,8 @@
           success: function() {
             console.log(`Gun ${gunId} deleted!`);
             res();
-            app.getAllGuns().then(app.outputGunsReport);
+            app.getAllGuns()
+              .then(app.outputGunsReport);
 
           },
           error: function(error){
@@ -419,8 +420,8 @@
         }
       })
     },
-    // rootURL: 'http://localhost:8080/guns'
-    rootURL: 'https://firearmbase.herokuapp.com/guns'
+    rootURL: 'http://localhost:8080/guns'
+    // rootURL: 'https://firearmbase.herokuapp.com/guns'
   };
 
   const state = {
