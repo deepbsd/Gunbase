@@ -256,8 +256,8 @@
     landingPage: function(){
       template = '<div class="landing"><h1 class="landing">Welcome to Gunbase</h1>';
       template += '<div class="landing-text">Gunbase is a database for your firearms collection';
-      template += 'that keeps track of the important legal information for each of your firearms.</div>';
-      template += '<div class="landingbtnwrapper"><button class="" id="landing-btn">Proceed</button></div></div>';
+      template += ' that keeps track of the important legal information for each of your firearms.</div>';
+      template += '<div class="landingbtnwrapper"><button class="clanding-btn" id="landing-btn">Proceed</button></div></div>';
       $("#output").html(template);
     },
     landingPgListener: function(){
@@ -284,7 +284,7 @@
       }
     },
     outputGunsReport: function() {
-      var template = '<form class="centered" id="top-form-find"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
+      var template = '<form class="centered" class="ctop-find" id="top-form-find"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
           template += '<ul class="list-one" id="list-top">';
       state.guns.forEach( gun => {
         let gunicon = app.getIcon(gun.type)
@@ -413,8 +413,8 @@
         }
       })
     },
-    // rootURL: 'http://localhost:8080/guns'
-    rootURL: 'https://firearmbase.herokuapp.com/guns'
+    rootURL: 'http://localhost:8080/guns'
+    // rootURL: 'https://firearmbase.herokuapp.com/guns'
   };
 
   const state = {
