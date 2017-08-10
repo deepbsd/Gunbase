@@ -149,7 +149,9 @@ input {
   }
   #top-form-find & {
     padding: 8px;
-    // font-size: 1.3em;
+    @include responsive(truman){
+      font-size: $large;
+    }
   }
 }
 

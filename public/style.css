@@ -501,6 +501,9 @@ h3.search_for_gun {
 
 #top-form-find input {
   padding: 8px; }
+  @media only screen and (min-width: 768px) {
+    #top-form-find input {
+      font-size: 1.143rem; } }
 
 #update_gun_form label {
   display: block;
