@@ -457,6 +457,17 @@ li:nth-of-type(even) {
 li:hover {
   color: crimson; }
 
+/*  ####################
+      FORM STYLES
+    #################### */
+h3.search_for_gun {
+  font-size: 1.143rem;
+  margin: 7px 0; }
+
+.formWrap h3 {
+  font-size: 1.143rem;
+  margin: 7px 0; }
+
 #update_gun_form {
   margin-top: 40px; }
 
@@ -472,10 +483,18 @@ li:hover {
   width: 100%; }
 
 #addagun_form input {
-  margin: 5px 0; }
+  margin: 5px 0;
+  padding: 5px 7px; }
+  @media only screen and (min-width: 768px) {
+    #addagun_form input {
+      font-size: 1.143rem; } }
 
 #findagun_form input {
-  margin: 5px 0; }
+  margin: 5px 0;
+  padding: 5px 7px; }
+  @media only screen and (min-width: 768px) {
+    #findagun_form input {
+      font-size: 1.143rem; } }
 
 #top-form-find input {
   padding: 8px; }

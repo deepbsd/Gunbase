@@ -99,6 +99,21 @@ li {
   }
 }
 
+/*  ####################
+      FORM STYLES
+    #################### */
+
+h3.search_for_gun {
+  font-size: $large;
+  margin: 7px 0;
+}
+
+.formWrap h3 {
+  font-size: $large;
+  margin: 7px 0;
+}
+
+
 #update_gun_form {
   margin-top: 40px;
 }
@@ -117,9 +132,17 @@ input {
   }
   #addagun_form & {
     margin: 5px 0;
+    padding: 5px 7px;
+    @include responsive(truman){
+      font-size: $large;
+    }
   }
   #findagun_form & {
     margin: 5px 0;
+    padding: 5px 7px;
+    @include responsive(truman){
+      font-size: $large;
+    }
   }
   #top-form-find & {
     padding: 8px;
@@ -179,49 +202,10 @@ button {
     #################### */
 
 
-
-// ul.navs {
-//   // display: none;
-//   // list-style: none;
-//   // margin: 0;
-//   // position: absolute;
-//   // right: 0;
-//   // text-align: right;
-//   // top: 50%;
-//   // transform: translateY(-50%);
-// }
-
 header {
   // border-bottom: 1px solid #666;
   position: relative;
 }
-
-// ul.navs li {
-//   cursor: pointer;
-//   display: inline-block;
-//   font-size: 18px;
-//   margin: 0 8px;
-// }
-
-// .iphone {           // same as .nav in fiddle
-//    // border: 1px solid #ddd;   //comment this out
-//    // width: 320px;
-//    border: 1px solid #ccc;
-//    background: white;
-//    margin: 0 0 24px;
-//    padding: 12px 0;
-//    position: fixed;
-//    top: 0;
-//    width: 100%;
-//    z-index: 4;
-//    &.inactive {
-//      background: none;
-//      border: 1px solid transparent;
-//    }
-// }
-
-// .hdrnimg {
-
 
 .cf:before,
 .cf:after {
