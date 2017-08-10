@@ -77,6 +77,9 @@ form#top-form-find {
 .nimg {
   display: inline-block;
   width: 30px;
+  @include responsive(truman){
+    width: 40px;
+  }
 }
 
 li {

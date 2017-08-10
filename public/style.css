@@ -439,6 +439,9 @@ form#top-form-find {
 .nimg {
   display: inline-block;
   width: 30px; }
+  @media only screen and (min-width: 768px) {
+    .nimg {
+      width: 40px; } }
 
 .list-one li {
   cursor: pointer;
