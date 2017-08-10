@@ -215,12 +215,6 @@
         }
       })
     },
-    logoListener: function(){
-      $(document).on("click", "#navhome1", function(ev){
-        ev.preventDefault();
-        app.outputGunsReport();
-      })
-    },
     hamburgerListener: function(){
       $(document).on('click', '#t-mobileicon', function(){
         $('html').toggleClass('disable');
@@ -282,6 +276,12 @@
           $("#list-top").append(`<li class="cf"><div class="vcenter"><div class="itemdata centered" data-gunobj="${gun.id}"><div class="nimg"><img src="icons/${gunicon}" alt="Gun icon"/></div></div><div class="itemdata" data-gunobj="${gun.id}">${gun.manufacturer}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.model}</div><div class="itemdata" data-gunobj="${gun.id}">${gun.chambering}</div></div></li>`);
         });
       }
+    },
+    logoListener: function(){
+      $(document).on("click", "#navhome1", function(ev){
+        ev.preventDefault();
+        app.outputGunsReport();
+      })
     },
     outputGunsReport: function() {
       var template = '<form class="centered" class="ctop-find" id="top-form-find"><input type="text" id="top-find" placeholder="Search for manufacturers" /></form>';
