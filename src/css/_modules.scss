@@ -80,7 +80,7 @@ form#top-form-find {
   display: inline-block;
   font-size: $small;
   font-style: italic;
-  margin: auto 6%;
+  margin: auto 4%;
   word-break: break-all;
   @include responsive(harding){
     font-size: $medium;
