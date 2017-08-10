@@ -424,6 +424,9 @@ li {
 
 .summaryWrap {
   text-align: center;
+  @include responsive(truman){
+    font-size: $large;
+  }
 }
 .summaryHdr {
   display: inline-block;
