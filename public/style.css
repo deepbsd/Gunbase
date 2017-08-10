@@ -690,7 +690,7 @@ header {
 
 /* End of Header Styles */
 /*  ####################
-       Output Styles
+     INDIVIDUAL RECORDS
     ####################  */
 /* These are for the individual record display styles */
 .medium-img {
@@ -715,3 +715,15 @@ header {
     display: inline-block;
     margin: 0 30px;
     vertical-align: top; } }
+
+/* ##################
+      SUMMARY PAGE
+   ################## */
+.summaryWrap {
+  text-align: center; }
+
+.summaryHdr {
+  display: inline-block;
+  margin: 20px 0;
+  text-align: center;
+  width: 25%; }
