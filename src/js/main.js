@@ -254,8 +254,10 @@
     },
     landingPage: function(){
       template = '<div class="landing"><h1 class="landing">Welcome to Gunbase</h1>';
-      template += '<div class="landing-text">Gunbase is a database for your firearms collection';
-      template += ' that keeps track of the important legal information for each of your firearms.</div>';
+      template += '<div class="landing-text"><p>Gunbase is a database for your firearms collection';
+      template += ' that keeps track of the important legal information for each of your firearms.</p><p>I developed';
+      template += ' this app because I have been a competitive shooter for some years and simply acquired too many guns, and I';
+      template += ' needed a way to keep track of them all.  I guess they have become like the carpenter who kept buying new hammers.</p></div>';
       template += '<div class="landingbtnwrapper"><button class="clanding-btn" id="landing-btn">Proceed</button></div></div>';
       $("#output").html(template);
     },

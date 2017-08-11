@@ -372,6 +372,7 @@ li {
     bottom: -13px;
     content: '';
     height: 12px;
+    left: 0;
     position: absolute;
     width: 100%;
     @include responsive(truman) {
