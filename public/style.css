@@ -312,6 +312,9 @@ img {
 a {
   cursor: pointer; }
 
+p + p {
+  margin-top: 12px; }
+
 /* layout styles */
 .y-wrap {
   margin: 0 auto;
@@ -342,7 +345,8 @@ a {
     z-index: 30; }
 
 #output {
-  margin-top: 110px; }
+  margin-top: 110px;
+  text-align: center; }
 
 .mobileicon {
   background: none;
@@ -392,7 +396,8 @@ a {
 .landing-text {
   font-family: 'Verdana', sans-serif;
   font-size: 1.143rem;
-  padding: 30px; }
+  padding: 30px;
+  text-align: left; }
 
 h1.landing {
   font-family: 'Verdana', sans-serif; }
@@ -408,12 +413,6 @@ h1.landing {
 /* ###################
      For Main Listing
    ###################   */
-form#top-form-find {
-  margin-top: 90px;
-  margin-bottom: 30px;
-  text-align: center;
-  max-width: 700px; }
-
 .centered {
   text-align: center; }
 
@@ -425,7 +424,6 @@ form#top-form-find {
 
 .list-one li .itemdata {
   display: inline-block;
-  padding-left: 5px;
   vertical-align: middle;
   width: 25%; }
 
@@ -442,19 +440,14 @@ form#top-form-find {
   display: inline-block;
   font-size: 0.714rem;
   font-style: italic;
-  margin: auto 4%;
+  width: 25%;
   word-break: break-all; }
   @media only screen and (min-width: 480px) {
     .listhdr {
-      font-size: 0.857rem;
-      margin: auto 6%; } }
-  @media only screen and (min-width: 680px) {
-    .listhdr {
-      margin: auto 7%; } }
+      font-size: 0.857rem; } }
   @media only screen and (min-width: 768px) {
     .listhdr {
-      font-size: 1rem;
-      margin: auto 8%; } }
+      font-size: 1rem; } }
 
 .nimg {
   display: inline-block;
@@ -492,7 +485,8 @@ h3.search_for_gun {
   margin: 7px 0; }
 
 #update_gun_form {
-  margin-top: 40px; }
+  margin-top: 40px;
+  text-align: left; }
 
 #update_gun_form input {
   display: block;
@@ -520,6 +514,8 @@ h3.search_for_gun {
       font-size: 1.143rem; } }
 
 #top-form-find input {
+  margin: 0 auto 30px;
+  max-width: 700px;
   padding: 8px; }
   @media only screen and (min-width: 768px) {
     #top-form-find input {
@@ -709,7 +705,7 @@ header {
 @media only screen and (min-width: 620px) {
   .fieldWrapWrapper {
     display: inline-block;
-    margin: 0 13px; } }
+    margin: 0 0 0 13px; } }
 
 @media only screen and (min-width: 900px) {
   .basicFieldWrap {
@@ -726,14 +722,22 @@ header {
     .summaryWrap {
       font-size: 1.143rem; } }
 
-.summaryHdr {
+.stats {
+  border: 1px solid #eee;
   display: inline-block;
-  font-style: italic;
-  font-weight: 500;
-  margin: 30px 0;
-  text-align: center;
+  margin: 16px 12px;
+  padding: 20px;
   width: 25%; }
 
-.summaryDiv {
-  display: inline-block;
-  width: 25%; }
+.stats div {
+  min-width: 22%; }
+
+.stats h6 {
+  background: lightgray;
+  font-size: 0.714rem; }
+  @media only screen and (min-width: 375px) {
+    .stats h6 {
+      font-size: 1rem; } }
+  @media only screen and (min-width: 768px) {
+    .stats h6 {
+      font-size: 1.143rem; } }

@@ -64,12 +64,37 @@
         value += gun.value
       })
       totalguns = state.guns.length;
-      template = `<h2>Summary</h2><div class="summaryWrap">
-      <div class="summaryHdr">Pistols</div><div class="summaryHdr">Revolvers</div><div class="summaryHdr">Rifles</div>
-      <div class="summaryDivWrap"><div class="summaryDiv">${pistols}</div><div class="summaryDiv">${revolvers}</div><div class="summaryDiv">${rifles}</div></div>
-      <div class="summaryHdr">Shotguns</div><div class="summaryHdr">Others</div><div class="summaryHdr">Total Guns</div>
-      <div class="summaryDivWrap"><div class="summaryDiv">${shotguns}</div><div class="summaryDiv">${others}</div><div class="summaryDiv">${totalguns}</div></div>
-      <div class="summaryHdr">Value</div><div class="summaryDivWrap"><div class="summaryDiv">${value}</div></div></div>`;
+      template = `<h2>Summary</h2>
+      <div class="summaryWrap">
+        <div class="stats">
+          <h6>Pistols</h6>
+          <div>${pistols}</div>
+        </div>
+        <div class="stats">
+          <h6>Revolvers</h6>
+          <div>${revolvers}</div>
+        </div>
+        <div class="stats">
+          <h6>Rifles</h6>
+          <div>${rifles}</div>
+        </div>
+        <div class="stats">
+          <h6>Shotguns</h6>
+          <div>${shotguns}</div>
+        </div>
+        <div class="stats">
+          <h6>Others</h6>
+          <div>${others}</div>
+        </div>
+        <div class="stats">
+          <h6>Total Guns</h6>
+          <div>${totalguns}</div>
+        </div>
+        <div class="stats">
+          <h6>Value</h6>
+          <div>${value}</div>
+        </div>
+      </div>`;
       $("#output").html(template);
     },
     deleteGun: function(gunId){
@@ -86,9 +111,6 @@
           success: function() {
             console.log(`Gun ${gunId} deleted!`);
             res();
-            app.getAllGuns()
-              .then(app.outputGunsReport);
-
           },
           error: function(error){
             rej('There was an error deleting the gun: ',error);
@@ -96,6 +118,11 @@
           }
         })
       })
+    },
+    deleteProxy: function(gunId) {
+      app.deleteGun(gunId)
+      .then(app.getAllGuns)
+      .then(app.outputGunsReport)
     },
     disableOverlay: function(){
       $("html").removeClass("disable");
@@ -120,6 +147,7 @@
           },
           success: function(gundata) {
             var num=0;
+            state.guns = [];  // reset state before db call
             gundata.forEach( gun => {
               //state.guns[gun.fullName] = gun;
               state.guns[num] = gun;
@@ -211,7 +239,7 @@
           $("#delete_gun_submit").click(function(ev){
             ev.preventDefault();
             console.log('Deleting gun with id: ', gunId);
-            app.deleteGun(gunId);
+            app.deleteProxy(gunId);
             // app.outputGunsReport();
           })
         },
@@ -257,7 +285,7 @@
       template += '<div class="landing-text"><p>Gunbase is a database for your firearms collection';
       template += ' that keeps track of the important legal information for each of your firearms.</p><p>I developed';
       template += ' this app because I have been a competitive shooter for some years and simply acquired too many guns, and I';
-      template += ' needed a way to keep track of them all.  I guess they have become like the carpenter who kept buying new hammers.</p></div>';
+      template += ' needed a way to keep track of them all.  I guess I have become like the carpenter who kept buying new hammers.</p></div>';
       template += '<div class="landingbtnwrapper"><button class="clanding-btn" id="landing-btn">Proceed</button></div></div>';
       $("#output").html(template);
     },
