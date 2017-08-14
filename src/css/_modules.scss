@@ -448,6 +448,7 @@ h6 {
   .stats & {
     background: lightgray;
     font-size: $small;
+    overflow-x: hidden;
     @include responsive(taft){
       font-size: $base;
     }

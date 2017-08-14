@@ -734,7 +734,8 @@ header {
 
 .stats h6 {
   background: lightgray;
-  font-size: 0.714rem; }
+  font-size: 0.714rem;
+  overflow-x: hidden; }
   @media only screen and (min-width: 375px) {
     .stats h6 {
       font-size: 1rem; } }
