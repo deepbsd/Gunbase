@@ -723,19 +723,22 @@ header {
       font-size: 1.143rem; } }
 
 .stats {
-  border: 1px solid #eee;
-  display: inline-block;
-  margin: 16px 12px;
-  padding: 20px;
-  width: 25%; }
+  border: 1px solid #ccc;
+  margin: 16px auto;
+  width: 50%; }
+  @media only screen and (min-width: 768px) {
+    .stats {
+      display: inline-block;
+      width: 25%; } }
 
 .stats div {
-  min-width: 22%; }
+  min-width: 22%;
+  padding: 20px 0; }
 
 .stats h6 {
   background: lightgray;
-  font-size: 0.714rem;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  padding: 8px 0; }
   @media only screen and (min-width: 375px) {
     .stats h6 {
       font-size: 1rem; } }

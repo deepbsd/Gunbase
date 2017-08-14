@@ -40,7 +40,6 @@
       })
     },
     createSummaryPg: function(){
-
       app.disableOverlay();
       var pistols, revolvers, rifles, shotguns, others, totalguns, value;
       pistols = revolvers = rifles = shotguns = others = totalguns = value = 0;
