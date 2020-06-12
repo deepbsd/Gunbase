@@ -91,7 +91,7 @@
         </div>
         <div class="stats">
           <h6>Value</h6>
-          <div>${value}</div>
+          <div>${value.toLocaleString("en-US", {style:"currency", currency:"USD"})}</div>
         </div>
       </div>`;
       $("#output").html(template);
@@ -449,8 +449,8 @@
         }
       })
     },
-    // rootURL: 'http://localhost:8080/guns'
-    rootURL: 'https://firearmbase.herokuapp.com/guns'
+    rootURL: 'http://localhost:8080/guns'
+    // rootURL: 'https://firearmbase.herokuapp.com/guns'
   };
 
   const state = {
